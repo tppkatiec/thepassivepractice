@@ -8,13 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 @font-face {
-  font-family: 'Ivy Presto Display Light';
-  src: url('https://thepassivepractice.mykajabi.com/resource_redirect/downloads/file-uploads/sites/2148581503/themes/2161941479/downloads/83ace1a-c0f3-ac2b-115c-57a622d387d3_ivy-presto-display-light.woff2') format('woff2');
-  font-display: swap;
-}
-@font-face {
-  font-family: 'IBM Plex Mono';
-  src: url('https://thepassivepractice.mykajabi.com/resource_redirect/downloads/file-uploads/sites/2148581503/themes/2161941479/downloads/da3bf2-bd5e-013b-6255-8cd0440455b0_IBMPlexMono-Regular.woff2') format('woff2');
+  font-family: 'Ivy Presto Headline SemiBold';
+  src: url('https://thepassivepractice.mykajabi.com/resource_redirect/downloads/file-uploads/sites/2148581503/themes/2161941479/downloads/5053da3-e7d-72e4-edb0-d3a1ab84057_ivy-presto-headline-semi-bold.woff2') format('woff2');
   font-display: swap;
 }
 
@@ -29,119 +24,33 @@ body {
 }
 
 .card {
-  width: 1200px;
-  height: 630px;
+  width: 600px;
+  height: 600px;
   background: #F6F5F5;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: relative;
-  overflow: hidden;
-}
-
-.label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #E17351;
-  margin-bottom: 24px;
+  text-align: center;
+  padding: 60px;
 }
 
 .headline {
-  font-family: 'Ivy Presto Display Light', Georgia, serif;
-  font-size: 72px;
-  line-height: 1.1;
+  font-family: 'Ivy Presto Headline SemiBold', Georgia, serif;
+  font-size: 64px;
+  line-height: 1.12;
   color: #363030;
-  text-align: center;
-  margin-bottom: 12px;
 }
 
 .headline em {
   font-style: italic;
   color: #E17351;
 }
-
-.sub {
-  font-family: 'Inter', sans-serif;
-  font-size: 18px;
-  color: #363030;
-  opacity: 0.5;
-  text-align: center;
-  margin-top: 16px;
-}
-
-/* Decorative starbursts */
-.star {
-  position: absolute;
-}
-.star-1 {
-  top: 60px;
-  right: 120px;
-  width: 50px;
-  height: 50px;
-  background: #DEFF46;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-.star-2 {
-  bottom: 80px;
-  left: 100px;
-  width: 36px;
-  height: 36px;
-  background: #E17351;
-  clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 81% 100%, 50% 72%, 19% 100%, 31% 59%, 0% 38%, 37% 38%);
-}
-.star-3 {
-  top: 140px;
-  left: 160px;
-  width: 24px;
-  height: 24px;
-  background: #7AA3E7;
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-}
-.star-4 {
-  bottom: 120px;
-  right: 180px;
-  width: 18px;
-  height: 18px;
-  background: #7AA3E7;
-  clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 81% 100%, 50% 72%, 19% 100%, 31% 59%, 0% 38%, 37% 38%);
-  opacity: 0.6;
-}
-
-/* Color dots along bottom */
-.dots {
-  position: absolute;
-  bottom: 40px;
-  display: flex;
-  gap: 10px;
-}
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
 </style>
 </head>
 <body>
 <div class="card">
-  <div class="star star-1"></div>
-  <div class="star star-2"></div>
-  <div class="star star-3"></div>
-  <div class="star star-4"></div>
-
-  <div class="label">The Passive Practice</div>
-  <div class="headline">Brand <em>Discovery</em></div>
-  <div class="sub">Find the brand that was already yours.</div>
-
-  <div class="dots">
-    <div class="dot" style="background:#E17351;"></div>
-    <div class="dot" style="background:#7AA3E7;"></div>
-    <div class="dot" style="background:#DEFF46;"></div>
-    <div class="dot" style="background:#363030;"></div>
-    <div class="dot" style="background:#F4F8EE; border:1px solid rgba(54,48,48,0.1);"></div>
-  </div>
+  <div class="headline">Brand<br><em>Discovery</em></div>
 </div>
 </body>
 </html>
