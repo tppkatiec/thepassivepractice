@@ -100,7 +100,7 @@ body {
 
 .mono-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--peach);
@@ -128,7 +128,7 @@ body {
 
 .intro-meta {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--graphite);
   opacity: 0.55;
   margin-top: 18px;
@@ -179,7 +179,7 @@ body {
 }
 .section-num {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--peach);
@@ -198,7 +198,7 @@ body {
 
 .q-label {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--peach);
@@ -278,7 +278,7 @@ body {
 }
 .cs {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: rgba(54,48,48,0.55);
   line-height: 1.4;
 }
@@ -307,55 +307,6 @@ body {
 .shape-card.selected svg path,
 .shape-card.selected svg polygon { fill: var(--graphite); }
 .shape-card.selected .ct { color: var(--graphite); }
-
-/* TEXTURE CARDS */
-.texture-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-@media (max-width: 500px) { .texture-grid { grid-template-columns: repeat(2, 1fr); } }
-
-.tex-card {
-  aspect-ratio: 1;
-  border-radius: 4px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.18s;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 12px;
-  user-select: none;
-  overflow: hidden;
-}
-.tex-card:hover { transform: translateY(-2px); }
-.tex-card.selected { border-color: var(--lime); }
-.tex-card .ct { font-size: 13px; position: relative; z-index: 1; }
-
-.t-linen {
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 5px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0px, rgba(255,255,255,0.04) 1px, transparent 1px, transparent 5px),
-    linear-gradient(145deg, #8A7A68, #A09080, #7A6A58);
-}
-.t-marble {
-  background: linear-gradient(135deg, #D8D8DC 0%, #E8ECF0 25%, #C8CED8 50%, #D4D8E0 75%, #E0E4E8 100%);
-}
-.t-clay {
-  background: radial-gradient(ellipse at 35% 35%, #C47A5A 0%, #A85840 35%, #8A4030 65%, #B86848 85%);
-}
-.t-leather {
-  background: linear-gradient(145deg, #3A2010, #5A3018, #3A2010, #4A2814);
-}
-.t-paper {
-  background: linear-gradient(145deg, #F8F4EC, #F2EED8, #F6F2E4);
-}
-.t-velvet {
-  background: linear-gradient(145deg, #3A1448, #4A1A5C, #28103A, #3C1650);
-}
-.t-marble .ct, .t-paper .ct { color: #363030; }
-.t-linen .ct, .t-clay .ct, .t-leather .ct, .t-velvet .ct { color: #F4F8EE; }
 
 /* TIME OF DAY */
 .time-grid {
@@ -391,7 +342,7 @@ body {
   display: flex;
   justify-content: space-between;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   color: rgba(54,48,48,0.55);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -439,6 +390,29 @@ input[type="range"]::-moz-range-thumb {
 .feeling-card.selected .ct { color: var(--graphite); }
 .feeling-card .ct { font-size: 16px; }
 
+/* TYPE CARDS */
+.type-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(54,48,48,0.1);
+  border-radius: 4px;
+  padding: 24px 16px 18px;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: center;
+  user-select: none;
+}
+.type-card:hover { border-color: var(--peach); background: rgba(225,115,81,0.04); }
+.type-card.selected { background: var(--lime); border-color: var(--lime); }
+.type-card.selected .type-preview { color: var(--graphite); }
+.type-card.selected .cs { color: rgba(54,48,48,0.55); }
+.type-preview {
+  font-size: 26px;
+  line-height: 1.2;
+  color: var(--graphite);
+  margin-bottom: 8px;
+}
+.type-card .cs { margin-top: 4px; }
+
 /* NAV */
 .nav-row {
   display: flex;
@@ -458,7 +432,7 @@ input[type="range"]::-moz-range-thumb {
 
 .results-eyebrow {
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--peach);
@@ -500,7 +474,7 @@ input[type="range"]::-moz-range-thumb {
   left: 50%;
   transform: translateX(-50%) rotate(-90deg);
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   letter-spacing: 0.04em;
   white-space: nowrap;
   opacity: 0;
@@ -517,7 +491,7 @@ input[type="range"]::-moz-range-thumb {
   flex: 1;
   text-align: center;
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   color: rgba(54,48,48,0.55);
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -696,32 +670,7 @@ input[type="range"]::-moz-range-thumb {
       </div>
 
       <div class="q">
-        <div class="q-label">Q09 / Texture</div>
-        <div class="q-text">If your brand had a texture...</div>
-        <div class="texture-grid">
-          <div class="tex-card t-linen" data-group="texture" data-value="linen" onclick="pick(this,'texture')">
-            <div class="ct">Worn linen</div>
-          </div>
-          <div class="tex-card t-marble" data-group="texture" data-value="marble" onclick="pick(this,'texture')">
-            <div class="ct">Polished marble</div>
-          </div>
-          <div class="tex-card t-clay" data-group="texture" data-value="clay" onclick="pick(this,'texture')">
-            <div class="ct">Raw clay</div>
-          </div>
-          <div class="tex-card t-leather" data-group="texture" data-value="leather" onclick="pick(this,'texture')">
-            <div class="ct">Worn leather</div>
-          </div>
-          <div class="tex-card t-paper" data-group="texture" data-value="paper" onclick="pick(this,'texture')">
-            <div class="ct">Crisp paper</div>
-          </div>
-          <div class="tex-card t-velvet" data-group="texture" data-value="velvet" onclick="pick(this,'texture')">
-            <div class="ct">Soft velvet</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="q">
-        <div class="q-label">Q10 / Place</div>
+        <div class="q-label">Q09 / Place</div>
         <div class="q-text">Your brand is a place. Pick the one that fits.</div>
         <div class="card-grid g2">
           <div class="card" data-group="place" data-value="forest" onclick="pick(this,'place')">
@@ -746,7 +695,7 @@ input[type="range"]::-moz-range-thumb {
       </div>
 
       <div class="q">
-        <div class="q-label">Q11 / Light</div>
+        <div class="q-label">Q10 / Light</div>
         <div class="q-text">What time of day is your brand?</div>
         <div class="time-grid">
           <div class="time-card t-morning" data-group="time" data-value="morning" onclick="pick(this,'time')">
@@ -765,7 +714,7 @@ input[type="range"]::-moz-range-thumb {
       </div>
 
       <div class="q">
-        <div class="q-label">Q12 / Design Elements</div>
+        <div class="q-label">Q11 / Design Elements</div>
         <div class="q-text">Which design elements are you drawn to?</div>
         <div class="q-hint">Pick all that feel right. This helps me know what to work with when I build your brand.</div>
         <div class="card-grid g3">
@@ -809,7 +758,7 @@ input[type="range"]::-moz-range-thumb {
       </div>
 
       <div class="q">
-        <div class="q-label">Q13 / Pace</div>
+        <div class="q-label">Q12 / Pace</div>
         <div class="q-text">How does your brand move?</div>
         <div class="slider-wrap">
           <div class="slider-labels">
@@ -834,12 +783,13 @@ input[type="range"]::-moz-range-thumb {
       </div>
 
       <div class="q">
-        <div class="q-label">Q14 / Feeling</div>
-        <div class="q-text">When the right person finds you, you want them to feel...</div>
+        <div class="q-label">Q13 / Emotion</div>
+        <div class="q-text">Someone lands on your website for the first time. Before they read a single word, what do you want them to feel?</div>
+        <div class="q-hint">Pick the one that matters most. Not what you think you should pick. The real one.</div>
         <div class="card-grid g4">
           <div class="feeling-card" data-group="feeling" data-value="calm" onclick="pick(this,'feeling')"><div class="ct">Calm</div></div>
-          <div class="feeling-card" data-group="feeling" data-value="safe" onclick="pick(this,'feeling')"><div class="ct">Safe</div></div>
-          <div class="feeling-card" data-group="feeling" data-value="capable" onclick="pick(this,'feeling')"><div class="ct">Capable</div></div>
+          <div class="feeling-card" data-group="feeling" data-value="safe" onclick="pick(this,'feeling')"><div class="ct">Held</div></div>
+          <div class="feeling-card" data-group="feeling" data-value="capable" onclick="pick(this,'feeling')"><div class="ct">Confident</div></div>
           <div class="feeling-card" data-group="feeling" data-value="inspired" onclick="pick(this,'feeling')"><div class="ct">Inspired</div></div>
           <div class="feeling-card" data-group="feeling" data-value="grounded" onclick="pick(this,'feeling')"><div class="ct">Grounded</div></div>
           <div class="feeling-card" data-group="feeling" data-value="seen" onclick="pick(this,'feeling')"><div class="ct">Seen</div></div>
@@ -849,39 +799,71 @@ input[type="range"]::-moz-range-thumb {
       </div>
 
       <div class="q">
+        <div class="q-label">Q14 / Typography</div>
+        <div class="q-text">Which of these type styles feel like your brand? Pick up to two.</div>
+        <div class="q-hint">You are not picking a font. You are picking a feeling. Go with your gut.</div>
+        <div class="card-grid g3">
+          <div class="type-card" data-group="typography" data-value="serif-elegant" onclick="toggleMax(this,2)">
+            <div class="type-preview" style="font-family:'Ivy Presto Display Light',Georgia,serif; font-style:italic;">Elegant</div>
+            <div class="cs">Classic serif. Refined and timeless.</div>
+          </div>
+          <div class="type-card" data-group="typography" data-value="sans-clean" onclick="toggleMax(this,2)">
+            <div class="type-preview" style="font-family:'Inter',-apple-system,sans-serif; font-weight:400;">Clean</div>
+            <div class="cs">Modern sans-serif. Simple and clear.</div>
+          </div>
+          <div class="type-card" data-group="typography" data-value="bold-statement" onclick="toggleMax(this,2)">
+            <div class="type-preview" style="font-family:'Ivy Presto Headline SemiBold',Georgia,serif; font-weight:bold;">Bold</div>
+            <div class="cs">Strong and commanding. Impossible to miss.</div>
+          </div>
+          <div class="type-card" data-group="typography" data-value="thin-delicate" onclick="toggleMax(this,2)">
+            <div class="type-preview" style="font-family:'Ivy Presto Display Thin',Georgia,serif;">Delicate</div>
+            <div class="cs">Thin and airy. Quiet confidence.</div>
+          </div>
+          <div class="type-card" data-group="typography" data-value="mono-structured" onclick="toggleMax(this,2)">
+            <div class="type-preview" style="font-family:'IBM Plex Mono',monospace; font-size:22px;">Structured</div>
+            <div class="cs">Monospace. Technical and intentional.</div>
+          </div>
+          <div class="type-card" data-group="typography" data-value="handwritten-personal" onclick="toggleMax(this,2)">
+            <div class="type-preview" style="font-family:'Segoe Script','Bradley Hand',cursive; font-size:24px;">Personal</div>
+            <div class="cs">Handwritten. Warm and human.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q">
         <div class="q-label">Q15 / Depth</div>
-        <div class="q-text">Your palette lives here...</div>
+        <div class="q-text">If your brand were a room, how would it be lit?</div>
         <div class="card-grid g3">
           <div class="card" data-group="mood" data-value="airy" onclick="pick(this,'mood')" style="background:linear-gradient(145deg,#FFFFFF,#F4F8EE);">
-            <div class="ct">Airy &amp; light</div>
-            <div class="cs">Pale. Open. Breathing room.</div>
+            <div class="ct">Bright and airy</div>
+            <div class="cs">Big windows. Natural light. Breathing room.</div>
           </div>
           <div class="card" data-group="mood" data-value="balanced" onclick="pick(this,'mood')" style="background:linear-gradient(145deg,rgba(122,163,231,0.12),rgba(225,115,81,0.08));">
-            <div class="ct">Balanced &amp; present</div>
-            <div class="cs">Neither washed out nor heavy.</div>
+            <div class="ct">Warm and balanced</div>
+            <div class="cs">A lamp on. Comfortable. Nothing too much.</div>
           </div>
           <div class="card" data-group="mood" data-value="moody" onclick="pick(this,'mood')" style="background:linear-gradient(145deg,#3A3028,#201810); border-color:#3A3028;">
-            <div class="ct" style="color:#F4F8EE;">Rich &amp; moody</div>
-            <div class="cs" style="color:rgba(244,248,238,0.5);">Depth. Weight. Presence.</div>
+            <div class="ct" style="color:#F4F8EE;">Dim and moody</div>
+            <div class="cs" style="color:rgba(244,248,238,0.5);">Candlelight. Depth. Intentional shadow.</div>
           </div>
         </div>
       </div>
 
       <div class="q">
         <div class="q-label">Q16 / Statement</div>
-        <div class="q-text">Bold or quiet?</div>
+        <div class="q-text">When someone scrolls past your brand, what should make them stop?</div>
         <div class="card-grid g3">
           <div class="card" data-group="boldness" data-value="statement" onclick="pick(this,'boldness')">
-            <div class="ct">One strong statement</div>
-            <div class="cs">An unexpected pop. Unmistakable.</div>
+            <div class="ct">A bold pop of color</div>
+            <div class="cs">One unexpected moment that grabs attention.</div>
           </div>
           <div class="card" data-group="boldness" data-value="cohesive" onclick="pick(this,'boldness')">
-            <div class="ct">Soft &amp; cohesive</div>
-            <div class="cs">Everything works together. Nothing shouts.</div>
+            <div class="ct">A cohesive mood</div>
+            <div class="cs">Everything flows. The whole thing just works.</div>
           </div>
           <div class="card" data-group="boldness" data-value="neutral" onclick="pick(this,'boldness')">
-            <div class="ct">Clean neutrals</div>
-            <div class="cs">Intentional restraint. The work speaks.</div>
+            <div class="ct">Quiet sophistication</div>
+            <div class="cs">Restraint is the statement. The work speaks.</div>
           </div>
         </div>
       </div>
@@ -946,10 +928,6 @@ function selectPalette() {
   if (A.shape === 'bouba') { temp += 1; organic += 1.5; }
   if (A.shape === 'kiki')  { temp -= 1; organic -= 1.5; }
 
-  const texTemp    = { linen:1, leather:1, clay:0.5, velvet:0,  marble:-1,  paper:-0.5 };
-  const texOrganic = { linen:1, clay:1.5, leather:0.5, velvet:0.5, marble:-1.5, paper:-0.5 };
-  if (A.texture) { temp += texTemp[A.texture]||0; organic += texOrganic[A.texture]||0; }
-
   const placeTemp    = { kitchen:1.5, forest:0.5, coast:0, mountain:-0.5, gallery:-0.5, library:0 };
   const placeOrganic = { forest:1.5, kitchen:1, mountain:0.5, coast:0.5, library:-0.5, gallery:-1 };
   if (A.place) { temp += placeTemp[A.place]||0; organic += placeOrganic[A.place]||0; }
@@ -1001,6 +979,24 @@ function toggle(el) {
   const v = el.dataset.value;
   if (el.classList.contains('selected')) { A[g].push(v); }
   else { A[g] = A[g].filter(x => x !== v); }
+}
+
+function toggleMax(el, max) {
+  const g = el.dataset.group;
+  if (!A[g]) A[g] = [];
+  const v = el.dataset.value;
+  if (el.classList.contains('selected')) {
+    el.classList.remove('selected');
+    A[g] = A[g].filter(x => x !== v);
+  } else {
+    if (A[g].length >= max) {
+      const first = document.querySelector(`[data-group="${g}"][data-value="${A[g][0]}"]`);
+      if (first) first.classList.remove('selected');
+      A[g].shift();
+    }
+    el.classList.add('selected');
+    A[g].push(v);
+  }
 }
 
 // ── NAVIGATION ────────────────────────────────────────────
@@ -1065,6 +1061,7 @@ function formatResults() {
   const pal = selectPalette();
   const avoid = Array.isArray(A.avoid) ? A.avoid.join(', ') : 'not selected';
   const elements = Array.isArray(A.elements) ? A.elements.join(', ') : 'not selected';
+  const typography = Array.isArray(A.typography) ? A.typography.join(', ') : 'not selected';
   return `BRAND DISCOVERY INTAKE
 ${A.practice || 'Untitled Practice'} / ${A.name || ''}
 Submitted: ${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}
@@ -1083,7 +1080,6 @@ What clients say after: ${A.referral}
 
 YOUR FEEL
 Shape: ${A.shape}
-Texture: ${A.texture}
 Place: ${A.place}
 Time of day: ${A.time}
 Design elements: ${elements}
@@ -1091,6 +1087,7 @@ Pace (0=slow 100=quick): ${A.pace}
 
 YOUR PALETTE
 Feeling: ${A.feeling}
+Typography: ${typography}
 Depth: ${A.mood}
 Boldness: ${A.boldness}
 
