@@ -1,0 +1,315 @@
+/* =============================================
+   IHA — GoHighLevel Dashboard Custom CSS
+   Client: Integrative Healthcare Associates
+   ============================================= */
+
+/* ── Font Faces ── */
+@font-face {
+  font-family: "Tan Mon Cheri";
+  src: url("https://assets.cdn.filesafe.space/TnV9noTnK31Dh4UXbSiG/media/69c2f2c3a848b1fe07a626c1.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Julius Sans One";
+  src: url("https://assets.cdn.filesafe.space/TnV9noTnK31Dh4UXbSiG/media/69c2f294cf4f9a3caa126b80.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "TT Norms";
+  src: url("https://assets.cdn.filesafe.space/TnV9noTnK31Dh4UXbSiG/media/69c2f3347fba4b8e6bcfbbb7.otf") format("opentype");
+  font-display: swap;
+}
+
+/* ── Brand Tokens ── */
+:root {
+  --iha-rust: #8c421f;
+  --iha-charcoal: #484747;
+  --iha-olive: #535a43;
+  --iha-sage: #989a7f;
+  --iha-mist: #c7c8b9;
+  --iha-cream: #faf5ec;
+  --iha-stone: #d5cfc2;
+  --iha-white: #ffffff;
+  --iha-scroll-bg: #fdfbf8;
+  --iha-sidebar-bg: #d2d3c7;
+  --iha-header-bg: #e3e3dc;
+}
+
+
+/* ══════════════════════════════════════════════
+   1. SCROLLABLE AREA / MAIN BACKGROUND
+   ══════════════════════════════════════════════ */
+
+.location-dashboard__custom-scroll-bar,
+.location-dashboard-wrapper.hl-wrapper-container,
+.location-dashboard-wrapper.hl-wrapper-container .n-config-provider {
+  background-color: var(--iha-scroll-bg) !important;
+}
+
+/* Scrollbar styling */
+.location-dashboard__custom-scroll-bar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.location-dashboard__custom-scroll-bar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.location-dashboard__custom-scroll-bar::-webkit-scrollbar-thumb {
+  background: var(--iha-mist);
+  border-radius: 999px;
+}
+
+.location-dashboard__custom-scroll-bar::-webkit-scrollbar-thumb:hover {
+  background: var(--iha-sage);
+}
+
+
+/* ══════════════════════════════════════════════
+   2. DASHBOARD HEADER BAR
+   ══════════════════════════════════════════════ */
+
+.location-dashboard_header .hl-header {
+  background-color: var(--iha-header-bg) !important;
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1);
+}
+
+/* "Dashboard" title text */
+.location-dashboard_header .hl-header h1,
+.location-dashboard_header .hl-header .hl-text-lg-bold,
+.location-dashboard_header .hl-header .hl-text-xl-bold,
+.location-dashboard_header .hl-header [class*="hl-text"] {
+  font-family: "Tan Mon Cheri", Georgia, serif !important;
+  text-transform: uppercase !important;
+  color: var(--iha-charcoal) !important;
+  letter-spacing: 0.04em;
+}
+
+/* Header divider */
+.location-dashboard_header .n-divider.n-divider--vertical {
+  background-color: rgba(83, 90, 67, 0.15) !important;
+}
+
+/* "Edit Dashboard" button & date filter in header */
+.location-dashboard_header .hl-header button,
+.location-dashboard_header .hl-header .hl-button {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+}
+
+
+/* ══════════════════════════════════════════════
+   3. QUICK FILTERS
+   ══════════════════════════════════════════════ */
+
+.location-dashboard-quick-filter-btn {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  color: var(--iha-charcoal) !important;
+  border-radius: 999px !important;
+  border-color: rgba(83, 90, 67, 0.18) !important;
+  transition: all 260ms ease;
+}
+
+.location-dashboard-quick-filter-btn:hover {
+  background-color: rgba(152, 154, 127, 0.1) !important;
+  border-color: var(--iha-sage) !important;
+}
+
+.location-dashboard-quick-filter-btn.active {
+  background-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   4. WIDGET CARDS (All Cards)
+   ══════════════════════════════════════════════ */
+
+/* Base card styling — white background */
+.grid-stack-item-content .hl-card {
+  background: var(--iha-white) !important;
+  border: 1px solid rgba(83, 90, 67, 0.08) !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 12px rgba(72, 71, 71, 0.05) !important;
+  overflow: hidden;
+}
+
+/* Card header — "Opportunity Status", "Conversion Rate", etc. */
+.grid-stack-item-content .hl-card .hl-card-header {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em;
+  color: var(--iha-olive) !important;
+  border-bottom: 1px solid rgba(83, 90, 67, 0.06);
+}
+
+/* Make sure the header text inherits card header styles */
+.grid-stack-item-content .hl-card .hl-card-header span,
+.grid-stack-item-content .hl-card .hl-card-header p,
+.grid-stack-item-content .hl-card .hl-card-header [class*="hl-text"],
+.location-dashboard-title-chart-container p.title-text {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em;
+  color: var(--iha-olive) !important;
+}
+
+/* Card body content text */
+.grid-stack-item-content .hl-card .hl-card-content {
+  font-family: "TT Norms", Arial, sans-serif;
+  color: var(--iha-charcoal);
+}
+
+/* Numeric stat cards */
+.location-dashboard-numeric-card.hl-card .hl-card-content {
+  font-family: "TT Norms", Arial, sans-serif;
+  color: var(--iha-charcoal);
+}
+
+.location-dashboard-numeric-chart-text:hover {
+  color: var(--iha-rust) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   5. CHART STYLING
+   ══════════════════════════════════════════════ */
+
+.chart-container .hl-card-content,
+.custom-chart-container .hl-card-content {
+  background: var(--iha-white);
+}
+
+/* Chart filter cards */
+.chart-filter.hl-card .hl-card-header {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.1em;
+  color: var(--iha-olive) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   6. TABLE WIDGETS
+   ══════════════════════════════════════════════ */
+
+.location-dashboard-table-chart.hl-card .hl-card-content {
+  font-family: "TT Norms", Arial, sans-serif;
+}
+
+/* Table headers */
+.hr-data-table .hr-data-table-base-table-header {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  color: var(--iha-olive) !important;
+}
+
+/* Table tags/badges */
+.location-dashboard-table-tag {
+  border-radius: 999px !important;
+  font-family: "TT Norms", Arial, sans-serif !important;
+  font-size: 0.75rem;
+}
+
+
+/* ══════════════════════════════════════════════
+   7. TASK WIDGET
+   ══════════════════════════════════════════════ */
+
+.location-dashboard-task-container.hl-card .hl-card-content {
+  font-family: "TT Norms", Arial, sans-serif;
+}
+
+.location-dashboard-task-divider > .n-divider:not(.n-divider--vertical) {
+  background-color: rgba(83, 90, 67, 0.08) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   8. LEAD SOURCE REPORT
+   ══════════════════════════════════════════════ */
+
+.location-dashboard-lead-source-report.hl-card .hl-card-content {
+  font-family: "TT Norms", Arial, sans-serif;
+}
+
+
+/* ══════════════════════════════════════════════
+   9. DASHBOARD NAVIGATION
+   ══════════════════════════════════════════════ */
+
+.location-dashboard-navigation .active_dashboard {
+  border-radius: 8px !important;
+  border-color: var(--iha-olive) !important;
+  background: rgba(83, 90, 67, 0.08) !important;
+}
+
+.location-dashboard-navigation .hl-card {
+  background: transparent !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   10. DROPDOWNS & SELECT MENUS (Pipeline filter, etc.)
+   ══════════════════════════════════════════════ */
+
+.n-dropdown-menu {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(72, 71, 71, 0.1) !important;
+}
+
+.n-select .n-base-selection {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  border-radius: 10px !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   11. PAGINATION
+   ══════════════════════════════════════════════ */
+
+.location-dashboard-table-chart .hl-card-footer .n-pagination,
+.location-dashboard-lead-source-report > .hl-card-footer > .n-pagination {
+  font-family: "TT Norms", Arial, sans-serif;
+}
+
+.n-pagination .n-pagination-item:not(.n-pagination-item--disabled).n-pagination-item--active {
+  background: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   12. GENERAL TYPOGRAPHY OVERRIDES
+   ══════════════════════════════════════════════ */
+
+/* Body text in the dashboard */
+.location-dashboard-wrapper p,
+.location-dashboard-wrapper span,
+.location-dashboard-wrapper label {
+  font-family: "TT Norms", Arial, sans-serif;
+}
+
+/* "No Data Found" empty state text */
+.hl-empty,
+.location-dashboard-permission-container .hl-empty {
+  font-family: "TT Norms", Arial, sans-serif;
+  color: var(--iha-sage);
+}
+
+/* "No pipeline available" text */
+.location-dashboard-permission-error.hl-card .hl-card-content {
+  font-family: "TT Norms", Arial, sans-serif;
+  color: var(--iha-sage);
+}
