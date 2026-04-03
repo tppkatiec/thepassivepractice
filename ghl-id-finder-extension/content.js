@@ -13,6 +13,7 @@
     /^c-/,          // c-section, c-row, c-column, c-button, c-wrapper
     /^el[A-Z]/,     // elButtonMain, elHeadline, elImageWrapper
     /^hl[_-]/,      // hl_page-preview, hl_header
+    /^ghl-/,        // ghl-footer, ghl-button-bar, ghl-submit-btn
     /^section-/,
     /^row-/,
     /^col-/,
@@ -20,6 +21,9 @@
     /^nanosite/,
     /^funnel/,
     /^page-/,
+    /^c-custom/,    // c-custom-code
+    /^hl_login/,    // hl_login, hl_login--header
+    /^hl-app/,
   ];
 
   // ── Helpers ──
@@ -41,6 +45,10 @@
     if (ghlClasses.some((c) => c.startsWith("elImage"))) return "Image";
     if (ghlClasses.some((c) => c.startsWith("elVideo"))) return "Video";
     if (ghlClasses.some((c) => c.startsWith("elForm") || c.startsWith("elInput"))) return "Form";
+    if (ghlClasses.some((c) => c.startsWith("ghl-submit") || c.startsWith("ghl-next") || c.startsWith("ghl-back"))) return "Button";
+    if (ghlClasses.some((c) => c.startsWith("ghl-progress"))) return "Progress";
+    if (ghlClasses.some((c) => c.startsWith("ghl-question") || c.startsWith("ghl-ques"))) return "Question";
+    if (ghlClasses.some((c) => c.startsWith("ghl-footer"))) return "Footer";
     if (ghlClasses.some((c) => c.startsWith("hl_"))) return "HL UI";
     if (tag === "section") return "Section";
     if (tag === "nav") return "Nav";
