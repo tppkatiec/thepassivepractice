@@ -37,6 +37,12 @@
   --iha-header-bg: #e3e3dc;
 }
 
+body::after {
+  content: "";
+  font-family: "Tan Mon Cheri";
+  position: absolute;
+  visibility: hidden;
+}
 
 /* ══════════════════════════════════════════════
    1. SCROLLABLE AREA / MAIN BACKGROUND
@@ -66,41 +72,89 @@
   background: var(--iha-sage);
 }
 
+#location-dashboard {
+  background-color: var(--iha-scroll-bg) !important;
+}
+
+.hl-header-content .hl-title-container {
+  padding: 24px 0 8px 0 !important;
+}
+
+.main-nav,
+#main-nav,
+nav[class*="main"],
+.hl-main-navigation,
+[class*="top-nav"],
+[class*="navbar"] {
+  background-color: var(--iha-header-bg) !important;
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
+}
+
+header.hl_header {
+  background-color: var(--iha-header-bg) !important;
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
+}
 
 /* ══════════════════════════════════════════════
    2. DASHBOARD HEADER BAR
    ══════════════════════════════════════════════ */
 
-.location-dashboard_header .hl-header {
+#location-dashboard-header {
   background-color: var(--iha-header-bg) !important;
-  border-bottom: 1px solid rgba(83, 90, 67, 0.1);
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
 }
 
-/* "Dashboard" title text */
-.location-dashboard_header .hl-header h1,
-.location-dashboard_header .hl-header .hl-text-lg-bold,
-.location-dashboard_header .hl-header .hl-text-xl-bold,
-.location-dashboard_header .hl-header [class*="hl-text"] {
+.hl-header .hl-header-content .title.hl-display-sm-medium {
   font-family: "Tan Mon Cheri", Georgia, serif !important;
   text-transform: uppercase !important;
   color: var(--iha-charcoal) !important;
   letter-spacing: 0.04em;
+  font-weight: 600;
 }
 
-/* Header divider */
 .location-dashboard_header .n-divider.n-divider--vertical {
   background-color: rgba(83, 90, 67, 0.15) !important;
 }
 
-/* "Edit Dashboard" button & date filter in header */
 .location-dashboard_header .hl-header button,
 .location-dashboard_header .hl-header .hl-button {
   font-family: "Julius Sans One", Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em;
-  font-size: 0.78rem;
+  font-size: 1rem;
+  font-weight: 500 !important;
 }
 
+/* Phone button */
+header.hl_header .bg-success-600 {
+  background-color: var(--iha-olive) !important;
+}
+
+/* Changelog, notifications, help, and primary buttons */
+header.hl_header .btn-circle,
+header.hl_header .btn-changelog,
+header.hl_header .btn-yellow,
+header.hl_header .btn-primary:not(#hl_header--copilot-icon) {
+  background-color: var(--iha-olive) !important;
+  border-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+}
+
+/* Icon colors inside buttons */
+header.hl_header .btn-circle i,
+header.hl_header .btn-changelog i,
+header.hl_header .btn-yellow i {
+  color: var(--iha-white) !important;
+}
+
+#hl_header--help-icon {
+  background-color: var(--iha-olive) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+#location_dashboard-main-content > .mt-4 {
+  margin-top: 0 !important;
+}
 
 /* ══════════════════════════════════════════════
    3. QUICK FILTERS
@@ -110,7 +164,8 @@
   font-family: "Julius Sans One", Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em;
-  font-size: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500 !important;
   color: var(--iha-charcoal) !important;
   border-radius: 999px !important;
   border-color: rgba(83, 90, 67, 0.18) !important;
@@ -148,7 +203,8 @@
   text-transform: uppercase !important;
   letter-spacing: 0.12em;
   color: var(--iha-olive) !important;
-  border-bottom: 1px solid rgba(83, 90, 67, 0.06);
+  border-bottom: 1px solid #c7c8b9;
+  font-weight: 600 !important;
 }
 
 /* Make sure the header text inherits card header styles */
@@ -159,6 +215,7 @@
   font-family: "Julius Sans One", Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 0.12em;
+  font-weight: 600 !important;
   color: var(--iha-olive) !important;
 }
 
@@ -312,4 +369,189 @@
 .location-dashboard-permission-error.hl-card .hl-card-content {
   font-family: "TT Norms", Arial, sans-serif;
   color: var(--iha-sage);
+}
+
+
+/* ══════════════════════════════════════════════
+   13. SIDEBAR NAVIGATION (#sidebar-v2)
+   ══════════════════════════════════════════════ */
+
+/* Sidebar background */
+#sidebar-v2 {
+  background-color: var(--iha-sidebar-bg) !important;
+  border-right: 1px solid rgba(83, 90, 67, 0.1) !important;
+}
+
+/* Override the default-bg-color utility class */
+#sidebar-v2.default-bg-color {
+  background-color: var(--iha-sidebar-bg) !important;
+}
+
+/* Inner wrapper */
+#sidebar-v2 .lead-connector {
+  background-color: transparent !important;
+}
+
+/* ── Location Switcher ── */
+#location-switcher-sidbar-v2 {
+  background-color: rgba(83, 90, 67, 0.12) !important;
+  border-radius: 10px !important;
+}
+
+#location-switcher-sidbar-v2 .hl_switcher-loc-name {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  font-weight: 500 !important;
+}
+
+#location-switcher-sidbar-v2 .hl_switcher-loc-city {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  opacity: 0.7;
+}
+
+#location-switcher-sidbar-v2 .hl_location_icon rect {
+  fill: var(--iha-olive) !important;
+  fill-opacity: 0.2 !important;
+}
+
+#location-switcher-sidbar-v2 .hl_location_icon path {
+  stroke: var(--iha-olive) !important;
+}
+
+#location-switcher-sidbar-v2 .switcher-caret-holder i {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.5;
+}
+
+/* ── Search Bar ── */
+#globalSearchOpener {
+  background: rgba(255, 255, 255, 0.45) !important;
+  border: 1px solid rgba(83, 90, 67, 0.12) !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+}
+
+#globalSearchOpener .search-placeholder {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  opacity: 0.5;
+}
+
+#globalSearchOpener .search-icon {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.5;
+}
+
+#globalSearchOpener .search-shortcut {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.4;
+  border: 1px solid rgba(83, 90, 67, 0.15) !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Quick Actions button */
+#quickActions {
+  color: var(--iha-charcoal) !important;
+}
+
+/* ── Nav Links ── */
+#sidebar-v2 .hl_nav-header nav a {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  border-radius: 8px !important;
+  transition: all 260ms ease !important;
+}
+
+/* Nav link text */
+#sidebar-v2 .hl_nav-header nav a .nav-title {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+/* Nav link hover */
+#sidebar-v2 .hl_nav-header nav a:hover {
+  background-color: rgba(83, 90, 67, 0.1) !important;
+  opacity: 1 !important;
+}
+
+/* Nav link active state */
+#sidebar-v2 .hl_nav-header nav a.active,
+#sidebar-v2 .hl_nav-header nav a.exact-active {
+  background-color: rgba(83, 90, 67, 0.18) !important;
+  opacity: 1 !important;
+}
+
+#sidebar-v2 .hl_nav-header nav a.active .nav-title,
+#sidebar-v2 .hl_nav-header nav a.exact-active .nav-title {
+  color: var(--iha-olive) !important;
+  font-weight: 600 !important;
+}
+
+/* Nav icons (img-based) — tint on hover/active isn't possible with img,
+   but we ensure consistent sizing and opacity */
+#sidebar-v2 .hl_nav-header nav a img {
+  opacity: 0.6;
+  transition: opacity 260ms ease !important;
+}
+
+#sidebar-v2 .hl_nav-header nav a:hover img {
+  opacity: 0.85;
+}
+
+#sidebar-v2 .hl_nav-header nav a.active img,
+#sidebar-v2 .hl_nav-header nav a.exact-active img {
+  opacity: 1;
+}
+
+/* ── Section Divider (between Payments and AI Agents) ── */
+#sidebar-v2 .divider p {
+  border-color: rgba(83, 90, 67, 0.15) !important;
+}
+
+/* ── Collapse Button ── */
+#sidebar-v2 .hl_collapse-button {
+  color: var(--iha-sage) !important;
+  transition: color 260ms ease !important;
+}
+
+#sidebar-v2 .hl_collapse-button:hover {
+  color: var(--iha-olive) !important;
+}
+
+/* ── Settings (Bottom Nav) ── */
+#sidebar-v2 .hl_nav-settings nav a {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  border-radius: 8px !important;
+  transition: all 260ms ease !important;
+}
+
+#sidebar-v2 .hl_nav-settings nav a .nav-title {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+#sidebar-v2 .hl_nav-settings nav a:hover {
+  background-color: rgba(83, 90, 67, 0.1) !important;
+  opacity: 1 !important;
+}
+
+/* ── Sidebar Scrollbar ── */
+#sidebar-v2 .hl_nav-header {
+  scrollbar-width: thin;
+  scrollbar-color: var(--iha-mist) transparent;
+}
+
+#sidebar-v2 .hl_nav-header::-webkit-scrollbar {
+  width: 4px;
+}
+
+#sidebar-v2 .hl_nav-header::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#sidebar-v2 .hl_nav-header::-webkit-scrollbar-thumb {
+  background: var(--iha-mist);
+  border-radius: 999px;
 }
