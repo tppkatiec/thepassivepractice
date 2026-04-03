@@ -10,10 +10,13 @@
 
   // ── Kajabi-specific class patterns ──
   const KAJABI_PATTERNS = [
-    /^kjb/,           // kjb-settings-id, kjb-*
+    /^kjb/,           // kjb-*
     /^header__/,      // header__container, header__content--desktop
     /^footer__/,      // footer__block, footer__container
     /^section__/,     // section__overlay
+    /^section$/,      // section
+    /^section-/,      // section-sm, section-lg
+    /^hero$/,         // hero sections
     /^btn--/,         // btn--large, btn--outline
     /^btn$/,
     /^image__/,       // image__image, image__overlay, image__overlay-text
@@ -27,19 +30,30 @@
     /^user__/,        // user__login
     /^hello-bar/,     // hello-bar__text
     /^modal__/,       // modal__content
+    /^overlay__/,     // overlay__inner, overlay__close
+    /^optin__/,       // optin__panel
     /^form-/,         // form-control, form-btn, form-group
     /^social-icons/,  // social-icons__icon
-    /^countdown__/,   // countdown__label
+    /^countdown/,     // countdown, countdown__item, countdown__amount
+    /^video__/,       // video__wrapper
     /^pagination__/,  // pagination__link--prev
+    /^checkout_/,     // checkout_offer_opt_in
+    /^editor-overlay/,
     /^powered-by/,
     /^disclaimer-text/,
     /^sizer$/,
-    /^container/,     // container, container--full
+    /^container/,     // container, container--full, container-sm
     /^row$/,
+    /^col-/,          // col-1 through col-12, col-sm-*, col-xs-*
+    /^col$/,
+    /^media/,         // media, media-body
   ];
 
   // ── ID patterns Kajabi uses ──
-  const KAJABI_ID_PATTERN = /^(section-|block-|exit-pop|two-step|editor-)/;
+  const KAJABI_ID_PATTERN = /^(section-|block-|exit-pop|two-step|editor-|countdown-timer|form-button)/;
+
+  // ── Kajabi-proprietary attributes to highlight ──
+  const KAJABI_ATTRS = ["kjb-settings-id", "data-gb-custom-block", "data-tag", "data-end-time", "data-timezone"];
 
   // ── Helpers ──
 
@@ -98,6 +112,10 @@
   function bestSelector(el) {
     // If element has a Kajabi-style ID, use it
     if (el.id) return `#${CSS.escape(el.id)}`;
+
+    // kjb-settings-id is the most specific Kajabi selector
+    const kjbId = el.getAttribute("kjb-settings-id");
+    if (kjbId) return `[kjb-settings-id="${kjbId}"]`;
 
     // Prefer Kajabi-specific classes
     const cls = Array.from(el.classList);
@@ -173,6 +191,24 @@
       </div>`;
     }
 
+    // Show kjb-settings-id prominently (Kajabi's proprietary editable element marker)
+    const kjbSettingsId = el.getAttribute("kjb-settings-id");
+    if (kjbSettingsId) {
+      html += `<div class="kft-row">
+        <div class="kft-label">KJB Settings ID</div>
+        <div class="kft-value" style="color:#fbbf24">${escapeHtml(kjbSettingsId)}</div>
+      </div>`;
+    }
+
+    // Show data-gb-custom-block if present
+    const gbBlock = el.getAttribute("data-gb-custom-block");
+    if (gbBlock !== null) {
+      html += `<div class="kft-row">
+        <div class="kft-label">Custom Block</div>
+        <div class="kft-value" style="color:#fbbf24">${escapeHtml(gbBlock || "true")}</div>
+      </div>`;
+    }
+
     if (parentContext && !(id && isKajabiId(id))) {
       html += `<div class="kft-row">
         <div class="kft-label">Parent Context</div>
@@ -199,9 +235,9 @@
       </div>`;
     }
 
-    // Data attributes (very useful in Kajabi — data-reveal-offset, data-slick-id, etc.)
+    // Data attributes (very useful in Kajabi — data-reveal-offset, data-slick-id, kjb-settings-id, etc.)
     const dataAttrs = Array.from(el.attributes)
-      .filter((a) => a.name.startsWith("data-") && a.value)
+      .filter((a) => (a.name.startsWith("data-") || KAJABI_ATTRS.includes(a.name)) && a.value && a.name !== "kjb-settings-id" && a.name !== "data-gb-custom-block")
       .slice(0, 6);
     if (dataAttrs.length) {
       html += `<div class="kft-row">
