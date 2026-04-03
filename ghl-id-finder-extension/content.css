@@ -1,0 +1,159 @@
+/* ── GHL ID Finder: Highlight Overlay ── */
+.ghl-finder-highlight {
+  outline: 2px solid #4f46e5 !important;
+  outline-offset: -1px;
+  background: rgba(79, 70, 229, 0.06) !important;
+  cursor: crosshair !important;
+  transition: outline-color 0.15s, background 0.15s;
+}
+
+/* ── Tooltip ── */
+.ghl-finder-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  max-width: 420px;
+  min-width: 200px;
+  font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e0e0e0;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.45);
+  padding: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s, transform 0.15s;
+  overflow: hidden;
+}
+.ghl-finder-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.ghl-finder-tooltip.pinned {
+  pointer-events: auto;
+}
+
+/* Header bar */
+.ghl-finder-tooltip .gft-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #16162a;
+  border-bottom: 1px solid #2a2a3e;
+  font-weight: 600;
+  font-size: 11px;
+  color: #a5b4fc;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.ghl-finder-tooltip .gft-header .gft-tag {
+  background: #4f46e5;
+  color: #fff;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+/* Close button */
+.ghl-finder-tooltip .gft-close {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 0 0 8px;
+}
+.ghl-finder-tooltip .gft-close:hover {
+  color: #fff;
+}
+
+/* Rows */
+.ghl-finder-tooltip .gft-body {
+  padding: 10px 12px;
+}
+.ghl-finder-tooltip .gft-row {
+  margin-bottom: 8px;
+}
+.ghl-finder-tooltip .gft-row:last-child {
+  margin-bottom: 0;
+}
+.ghl-finder-tooltip .gft-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 2px;
+}
+.ghl-finder-tooltip .gft-value {
+  color: #e0e0e0;
+  word-break: break-all;
+}
+
+/* Copyable selector row */
+.ghl-finder-tooltip .gft-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #111;
+  border-top: 1px solid #2a2a3e;
+  cursor: pointer;
+  user-select: all;
+  transition: background 0.15s;
+}
+.ghl-finder-tooltip .gft-selector:hover {
+  background: #1e1b4b;
+}
+.ghl-finder-tooltip .gft-selector code {
+  flex: 1;
+  color: #c4b5fd;
+  font-size: 12px;
+}
+.ghl-finder-tooltip .gft-selector .gft-copy-icon {
+  color: #666;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.ghl-finder-tooltip .gft-selector.copied .gft-copy-icon {
+  color: #34d399;
+}
+
+/* Class pills */
+.ghl-finder-tooltip .gft-class-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+.ghl-finder-tooltip .gft-class-pill {
+  background: #2a2a3e;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #c4b5fd;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.ghl-finder-tooltip .gft-class-pill:hover {
+  background: #4f46e5;
+  color: #fff;
+}
+.ghl-finder-tooltip .gft-class-pill.copied {
+  background: #065f46;
+  color: #34d399;
+}
+
+/* Pinned badge */
+.ghl-finder-tooltip .gft-pinned-badge {
+  font-size: 9px;
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
