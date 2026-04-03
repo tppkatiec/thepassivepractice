@@ -370,3 +370,188 @@ header.hl_header .btn-yellow i {
   font-family: "TT Norms", Arial, sans-serif;
   color: var(--iha-sage);
 }
+
+
+/* ══════════════════════════════════════════════
+   13. SIDEBAR NAVIGATION (#sidebar-v2)
+   ══════════════════════════════════════════════ */
+
+/* Sidebar background */
+#sidebar-v2 {
+  background-color: var(--iha-sidebar-bg) !important;
+  border-right: 1px solid rgba(83, 90, 67, 0.1) !important;
+}
+
+/* Override the default-bg-color utility class */
+#sidebar-v2.default-bg-color {
+  background-color: var(--iha-sidebar-bg) !important;
+}
+
+/* Inner wrapper */
+#sidebar-v2 .lead-connector {
+  background-color: transparent !important;
+}
+
+/* ── Location Switcher ── */
+#location-switcher-sidbar-v2 {
+  background-color: rgba(83, 90, 67, 0.12) !important;
+  border-radius: 10px !important;
+}
+
+#location-switcher-sidbar-v2 .hl_switcher-loc-name {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  font-weight: 500 !important;
+}
+
+#location-switcher-sidbar-v2 .hl_switcher-loc-city {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  opacity: 0.7;
+}
+
+#location-switcher-sidbar-v2 .hl_location_icon rect {
+  fill: var(--iha-olive) !important;
+  fill-opacity: 0.2 !important;
+}
+
+#location-switcher-sidbar-v2 .hl_location_icon path {
+  stroke: var(--iha-olive) !important;
+}
+
+#location-switcher-sidbar-v2 .switcher-caret-holder i {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.5;
+}
+
+/* ── Search Bar ── */
+#globalSearchOpener {
+  background: rgba(255, 255, 255, 0.45) !important;
+  border: 1px solid rgba(83, 90, 67, 0.12) !important;
+  border-radius: 8px !important;
+  padding: 4px 8px !important;
+}
+
+#globalSearchOpener .search-placeholder {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  opacity: 0.5;
+}
+
+#globalSearchOpener .search-icon {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.5;
+}
+
+#globalSearchOpener .search-shortcut {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.4;
+  border: 1px solid rgba(83, 90, 67, 0.15) !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Quick Actions button */
+#quickActions {
+  color: var(--iha-charcoal) !important;
+}
+
+/* ── Nav Links ── */
+#sidebar-v2 .hl_nav-header nav a {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  border-radius: 8px !important;
+  transition: all 260ms ease !important;
+}
+
+/* Nav link text */
+#sidebar-v2 .hl_nav-header nav a .nav-title {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+/* Nav link hover */
+#sidebar-v2 .hl_nav-header nav a:hover {
+  background-color: rgba(83, 90, 67, 0.1) !important;
+  opacity: 1 !important;
+}
+
+/* Nav link active state */
+#sidebar-v2 .hl_nav-header nav a.active,
+#sidebar-v2 .hl_nav-header nav a.exact-active {
+  background-color: rgba(83, 90, 67, 0.18) !important;
+  opacity: 1 !important;
+}
+
+#sidebar-v2 .hl_nav-header nav a.active .nav-title,
+#sidebar-v2 .hl_nav-header nav a.exact-active .nav-title {
+  color: var(--iha-olive) !important;
+  font-weight: 600 !important;
+}
+
+/* Nav icons (img-based) — tint on hover/active isn't possible with img,
+   but we ensure consistent sizing and opacity */
+#sidebar-v2 .hl_nav-header nav a img {
+  opacity: 0.6;
+  transition: opacity 260ms ease !important;
+}
+
+#sidebar-v2 .hl_nav-header nav a:hover img {
+  opacity: 0.85;
+}
+
+#sidebar-v2 .hl_nav-header nav a.active img,
+#sidebar-v2 .hl_nav-header nav a.exact-active img {
+  opacity: 1;
+}
+
+/* ── Section Divider (between Payments and AI Agents) ── */
+#sidebar-v2 .divider p {
+  border-color: rgba(83, 90, 67, 0.15) !important;
+}
+
+/* ── Collapse Button ── */
+#sidebar-v2 .hl_collapse-button {
+  color: var(--iha-sage) !important;
+  transition: color 260ms ease !important;
+}
+
+#sidebar-v2 .hl_collapse-button:hover {
+  color: var(--iha-olive) !important;
+}
+
+/* ── Settings (Bottom Nav) ── */
+#sidebar-v2 .hl_nav-settings nav a {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  border-radius: 8px !important;
+  transition: all 260ms ease !important;
+}
+
+#sidebar-v2 .hl_nav-settings nav a .nav-title {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+#sidebar-v2 .hl_nav-settings nav a:hover {
+  background-color: rgba(83, 90, 67, 0.1) !important;
+  opacity: 1 !important;
+}
+
+/* ── Sidebar Scrollbar ── */
+#sidebar-v2 .hl_nav-header {
+  scrollbar-width: thin;
+  scrollbar-color: var(--iha-mist) transparent;
+}
+
+#sidebar-v2 .hl_nav-header::-webkit-scrollbar {
+  width: 4px;
+}
+
+#sidebar-v2 .hl_nav-header::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#sidebar-v2 .hl_nav-header::-webkit-scrollbar-thumb {
+  background: var(--iha-mist);
+  border-radius: 999px;
+}
