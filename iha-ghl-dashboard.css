@@ -37,6 +37,12 @@
   --iha-header-bg: #e3e3dc;
 }
 
+body::after {
+  content: "";
+  font-family: "Tan Mon Cheri";
+  position: absolute;
+  visibility: hidden;
+}
 
 /* ══════════════════════════════════════════════
    1. SCROLLABLE AREA / MAIN BACKGROUND
@@ -66,41 +72,89 @@
   background: var(--iha-sage);
 }
 
+#location-dashboard {
+  background-color: var(--iha-scroll-bg) !important;
+}
+
+.hl-header-content .hl-title-container {
+  padding: 24px 0 8px 0 !important;
+}
+
+.main-nav,
+#main-nav,
+nav[class*="main"],
+.hl-main-navigation,
+[class*="top-nav"],
+[class*="navbar"] {
+  background-color: var(--iha-header-bg) !important;
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
+}
+
+header.hl_header {
+  background-color: var(--iha-header-bg) !important;
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
+}
 
 /* ══════════════════════════════════════════════
    2. DASHBOARD HEADER BAR
    ══════════════════════════════════════════════ */
 
-.location-dashboard_header .hl-header {
+#location-dashboard-header {
   background-color: var(--iha-header-bg) !important;
-  border-bottom: 1px solid rgba(83, 90, 67, 0.1);
+  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
 }
 
-/* "Dashboard" title text */
-.location-dashboard_header .hl-header h1,
-.location-dashboard_header .hl-header .hl-text-lg-bold,
-.location-dashboard_header .hl-header .hl-text-xl-bold,
-.location-dashboard_header .hl-header [class*="hl-text"] {
+.hl-header .hl-header-content .title.hl-display-sm-medium {
   font-family: "Tan Mon Cheri", Georgia, serif !important;
   text-transform: uppercase !important;
   color: var(--iha-charcoal) !important;
   letter-spacing: 0.04em;
+  font-weight: 600;
 }
 
-/* Header divider */
 .location-dashboard_header .n-divider.n-divider--vertical {
   background-color: rgba(83, 90, 67, 0.15) !important;
 }
 
-/* "Edit Dashboard" button & date filter in header */
 .location-dashboard_header .hl-header button,
 .location-dashboard_header .hl-header .hl-button {
   font-family: "Julius Sans One", Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em;
-  font-size: 0.78rem;
+  font-size: 1rem;
+  font-weight: 500 !important;
 }
 
+/* Phone button */
+header.hl_header .bg-success-600 {
+  background-color: var(--iha-olive) !important;
+}
+
+/* Changelog, notifications, help, and primary buttons */
+header.hl_header .btn-circle,
+header.hl_header .btn-changelog,
+header.hl_header .btn-yellow,
+header.hl_header .btn-primary:not(#hl_header--copilot-icon) {
+  background-color: var(--iha-olive) !important;
+  border-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+}
+
+/* Icon colors inside buttons */
+header.hl_header .btn-circle i,
+header.hl_header .btn-changelog i,
+header.hl_header .btn-yellow i {
+  color: var(--iha-white) !important;
+}
+
+#hl_header--help-icon {
+  background-color: var(--iha-olive) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+#location_dashboard-main-content > .mt-4 {
+  margin-top: 0 !important;
+}
 
 /* ══════════════════════════════════════════════
    3. QUICK FILTERS
@@ -110,7 +164,8 @@
   font-family: "Julius Sans One", Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 0.1em;
-  font-size: 0.75rem;
+  font-size: 1rem;
+  font-weight: 500 !important;
   color: var(--iha-charcoal) !important;
   border-radius: 999px !important;
   border-color: rgba(83, 90, 67, 0.18) !important;
@@ -148,7 +203,8 @@
   text-transform: uppercase !important;
   letter-spacing: 0.12em;
   color: var(--iha-olive) !important;
-  border-bottom: 1px solid rgba(83, 90, 67, 0.06);
+  border-bottom: 1px solid #c7c8b9;
+  font-weight: 600 !important;
 }
 
 /* Make sure the header text inherits card header styles */
@@ -159,6 +215,7 @@
   font-family: "Julius Sans One", Arial, sans-serif !important;
   text-transform: uppercase !important;
   letter-spacing: 0.12em;
+  font-weight: 600 !important;
   color: var(--iha-olive) !important;
 }
 
@@ -305,155 +362,11 @@
 .hl-empty,
 .location-dashboard-permission-container .hl-empty {
   font-family: "TT Norms", Arial, sans-serif;
-  color: var(--iha-olive);
-  opacity: 0.75;
+  color: var(--iha-sage);
 }
 
 /* "No pipeline available" text */
 .location-dashboard-permission-error.hl-card .hl-card-content {
   font-family: "TT Norms", Arial, sans-serif;
-  color: var(--iha-olive);
-  opacity: 0.75;
-}
-
-
-/* ══════════════════════════════════════════════
-   13. SIDEBAR NAVIGATION
-   ══════════════════════════════════════════════ */
-
-/* Sidebar background */
-.hl_sidebar,
-.left-sidebar,
-nav.sidebar {
-  background-color: var(--iha-sidebar-bg) !important;
-  border-right: 1px solid rgba(83, 90, 67, 0.1) !important;
-}
-
-/* Nav link base styles */
-.hl_sidebar a,
-.left-sidebar .sidebar-nav ul li a,
-nav.sidebar a {
-  font-family: "TT Norms", Arial, sans-serif !important;
-  font-size: 0.85rem !important;
-  color: var(--iha-charcoal) !important;
-  letter-spacing: 0.02em;
-  border-radius: 8px !important;
-  transition: all 260ms ease !important;
-}
-
-/* Nav link hover */
-.hl_sidebar a:hover,
-.left-sidebar .sidebar-nav ul li a:hover,
-nav.sidebar a:hover {
-  background-color: rgba(83, 90, 67, 0.1) !important;
-  color: var(--iha-olive) !important;
-}
-
-/* Nav link active / selected */
-.hl_sidebar a.active,
-.hl_sidebar a.router-link-active,
-.left-sidebar .sidebar-nav ul li.active > a,
-nav.sidebar a.router-link-active {
-  background-color: rgba(83, 90, 67, 0.15) !important;
-  color: var(--iha-olive) !important;
-  font-weight: 500 !important;
-}
-
-/* Nav icons — decorative but kept readable */
-.hl_sidebar a svg,
-.hl_sidebar a i,
-.left-sidebar .sidebar-nav ul li a svg,
-.left-sidebar .sidebar-nav ul li a i {
-  color: var(--iha-olive) !important;
-  opacity: 0.7;
-  transition: color 260ms ease, opacity 260ms ease !important;
-}
-
-/* Active nav icons */
-.hl_sidebar a.active svg,
-.hl_sidebar a.active i,
-.hl_sidebar a.router-link-active svg,
-.hl_sidebar a.router-link-active i,
-.left-sidebar .sidebar-nav ul li.active > a svg,
-.left-sidebar .sidebar-nav ul li.active > a i {
-  color: var(--iha-olive) !important;
-  opacity: 1;
-}
-
-/* Hover nav icons */
-.hl_sidebar a:hover svg,
-.hl_sidebar a:hover i,
-.left-sidebar .sidebar-nav ul li a:hover svg,
-.left-sidebar .sidebar-nav ul li a:hover i {
-  color: var(--iha-olive) !important;
-  opacity: 1;
-}
-
-/* Section dividers in nav */
-.left-sidebar .sidebar-nav ul li.nav-section {
-  font-family: "Julius Sans One", Arial, sans-serif !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.12em;
-  font-size: 0.68rem !important;
-  color: var(--iha-charcoal) !important;
-  opacity: 0.75;
-}
-
-/* Account switcher at top of sidebar */
-.hl_sidebar .account-switcher,
-.hl_sidebar .sub-account-selector {
-  border-bottom: 1px solid rgba(83, 90, 67, 0.12) !important;
-}
-
-/* Search bar in sidebar */
-.hl_sidebar .search-bar,
-.hl_sidebar input[type="search"],
-.hl_sidebar input[type="text"] {
-  background: rgba(255, 255, 255, 0.5) !important;
-  border: 1px solid rgba(83, 90, 67, 0.15) !important;
-  border-radius: 8px !important;
-  font-family: "TT Norms", Arial, sans-serif !important;
-  color: var(--iha-charcoal) !important;
-}
-
-/* Sidebar scrollbar */
-.hl_sidebar::-webkit-scrollbar,
-.left-sidebar::-webkit-scrollbar {
-  width: 4px;
-}
-
-.hl_sidebar::-webkit-scrollbar-track,
-.left-sidebar::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.hl_sidebar::-webkit-scrollbar-thumb,
-.left-sidebar::-webkit-scrollbar-thumb {
-  background: var(--iha-mist);
-  border-radius: 999px;
-}
-
-
-/* ══════════════════════════════════════════════
-   14. TOP HEADER BAR (Global)
-   ══════════════════════════════════════════════ */
-
-.topbar,
-.hl_header,
-header.navbar {
-  background-color: var(--iha-header-bg) !important;
-  border-bottom: 1px solid rgba(83, 90, 67, 0.1) !important;
-}
-
-.topbar .nav-link,
-.topbar .navbar-text,
-.hl_header a,
-.hl_header span {
-  font-family: "TT Norms", Arial, sans-serif !important;
-  color: var(--iha-charcoal) !important;
-}
-
-.topbar .nav-link:hover,
-.hl_header a:hover {
-  color: var(--iha-olive) !important;
+  color: var(--iha-sage);
 }
