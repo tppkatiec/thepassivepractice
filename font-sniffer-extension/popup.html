@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 300px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1017;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-top: 1px solid #2a2028;
+    }
+    .toggle-label {
+      font-size: 13px;
+      color: #ccc;
+    }
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #333;
+      border-radius: 24px;
+      transition: 0.2s;
+    }
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    input:checked + .slider { background: #ec4899; }
+    input:checked + .slider::before { transform: translateX(20px); }
+    .status {
+      margin-top: 16px;
+      padding: 10px 12px;
+      background: #2a2028;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.5;
+    }
+    .status.active {
+      color: #f9a8d4;
+      background: #2a1525;
+    }
+    .hotkey {
+      display: inline-block;
+      background: #333;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: monospace;
+      color: #ccc;
+    }
+    .instructions {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #777;
+      line-height: 1.6;
+    }
+    .instructions li {
+      margin-bottom: 4px;
+      list-style: none;
+      padding-left: 16px;
+      position: relative;
+    }
+    .instructions li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: #ec4899;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Font Sniffer</h1>
+  <p class="subtitle">Inspect fonts on any website</p>
+
+  <div class="toggle-row">
+    <span class="toggle-label">Enable Font Inspector</span>
+    <label class="toggle">
+      <input type="checkbox" id="toggleInspector">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span class="toggle-label">Pin on click</span>
+    <label class="toggle">
+      <input type="checkbox" id="toggleSticky" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div id="statusBox" class="status">
+    Toggle the inspector, then hover over any text on the page.
+  </div>
+
+  <ul class="instructions">
+    <li>Hover over text to see all font properties</li>
+    <li>Click to pin the tooltip</li>
+    <li>Click any property value to copy it</li>
+    <li>Click "Copy All CSS" for the full block</li>
+    <li>Press <span class="hotkey">Esc</span> to dismiss</li>
+    <li>Works on every website</li>
+  </ul>
+
+  <script src="popup.js"></script>
+</body>
+</html>

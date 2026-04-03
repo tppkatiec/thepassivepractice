@@ -1,0 +1,163 @@
+/* ── Font Sniffer: Highlight ── */
+.fs-highlight {
+  outline: 2px solid #ec4899 !important;
+  outline-offset: -1px;
+  background: rgba(236, 72, 153, 0.06) !important;
+  cursor: crosshair !important;
+  transition: outline-color 0.15s, background 0.15s;
+}
+
+/* ── Tooltip ── */
+.fs-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  width: 340px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e0e0e0;
+  background: #1a1017;
+  border: 1px solid #3a2838;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  padding: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s, transform 0.15s;
+  overflow: hidden;
+}
+.fs-tooltip.visible { opacity: 1; transform: translateY(0); }
+.fs-tooltip.pinned { pointer-events: auto; }
+
+/* ── Header ── */
+.fs-tooltip .fs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #150e14;
+  border-bottom: 1px solid #2a2028;
+}
+.fs-tooltip .fs-font-name {
+  font-family: "SF Mono", "Fira Code", Consolas, monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #f9a8d4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 260px;
+}
+.fs-tooltip .fs-close {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 0 0 8px;
+  display: none;
+}
+.fs-tooltip .fs-close:hover { color: #fff; }
+.fs-tooltip .fs-pinned-badge {
+  font-size: 9px;
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: none;
+}
+
+/* ── Preview ── */
+.fs-tooltip .fs-preview {
+  padding: 12px 14px;
+  border-bottom: 1px solid #2a2028;
+  text-align: center;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fs-tooltip .fs-preview-text {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Properties grid ── */
+.fs-tooltip .fs-props {
+  padding: 10px 14px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+.fs-tooltip .fs-prop {
+  padding: 6px 0;
+  border-bottom: 1px solid #1f1a1e;
+  cursor: pointer;
+  transition: background 0.15s;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+}
+.fs-tooltip .fs-prop:hover {
+  background: #2a1525;
+}
+.fs-tooltip .fs-prop-label {
+  font-size: 9px;
+  font-weight: 600;
+  color: #777;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 1px;
+}
+.fs-tooltip .fs-prop-value {
+  font-family: "SF Mono", "Fira Code", Consolas, monospace;
+  font-size: 12px;
+  color: #e0e0e0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.fs-tooltip .fs-prop.copied .fs-prop-value {
+  color: #34d399;
+}
+.fs-tooltip .fs-prop.full-width {
+  grid-column: 1 / -1;
+}
+
+/* ── Color swatch ── */
+.fs-tooltip .fs-color-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.15);
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* ── Copy All button ── */
+.fs-tooltip .fs-copy-all {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 14px;
+  background: #150e14;
+  border-top: 1px solid #2a2028;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-size: 11px;
+  font-weight: 600;
+  color: #f9a8d4;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.fs-tooltip .fs-copy-all:hover {
+  background: #2a1525;
+}
+.fs-tooltip .fs-copy-all.copied {
+  color: #34d399;
+}
