@@ -305,13 +305,15 @@
 .hl-empty,
 .location-dashboard-permission-container .hl-empty {
   font-family: "TT Norms", Arial, sans-serif;
-  color: var(--iha-sage);
+  color: var(--iha-olive);
+  opacity: 0.75;
 }
 
 /* "No pipeline available" text */
 .location-dashboard-permission-error.hl-card .hl-card-content {
   font-family: "TT Norms", Arial, sans-serif;
-  color: var(--iha-sage);
+  color: var(--iha-olive);
+  opacity: 0.75;
 }
 
 
@@ -357,14 +359,14 @@ nav.sidebar a.router-link-active {
   font-weight: 500 !important;
 }
 
-/* Nav icons */
+/* Nav icons — decorative but kept readable */
 .hl_sidebar a svg,
 .hl_sidebar a i,
 .left-sidebar .sidebar-nav ul li a svg,
 .left-sidebar .sidebar-nav ul li a i {
-  color: var(--iha-sage) !important;
-  opacity: 0.8;
-  transition: color 260ms ease !important;
+  color: var(--iha-olive) !important;
+  opacity: 0.7;
+  transition: color 260ms ease, opacity 260ms ease !important;
 }
 
 /* Active nav icons */
@@ -393,7 +395,8 @@ nav.sidebar a.router-link-active {
   text-transform: uppercase !important;
   letter-spacing: 0.12em;
   font-size: 0.68rem !important;
-  color: var(--iha-sage) !important;
+  color: var(--iha-charcoal) !important;
+  opacity: 0.75;
 }
 
 /* Account switcher at top of sidebar */
