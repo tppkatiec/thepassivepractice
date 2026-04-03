@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 300px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+    h1 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 16px;
+    }
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-top: 1px solid #2a2a3e;
+    }
+    .toggle-label {
+      font-size: 13px;
+      color: #ccc;
+    }
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #333;
+      border-radius: 24px;
+      transition: 0.2s;
+    }
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.2s;
+    }
+    input:checked + .slider {
+      background: #4f46e5;
+    }
+    input:checked + .slider::before {
+      transform: translateX(20px);
+    }
+    .status {
+      margin-top: 16px;
+      padding: 10px 12px;
+      background: #2a2a3e;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #aaa;
+      line-height: 1.5;
+    }
+    .status.active {
+      color: #a5b4fc;
+      background: #1e1b4b;
+    }
+    .hotkey {
+      display: inline-block;
+      background: #333;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-family: monospace;
+      color: #ccc;
+    }
+    .instructions {
+      margin-top: 12px;
+      font-size: 11px;
+      color: #777;
+      line-height: 1.6;
+    }
+    .instructions li {
+      margin-bottom: 4px;
+      list-style: none;
+      padding-left: 16px;
+      position: relative;
+    }
+    .instructions li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: #4f46e5;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>GHL Class & ID Finder</h1>
+  <p class="subtitle">Inspect Go High Level elements</p>
+
+  <div class="toggle-row">
+    <span class="toggle-label">Enable Inspector</span>
+    <label class="toggle">
+      <input type="checkbox" id="toggleInspector">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="toggle-row">
+    <span class="toggle-label">Sticky tooltips (click to pin)</span>
+    <label class="toggle">
+      <input type="checkbox" id="toggleSticky" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div id="statusBox" class="status">
+    Toggle the inspector, then hover over any element on a GHL page.
+  </div>
+
+  <ul class="instructions">
+    <li>Hover to see classes & IDs</li>
+    <li>Click an element to pin its info</li>
+    <li>Click the CSS selector to copy it</li>
+    <li>Press <span class="hotkey">Esc</span> to dismiss pinned tooltips</li>
+    <li>Works on GHL funnels, websites & dashboards</li>
+  </ul>
+
+  <script src="popup.js"></script>
+</body>
+</html>
