@@ -36,7 +36,7 @@ toggleSticky.addEventListener("change", () => {
 
 function updateStatus() {
   if (toggleInspector.checked) {
-    statusBox.textContent = "Font Sniffer is ON — hover over any text.";
+    statusBox.textContent = "Fontspo is ON — hover over any text.";
     statusBox.classList.add("active");
   } else {
     statusBox.textContent = "Toggle the inspector, then hover over any text on the page.";

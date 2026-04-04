@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Font Sniffer",
+  "name": "Fontspo",
   "description": "Hover over any text to instantly see its font family, weight, size, line height, letter spacing, color, and full CSS. Works on any website.",
   "version": "1.0.0",
   "permissions": ["activeTab", "scripting", "storage"],
