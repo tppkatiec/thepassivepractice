@@ -154,6 +154,14 @@ header.hl_header .btn-yellow i {
   filter: none !important;
 }
 
+/* Help icon — beat inline style with [style] specificity boost */
+#hl_header--help-icon[style],
+#hl_header--help-icon[style="background: yellow;"] {
+  background: var(--iha-olive) !important;
+  background-color: var(--iha-olive) !important;
+  background-image: none !important;
+}
+
 
 #location_dashboard-main-content > .mt-4 {
   margin-top: 0 !important;
@@ -189,6 +197,30 @@ header.hl_header .btn-yellow i {
 .n-button--primary-type .n-button__border,
 .n-button--primary-type .n-button__state-border {
   border-color: var(--iha-olive) !important;
+}
+
+/* Edit Dashboard button hover */
+#location-dashboard_btn--edit-dashboard:hover,
+#location-dashboard_btn--edit-dashboard:hover::before,
+#location-dashboard_btn--edit-dashboard:focus,
+#location-dashboard_btn--edit-dashboard:focus::before {
+  background-color: #6b7355 !important;
+}
+
+#location-dashboard_btn--edit-dashboard:hover .n-button__border,
+#location-dashboard_btn--edit-dashboard:hover .n-button__state-border {
+  border-color: #6b7355 !important;
+}
+
+/* All primary buttons hover (n-button) */
+.n-button--primary-type:hover,
+.n-button--primary-type:focus {
+  background-color: #6b7355 !important;
+}
+
+.n-button--primary-type:hover .n-button__border,
+.n-button--primary-type:hover .n-button__state-border {
+  border-color: #6b7355 !important;
 }
 
 /* Quick Filters text */
@@ -607,4 +639,270 @@ header.hl_header .btn-yellow i {
 #sidebar-v2 .hl_nav-header::-webkit-scrollbar-thumb {
   background: var(--iha-mist);
   border-radius: 999px;
+}
+
+
+/* ══════════════════════════════════════════════
+   14. GLOBAL TAILWIND COLOR OVERRIDES
+   (Used by Conversations & other GHL sections)
+   ══════════════════════════════════════════════ */
+
+/* "Apple green" — GHL's default primary green button color */
+.bg-apple-500 {
+  background-color: var(--iha-olive) !important;
+}
+
+.hover\:bg-apple-600:hover,
+.bg-apple-500:hover {
+  background-color: #6b7355 !important;
+}
+
+.bg-success-600 {
+  background-color: var(--iha-olive) !important;
+}
+
+.text-primary-400 {
+  color: var(--iha-olive) !important;
+}
+
+.focus\:ring-apple-500:focus {
+  --tw-ring-color: var(--iha-olive) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   15. CONVERSATIONS SECTION (hr- prefix / Highrise UI)
+   ══════════════════════════════════════════════ */
+
+/* ── Tabs (active tab indicator) ── */
+.hr-tabs-tab__label {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  transition: color 260ms ease !important;
+}
+
+.hr-tabs-tab:hover .hr-tabs-tab__label {
+  color: var(--iha-olive) !important;
+}
+
+/* Active tab text */
+.hr-tabs-tab--active .hr-tabs-tab__label,
+.hr-tabs-tab.hr-tabs-tab--active {
+  color: var(--iha-olive) !important;
+  font-weight: 600 !important;
+}
+
+/* The underline bar that moves under the active tab */
+.hr-tabs-bar,
+.hr-tabs--line-type .hr-tabs-bar {
+  background-color: var(--iha-olive) !important;
+}
+
+/* Tab nav container */
+.hr-tabs-nav,
+.hr-tabs-nav--line-type {
+  border-bottom-color: rgba(83, 90, 67, 0.12) !important;
+}
+
+
+/* ── Buttons (hr-button) ── */
+
+/* Primary buttons (hr-button--primary) */
+.hr-button--primary,
+.hr-button--primary-type {
+  background-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+}
+
+.hr-button--primary .hr-button__border,
+.hr-button--primary .hr-button__state-border,
+.hr-button--primary-type .hr-button__border,
+.hr-button--primary-type .hr-button__state-border {
+  border-color: var(--iha-olive) !important;
+}
+
+.hr-button--primary:hover,
+.hr-button--primary-type:hover,
+.hr-button--primary:focus,
+.hr-button--primary-type:focus {
+  background-color: #6b7355 !important;
+}
+
+.hr-button--primary:hover .hr-button__border,
+.hr-button--primary-type:hover .hr-button__border {
+  border-color: #6b7355 !important;
+}
+
+/* Secondary buttons */
+.hr-button--secondary {
+  color: var(--iha-olive) !important;
+}
+
+.hr-button--secondary .hr-button__border,
+.hr-button--secondary .hr-button__state-border {
+  border-color: var(--iha-olive) !important;
+}
+
+.hr-button--secondary:hover {
+  background-color: rgba(83, 90, 67, 0.08) !important;
+}
+
+/* Text buttons */
+.hr-button--text {
+  color: var(--iha-olive) !important;
+}
+
+.hr-button--text:hover {
+  color: var(--iha-rust) !important;
+}
+
+/* Default type buttons */
+.hr-button--default-type {
+  font-family: "TT Norms", Arial, sans-serif !important;
+}
+
+
+/* ── Empty States (hr-empty) ── */
+
+.hr-empty {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+.hr-empty__title {
+  font-family: "Tan Mon Cheri", Georgia, serif !important;
+  text-transform: uppercase !important;
+  color: var(--iha-charcoal) !important;
+  letter-spacing: 0.04em;
+  font-weight: 600 !important;
+}
+
+.hr-empty__header {
+  color: var(--iha-charcoal) !important;
+  opacity: 0.7;
+}
+
+.hr-empty__actions {
+  margin-top: 16px;
+}
+
+.hr-empty__button--positive {
+  background-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+.hr-empty__button--positive:hover {
+  background-color: #6b7355 !important;
+}
+
+/* Data table no-data state */
+.data-table__no-data {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  opacity: 0.7;
+}
+
+
+/* ── Data Tables (hr-data-table) ── */
+
+.hr-data-table {
+  font-family: "TT Norms", Arial, sans-serif !important;
+}
+
+.hr-data-table__header,
+.hr-data-table__cell-header {
+  font-family: "Julius Sans One", Arial, sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em;
+  color: var(--iha-olive) !important;
+  font-size: 0.75rem !important;
+}
+
+.hr-data-table__body {
+  color: var(--iha-charcoal) !important;
+}
+
+
+/* ── Inputs (hr-input) ── */
+
+.hr-input,
+.hr-input__input-el {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+.hr-input__placeholder {
+  color: rgba(72, 71, 71, 0.45) !important;
+}
+
+.hr-input__border,
+.hr-input__state-border {
+  border-color: rgba(83, 90, 67, 0.18) !important;
+}
+
+.hr-input:focus-within .hr-input__border,
+.hr-input:focus-within .hr-input__state-border {
+  border-color: var(--iha-olive) !important;
+}
+
+
+/* ── Selects (hr-select / hr-base-selection) ── */
+
+.hr-base-selection,
+.hr-base-selection-input,
+.hr-base-selection-label {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+.hr-base-selection__border,
+.hr-base-selection__state-border {
+  border-color: rgba(83, 90, 67, 0.18) !important;
+}
+
+.hr-base-selection--selected .hr-base-selection__border {
+  border-color: var(--iha-olive) !important;
+}
+
+
+/* ── Pagination (hr-pagination) ── */
+
+.hr-pagination-cntr,
+.hr-pagination-item {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+.hr-pagination-item__active,
+.hr-pagination-item.hr-pagination-item__active {
+  background-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+
+/* ── Tab Pane / Wrapper backgrounds ── */
+
+.hr-tab-pane,
+.hr-tabs-pane-wrapper {
+  background-color: transparent !important;
+}
+
+/* Conversations app container */
+.conversationsUtilitiesApp {
+  font-family: "TT Norms", Arial, sans-serif !important;
+}
+
+
+/* ── Generic hr- text classes ── */
+
+.hr-text {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+.hr-text-bold,
+.hr-text-semibold {
+  color: var(--iha-charcoal) !important;
 }
