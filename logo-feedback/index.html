@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo Feedback | The Passive Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #F4F8EE;
+  --graphite: #363030;
+  --smoke: #F6F5F5;
+  --peach: #E17351;
+  --wisteria: #7AA3E7;
+  --lime: #DEFF46;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: var(--smoke);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ── LAYOUT ────────────────────────────────── */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── INTRO SCREEN ──────────────────────────── */
+#intro {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+.intro-inner {
+  max-width: 520px;
+  text-align: center;
+}
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 24px;
+  display: block;
+}
+.intro-headline {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(36px, 8vw, 56px);
+  line-height: 1.1;
+  color: var(--graphite);
+  margin-bottom: 24px;
+}
+.intro-headline em {
+  font-style: italic;
+  color: var(--peach);
+}
+.intro-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--graphite);
+  opacity: 0.6;
+  margin-bottom: 44px;
+}
+.intro-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--graphite);
+  opacity: 0.4;
+  margin-top: 16px;
+  letter-spacing: 0.04em;
+}
+
+/* ── BUTTONS ───────────────────────────────── */
+.btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.18s ease;
+  display: inline-block;
+  -webkit-appearance: none;
+}
+.btn-primary {
+  background: var(--lime);
+  color: var(--graphite);
+}
+.btn-primary:hover {
+  background: #c8e83a;
+  transform: translateY(-1px);
+}
+
+/* ── PHASE 1: QUICK SORT ───────────────────── */
+#phase1 {
+  display: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 40px 0;
+}
+
+.sort-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  animation: fadeUp 0.3s ease forwards;
+}
+.sort-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  border: 1px solid rgba(54,48,48,0.06);
+}
+.sort-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.sort-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.sort-btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 18px 12px;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 4px;
+  background: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+  text-align: center;
+}
+.sort-btn:active {
+  transform: scale(0.97);
+}
+.sort-btn.yes:hover, .sort-btn.yes:active {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+.sort-btn.maybe:hover, .sort-btn.maybe:active {
+  background: var(--wisteria);
+  border-color: var(--wisteria);
+  color: #FFFFFF;
+}
+.sort-btn.no:hover, .sort-btn.no:active {
+  background: var(--graphite);
+  border-color: var(--graphite);
+  color: #FFFFFF;
+}
+
+/* ── NO FOLLOW-UP ──────────────────────────── */
+.no-followup {
+  display: none;
+  animation: fadeUp 0.2s ease forwards;
+}
+.no-followup-label {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 20px;
+  color: var(--graphite);
+  text-align: center;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.no-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.no-tag {
+  padding: 12px 18px;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 100px;
+  background: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+}
+.no-tag:active {
+  transform: scale(0.96);
+}
+.no-tag:hover {
+  border-color: var(--peach);
+  color: var(--peach);
+}
+
+/* ── PHASE TRANSITION ──────────────────────── */
+#transition {
+  display: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+}
+.transition-stat {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 8px;
+}
+.transition-num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(48px, 12vw, 80px);
+  color: var(--graphite);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.transition-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(54,48,48,0.5);
+  margin-bottom: 40px;
+}
+
+/* ── PHASE 2: DETAILED FEEDBACK ────────────── */
+#phase2 {
+  display: none;
+  padding: 40px 0 120px;
+}
+
+.phase2-progress {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.phase2-progress-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(54,48,48,0.35);
+}
+
+.detail-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  animation: fadeUp 0.3s ease forwards;
+}
+
+.detail-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  border: 1px solid rgba(54,48,48,0.06);
+}
+.detail-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.tag-group {
+  margin-bottom: 20px;
+}
+.tag-group-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 10px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  padding: 10px 16px;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 100px;
+  background: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+  user-select: none;
+}
+.tag:active { transform: scale(0.96); }
+.tag.selected {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--graphite);
+}
+.tag.selected-off {
+  background: var(--graphite);
+  border-color: var(--graphite);
+  color: #FFFFFF;
+}
+
+.detail-note {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--graphite);
+  outline: none;
+  resize: none;
+  height: 72px;
+  margin-top: 20px;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.detail-note:focus { border-color: var(--peach); }
+.detail-note::placeholder { color: rgba(54,48,48,0.3); }
+
+.detail-next {
+  margin-top: 24px;
+  text-align: center;
+}
+
+/* ── RESULTS ───────────────────────────────── */
+#results {
+  display: none;
+  padding: 80px 0 120px;
+  animation: fadeUp 0.4s ease forwards;
+}
+
+.results-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 16px;
+}
+.results-headline {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 6vw, 48px);
+  line-height: 1.1;
+  color: var(--graphite);
+  margin-bottom: 12px;
+}
+.results-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(54,48,48,0.5);
+  line-height: 1.65;
+  margin-bottom: 48px;
+}
+
+.results-section {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(54,48,48,0.08);
+}
+.results-section:last-of-type { border-bottom: none; }
+.results-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 16px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+.results-thumb {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(54,48,48,0.06);
+}
+.results-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.results-tag-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.results-tag {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(54,48,48,0.05);
+  color: var(--graphite);
+}
+.results-tag .count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--peach);
+  margin-left: 4px;
+}
+
+.results-note-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(54,48,48,0.08);
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin-bottom: 8px;
+}
+.results-note-card .note-img-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(54,48,48,0.4);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.results-note-card .note-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--graphite);
+}
+
+.results-actions {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(54,48,48,0.08);
+}
+
+/* ── ANIMATIONS ────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOBILE ────────────────────────────────── */
+@media (max-width: 480px) {
+  .sort-btn { padding: 16px 8px; font-size: 11px; }
+  .tag { padding: 9px 14px; font-size: 12px; }
+  .no-tag { padding: 10px 14px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-inner">
+    <span class="mono-label">Logo Feedback</span>
+    <h1 class="intro-headline">I picked these <em>for you.</em></h1>
+    <p class="intro-body">These are not your logo. They are starting points, references, vibes. Flip through them and tell me what pulls you in and what does not. There are no wrong answers.</p>
+    <button class="btn btn-primary" onclick="startSort()">Let's go</button>
+    <div class="intro-meta">Takes about 5 minutes. Two quick rounds.</div>
+  </div>
+</div>
+
+<!-- PHASE 1: QUICK SORT -->
+<div id="phase1">
+  <div class="sort-card" id="sort-card">
+    <div class="sort-image-wrap">
+      <img id="sort-img" src="" alt="Logo inspiration">
+    </div>
+    <div id="sort-buttons">
+      <div class="sort-actions">
+        <button class="sort-btn yes" onclick="sortVote('yes')">Yes</button>
+        <button class="sort-btn maybe" onclick="sortVote('maybe')">Maybe</button>
+        <button class="sort-btn no" onclick="sortVote('no')">No</button>
+      </div>
+    </div>
+    <div class="no-followup" id="no-followup">
+      <div class="no-followup-label">What's not working?</div>
+      <div class="no-tags">
+        <button class="no-tag" onclick="noReason(this)">Too busy</button>
+        <button class="no-tag" onclick="noReason(this)">Too simple</button>
+        <button class="no-tag" onclick="noReason(this)">Too feminine</button>
+        <button class="no-tag" onclick="noReason(this)">Too corporate</button>
+        <button class="no-tag" onclick="noReason(this)">Not me</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSITION -->
+<div id="transition">
+  <div>
+    <div class="transition-stat">You kept</div>
+    <div class="transition-num" id="kept-count">0</div>
+    <div class="transition-sub" id="kept-sub">Now let's look a little closer.</div>
+    <button class="btn btn-primary" onclick="startPhase2()">Continue</button>
+  </div>
+</div>
+
+<!-- PHASE 2: DETAILED FEEDBACK -->
+<div id="phase2">
+  <div class="container">
+    <div class="phase2-progress">
+      <span class="phase2-progress-text" id="p2-progress"></span>
+    </div>
+  </div>
+  <div class="detail-card" id="detail-card">
+    <div class="detail-image-wrap">
+      <img id="detail-img" src="" alt="Logo inspiration">
+    </div>
+    <div class="tag-group">
+      <div class="tag-group-label">What caught your eye</div>
+      <div class="tags" id="tags-pos">
+        <button class="tag" data-tag="The typography" onclick="toggleTag(this,'pos')">The typography</button>
+        <button class="tag" data-tag="The icon or symbol" onclick="toggleTag(this,'pos')">The icon or symbol</button>
+        <button class="tag" data-tag="The layout" onclick="toggleTag(this,'pos')">The layout</button>
+        <button class="tag" data-tag="The colors" onclick="toggleTag(this,'pos')">The colors</button>
+        <button class="tag" data-tag="The overall vibe" onclick="toggleTag(this,'pos')">The overall vibe</button>
+        <button class="tag" data-tag="The simplicity" onclick="toggleTag(this,'pos')">The simplicity</button>
+        <button class="tag" data-tag="The detail level" onclick="toggleTag(this,'pos')">The detail level</button>
+      </div>
+    </div>
+    <div class="tag-group">
+      <div class="tag-group-label">What feels off</div>
+      <div class="tags" id="tags-neg">
+        <button class="tag" data-tag="Too busy" onclick="toggleTag(this,'neg')">Too busy</button>
+        <button class="tag" data-tag="Too simple" onclick="toggleTag(this,'neg')">Too simple</button>
+        <button class="tag" data-tag="Too feminine" onclick="toggleTag(this,'neg')">Too feminine</button>
+        <button class="tag" data-tag="Too masculine" onclick="toggleTag(this,'neg')">Too masculine</button>
+        <button class="tag" data-tag="Too trendy" onclick="toggleTag(this,'neg')">Too trendy</button>
+        <button class="tag" data-tag="Too corporate" onclick="toggleTag(this,'neg')">Too corporate</button>
+        <button class="tag" data-tag="Not me" onclick="toggleTag(this,'neg')">Not me</button>
+      </div>
+    </div>
+    <textarea class="detail-note" id="detail-note" placeholder="Even one word helps."></textarea>
+    <div class="detail-next">
+      <button class="btn btn-primary" onclick="nextDetail()">Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="container">
+    <div class="results-eyebrow">Your Feedback</div>
+    <h2 class="results-headline">That's everything.</h2>
+    <p class="results-sub">Here is a summary of what you told me. I will use this to build something that feels like yours.</p>
+    <div id="results-content"></div>
+    <div class="results-actions">
+      <button class="btn btn-primary" onclick="sendResults()">Send to Amanda</button>
+      <button class="btn" style="background:transparent; color:rgba(54,48,48,0.4); border:1px solid rgba(54,48,48,0.15);" id="copy-results-btn" onclick="copyResults()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── IMAGE LIST ──────────────────────────────
+// All images in the images/ folder
+const IMAGES = [
+  '09b46764002c0cb26f1eff69759a81d9.jpg',
+  '132ff5e0bd7a4ca4dd995d787de10b03.jpg',
+  '1cd06de8c633b405bf4dc0647f78ba53.jpg',
+  '1d6cd0b90fc45ffafbaad9668d2f6907.jpg',
+  '1d909c5f8bd4b68f394579604c55b69b.jpg',
+  '1ed7735fd82eac1bed9b8f013eb6987e.jpg',
+  '50835d760b659f8aa3e9ec1156e33b64.jpg',
+  '5b15b9ddf64fb3568b02bad242f21951.jpg',
+  '5f25454b16ba2a15c3787b5f87a758ea.jpg',
+  '781b34ebb2e41e4247edce7aa0452688.jpg',
+  '98cdd010cbf8ffc800aa5ae7e6a6b440.jpg',
+  'a68ee94640107f358093782e610a6f67.jpg',
+  'ccbb5ae9810dfb1892d523beeb0b438b.jpg',
+  'd6e4adc6a85c33423690ebf6aff7351d.jpg',
+  'dcd5e3691c47421b6a1be80e4a595bf1.jpg',
+  'ed56851821705eb703cbe14d1def94b5.jpg',
+  'ef15e2d53ac29d7ae89ec039322bd912.jpg',
+  'f41978bcc0bdd5f0664a34d8fd121725.jpg',
+  'fc96eb3df3d6f0d832765d2df8ca51f9.jpg',
+  'ff11a62dae6ff13e0deee798109a61de.jpg'
+];
+
+// ── STATE ───────────────────────────────────
+const data = {};      // { filename: { vote, noReason, posTags, negTags, note } }
+let sortIndex = 0;    // current image in phase 1
+let detailImages = []; // images that made it past phase 1
+let detailIndex = 0;   // current image in phase 2
+
+// Placeholder functions - will be built in next sections
+function startSort() {}
+function sortVote(vote) {}
+function noReason(btn) {}
+function startPhase2() {}
+function toggleTag(btn, group) {}
+function nextDetail() {}
+function sendResults() {}
+function copyResults() {}
+function formatResults() { return ''; }
+</script>
+</body>
+</html>
