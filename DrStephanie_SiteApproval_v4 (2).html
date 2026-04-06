@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Site Wireframe + Approval | Dr. Stephanie Bathurst</title>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Very dark text for legibility */
+  --near-black: #1A1808;
+  --dark-olive:  #252310;
+  --olive:       #404030;
+  --gold:        #7A6020;
+  --khaki:       #9A9668;
+  --taupe:       #5A5040;
+  --cream:       #ECE7CD;
+  --camel:       #4A3C20;
+  /* Pure white / very light backgrounds */
+  --cream-lt:    #FFFFFF;
+  --rule:        #D4C8A8;
+  --white:       #FFFFFF;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: #F8F6EE;
+  color: var(--near-black);
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── STICKY NAV ── */
+.nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--dark-olive);
+  display: flex; overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 2px solid var(--gold);
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: none;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  padding: 14px 18px; white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.07);
+  transition: color 0.2s;
+}
+.nav a:hover, .nav a.act { color: var(--cream); }
+.nav .nav-brand {
+  font-size: 14px; font-weight: 400; font-style: italic;
+  color: rgba(255,255,255,0.5);
+  padding: 0 22px; display: flex; align-items: center;
+  white-space: nowrap; border-right: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+}
+.nav .nav-count {
+  margin-left: auto; padding: 0 20px;
+  font-size: 14px; font-weight: 600; color: var(--gold);
+  display: flex; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+
+/* ── HEADER ── */
+.doc-header {
+  background: var(--olive);
+  padding: 64px 80px 56px;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.dh-eyebrow {
+  font-size: 14px; font-weight: 600; letter-spacing: 0.3em;
+  text-transform: uppercase; color: rgba(255,255,255,0.45);
+  margin-bottom: 18px; display: flex; align-items: center; gap: 12px;
+}
+.dh-eyebrow::before { content: ''; width: 28px; height: 1px; background: rgba(255,255,255,0.3); flex-shrink: 0; }
+.dh-title {
+  font-size: 52px; font-weight: 700; line-height: 1.05;
+  letter-spacing: -0.025em; color: var(--cream-lt);
+  margin-bottom: 6px;
+}
+.dh-title em { font-style: italic; font-weight: 400; color: var(--cream); opacity: 0.75; }
+.dh-sub {
+  font-size: 16px; font-weight: 400; color: rgba(255,255,255,0.55);
+  max-width: 560px; line-height: 1.75; margin-top: 16px;
+}
+
+/* ── LEGEND ── */
+.legend {
+  background: var(--cream); border-bottom: 1px solid var(--rule);
+  padding: 14px 80px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+}
+.legend .lg-title {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--camel); margin-right: 8px;
+}
+.lg-item { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 500; color: var(--dark-olive); }
+.lg-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+/* ── WRAP ── */
+.wrap { max-width: 1040px; margin: 0 auto; padding: 60px 80px 120px; }
+
+/* ── SECTION HEADERS ── */
+.section-block { margin-bottom: 80px; }
+
+.sec-eyebrow {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 8px;
+}
+.sec-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); flex-shrink: 0; }
+
+.sec-title {
+  font-size: 36px; font-weight: 700; letter-spacing: -0.02em;
+  color: var(--near-black); margin-bottom: 8px; line-height: 1.1;
+}
+.sec-title em { font-style: italic; font-weight: 400; color: var(--olive); }
+.sec-desc { font-size: 15px; font-weight: 400; color: var(--dark-olive); max-width: 600px; line-height: 1.7; margin-bottom: 28px; }
+
+/* ── DIVIDER ── */
+.rule { border: none; border-top: 1px solid var(--rule); margin: 64px 0; }
+
+/* ── PAGE CARD ── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--rule);
+  border-radius: 3px;
+  margin-bottom: 8px;
+  transition: border-left-color 0.2s;
+}
+.card.s-approved { border-left-color: var(--olive); background: #F5F5EE; }
+.card.s-discuss  { border-left-color: var(--gold); background: #FAF7EE; }
+.card.s-cut      { border-left-color: var(--camel); background: #F8F5F0; opacity: 0.7; }
+.card.s-merge    { border-left-color: var(--khaki); background: #F6F5F0; }
+
+.card-top {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; padding: 18px 22px;
+  align-items: start; cursor: pointer;
+}
+.card-name {
+  font-size: 16px; font-weight: 600; color: var(--near-black);
+  margin-bottom: 4px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.card-sub { font-size: 14px; font-weight: 400; color: var(--dark-olive); line-height: 1.55; }
+
+.card-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
+
+/* Status buttons */
+.btns { display: flex; gap: 5px; flex-wrap: wrap; justify-content: flex-end; }
+.btn {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; padding: 5px 12px; border-radius: 2px;
+  border: 1.5px solid; cursor: pointer; background: transparent;
+  font-family: 'Jost', sans-serif; transition: all 0.15s;
+}
+.btn-a { color: var(--olive); border-color: var(--olive); }
+.btn-a:hover, .btn-a.on { background: var(--olive); color: #fff; }
+.btn-d { color: var(--gold); border-color: var(--gold); }
+.btn-d:hover, .btn-d.on { background: var(--gold); color: #fff; }
+.btn-c { color: var(--camel); border-color: var(--camel); }
+.btn-c:hover, .btn-c.on { background: var(--camel); color: #fff; }
+.btn-m { color: var(--khaki); border-color: var(--khaki); }
+.btn-m:hover, .btn-m.on { background: var(--khaki); color: var(--near-black); }
+
+.card-toggle { font-size: 14px; color: var(--rule); cursor: pointer; transition: transform 0.2s; margin-top: 2px; }
+.card-toggle.open { transform: rotate(180deg); }
+
+/* Card detail */
+.card-detail { display: none; padding: 0 22px 22px; border-top: 1px solid var(--rule); }
+.card-detail.open { display: block; padding-top: 18px; }
+
+.detail-label {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--taupe); margin-bottom: 10px;
+}
+.detail-list { list-style: none; padding: 0; margin-bottom: 16px; }
+.detail-list li {
+  font-size: 14.5px; font-weight: 400; color: var(--near-black);
+  padding: 7px 0; border-bottom: 1px dashed var(--rule);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
+}
+.detail-list li:last-child { border-bottom: none; }
+.detail-list li::before { content: '·'; color: var(--gold); font-size: 18px; line-height: 1; flex-shrink: 0; margin-top: -1px; }
+
+/* Notes */
+.notes-label {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--dark-olive); margin-bottom: 6px;
+}
+.notes {
+  width: 100%; min-height: 60px;
+  background: var(--cream-lt); border: 1px solid var(--rule);
+  border-radius: 2px; padding: 10px 14px;
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 400;
+  color: var(--near-black); resize: vertical; line-height: 1.65; outline: none;
+  transition: border-color 0.2s;
+}
+.notes:focus { border-color: var(--olive); }
+.notes::placeholder { color: var(--taupe); }
+
+/* priority tag on card */
+.priority-bar {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--olive);
+  padding: 5px 22px; background: rgba(93,92,56,0.06);
+  border-bottom: 1px solid rgba(93,92,56,0.1);
+  display: flex; align-items: center; gap: 6px;
+}
+.priority-bar::before { content: '↑'; font-size: 14px; }
+
+/* badge */
+.badge {
+  font-size: 9.5px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; padding: 2px 8px; border-radius: 2px; flex-shrink: 0;
+}
+.b-new    { background: rgba(93,92,56,0.1); color: var(--olive); }
+.b-rw     { background: rgba(170,133,75,0.12); color: var(--gold); }
+.b-cut    { background: rgba(163,147,104,0.1); color: var(--camel); }
+.b-merge  { background: rgba(188,185,147,0.15); color: var(--dark-olive); }
+
+/* ── NAV PREVIEW ── */
+.nav-preview {
+  background: var(--white); border: 1px solid var(--rule);
+  border-radius: 3px; overflow: hidden; margin-bottom: 20px;
+}
+.np-bar {
+  background: var(--dark-olive); padding: 13px 22px;
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+}
+.np-logo { font-size: 15px; font-weight: 400; font-style: italic; color: rgba(255,255,255,0.7); margin-right: 18px; }
+.np-item {
+  font-size: 14px; font-weight: 500; letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.55); padding: 5px 13px;
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 2px;
+}
+.np-item.cta {
+  background: var(--gold); color: var(--near-black);
+  border-color: var(--gold); font-weight: 700; margin-left: auto;
+}
+.np-note {
+  padding: 14px 22px; font-size: 14.5px; font-weight: 400;
+  color: var(--near-black); border-top: 1px solid var(--rule); background: #F8F6EE;
+}
+
+/* ── THREE DOORS ── */
+.doors { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 24px; }
+.door {
+  background: var(--white); border: 1px solid var(--rule);
+  padding: 28px 24px; position: relative;
+}
+.door::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.d1::before { background: var(--olive); }
+.d2::before { background: var(--gold); }
+.d3::before { background: var(--khaki); }
+.door-n { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--taupe); margin-bottom: 10px; }
+.door-title { font-size: 18px; font-weight: 600; color: var(--near-black); margin-bottom: 10px; line-height: 1.3; }
+.door-desc { font-size: 15px; font-weight: 400; color: var(--dark-olive); font-weight: 400; line-height: 1.65; margin-bottom: 12px; }
+.door-path { font-size: 14px; font-weight: 400; font-style: italic; color: var(--dark-olive); border-top: 1px dashed var(--rule); padding-top: 10px; }
+
+/* ── HOMEPAGE WIREFRAME ── */
+.hpwf { border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; background: var(--white); }
+.hpwf-bar {
+  background: var(--near-black); height: 40px;
+  display: flex; align-items: center; padding: 0 16px; gap: 6px;
+}
+.hpwf-dot { width: 9px; height: 9px; border-radius: 50%; }
+.hpwf-dot:nth-child(1) { background: #C85040; }
+.hpwf-dot:nth-child(2) { background: var(--gold); }
+.hpwf-dot:nth-child(3) { background: var(--olive); }
+
+.hpwf-row {
+  border-bottom: 1px solid var(--cream);
+  padding: 18px 24px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 16px; align-items: center;
+}
+.hpwf-row:last-child { border-bottom: none; }
+.hpwf-row:nth-child(odd) { background: var(--white); }
+.hpwf-row:nth-child(even) { background: var(--cream-lt); }
+
+.hpwf-left {}
+.hpwf-num {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 4px;
+}
+.hpwf-title { font-size: 15px; font-weight: 600; color: var(--near-black); margin-bottom: 3px; }
+.hpwf-desc { font-size: 14px; font-weight: 400; color: var(--dark-olive); line-height: 1.6; }
+.hpwf-right { display: flex; gap: 5px; flex-shrink: 0; }
+
+/* ── COPY GRID ── */
+.copy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+.cg {
+  background: var(--white); border: 1px solid var(--rule);
+  border-top: 3px solid var(--rule); border-radius: 3px; padding: 28px 30px;
+}
+.cg.cg-a { border-top-color: var(--olive); }
+.cg.cg-b { border-top-color: var(--gold); }
+.cg-head {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--camel);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
+}
+.cg-head::before { content: ''; width: 18px; height: 1px; flex-shrink: 0; }
+.cg.cg-a .cg-head::before { background: var(--olive); }
+.cg.cg-b .cg-head::before { background: var(--gold); }
+.cg-body { font-size: 15px; font-weight: 400; color: var(--near-black); line-height: 1.8; }
+.cg-body strong { font-weight: 600; color: var(--near-black); }
+.cg-list { list-style: none; padding: 0; margin-top: 12px; }
+.cg-list li {
+  font-size: 14px; font-weight: 400; color: var(--dark-olive);
+  padding: 7px 0; border-bottom: 1px solid var(--cream);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.5;
+}
+.cg-list li:last-child { border-bottom: none; }
+.cg-list li::before { content: '·'; color: var(--gold); font-size: 18px; line-height: 1; flex-shrink: 0; margin-top: -1px; }
+
+/* ── FINAL FORM ── */
+.final {
+  background: var(--cream); border: 1px solid var(--rule);
+  border-top: 3px solid var(--olive); border-radius: 3px;
+  padding: 48px 52px;
+}
+.final-head { font-size: 30px; font-weight: 700; letter-spacing: -0.02em; color: var(--near-black); margin-bottom: 8px; }
+.final-head em { font-style: italic; font-weight: 400; color: var(--olive); }
+.final-sub { font-size: 15px; font-weight: 400; color: var(--dark-olive); margin-bottom: 28px; max-width: 520px; line-height: 1.7; }
+.final-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+.ff { display: flex; flex-direction: column; gap: 6px; }
+.ff.full { grid-column: 1 / -1; }
+.ff-label { font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dark-olive); }
+.ff-input, .ff-ta {
+  background: var(--white); border: 1px solid var(--rule); border-radius: 2px;
+  padding: 11px 14px; font-family: 'Jost', sans-serif; font-size: 14.5px;
+  font-weight: 400; color: var(--near-black); outline: none;
+  transition: border-color 0.2s; line-height: 1.65;
+}
+.ff-input:focus, .ff-ta:focus { border-color: var(--olive); }
+.ff-input::placeholder, .ff-ta::placeholder { color: var(--taupe); }
+.ff-ta { min-height: 80px; resize: vertical; }
+.submit-btn {
+  background: var(--olive); color: var(--cream-lt);
+  font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  padding: 14px 32px; border: none; border-radius: 2px;
+  cursor: pointer; transition: background 0.2s;
+}
+.submit-btn:hover { background: var(--dark-olive); }
+.submit-success {
+  display: none; font-size: 15px; font-style: italic; font-weight: 400;
+  color: var(--olive); margin-top: 14px;
+}
+
+/* ── PROGRESS WIDGET ── */
+.progress {
+  position: fixed; bottom: 24px; right: 24px; z-index: 100;
+  background: var(--white); border: 1px solid var(--rule);
+  border-top: 3px solid var(--olive); border-radius: 3px;
+  padding: 16px 20px; width: 220px;
+  box-shadow: 0 4px 24px rgba(51,45,15,0.1);
+}
+.prog-title {
+  font-size: 14px; font-weight: 700; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--camel); margin-bottom: 12px;
+}
+.prog-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 3px 0; font-size: 14px;
+}
+.prog-lbl { display: flex; align-items: center; gap: 7px; color: var(--dark-olive); font-weight: 400; }
+.prog-dot { width: 8px; height: 8px; border-radius: 50%; }
+.pd-a { background: var(--olive); }
+.pd-d { background: var(--gold); }
+.pd-c { background: var(--camel); }
+.pd-m { background: var(--khaki); }
+.pd-n { background: var(--rule); }
+.prog-count { font-weight: 700; color: var(--near-black); font-size: 14px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 720px) {
+  .wrap { padding: 40px 22px 80px; }
+  .doc-header { padding: 48px 24px 40px; }
+  .legend { padding: 12px 24px; }
+  .doors, .copy-grid, .final-grid { grid-template-columns: 1fr; }
+  .hpwf-right { display: none; }
+  .dh-title { font-size: 36px; }
+  .progress { width: 188px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-brand">Dr. Stephanie Bathurst</span>
+  <a href="#nav">Navigation</a>
+  <a href="#doors">Three Doors</a>
+  <a href="#homepage">Homepage</a>
+  <a href="#services">Services</a>
+  <a href="#course">Course + Retreats</a>
+  <a href="#supporting">Supporting Pages</a>
+  <a href="#cut">Pages to Cut</a>
+  <a href="#copy">Copy Approach</a>
+  <a href="#final">Final Sign-Off</a>
+  <div class="nav-count"><span id="prog-label">0 approved</span></div>
+</nav>
+
+
+<!-- HEADER -->
+<header class="doc-header">
+  <div class="dh-eyebrow">The Passive Practice LLC &nbsp;·&nbsp; Site Wireframe + Approval</div>
+  <div class="dh-title">Website Restructure<br><em>Approval Document</em></div>
+  <p class="dh-sub">Walk through each section, mark your decisions, and add notes where needed. Nothing gets written until this is reviewed together. That is the whole point.</p>
+</header>
+
+<!-- LEGEND -->
+<div class="legend">
+  <span class="lg-title">Status key</span>
+  <span class="lg-item"><span class="lg-dot" style="background:var(--olive)"></span> Approved</span>
+  <span class="lg-item"><span class="lg-dot" style="background:var(--gold)"></span> Let's discuss</span>
+  <span class="lg-item"><span class="lg-dot" style="background:var(--camel)"></span> Cut it</span>
+  <span class="lg-item"><span class="lg-dot" style="background:var(--khaki)"></span> Merge with another page</span>
+</div>
+
+
+<!-- MAIN -->
+<div class="wrap">
+
+
+  <!-- ══ NAVIGATION ══ -->
+  <div class="section-block" id="nav">
+    <div class="sec-eyebrow">Section 01</div>
+    <div class="sec-title">Navigation <em>Structure</em></div>
+    <p class="sec-desc">The proposed menu and why each item sits where it does. Book a Call stays visible at all times on all devices.</p>
+
+    <div class="nav-preview">
+      <div class="np-bar">
+        <span class="np-logo">Dr. Stephanie Bathurst</span>
+        <span class="np-item">About</span>
+        <span class="np-item">Work With Me</span>
+        <span class="np-item">The Course</span>
+        <span class="np-item">Retreats</span>
+        <span class="np-item">Resources</span>
+        <span class="np-item">Blog</span>
+        <span class="np-item cta">Book a Call</span>
+      </div>
+      <div class="np-note">About is first because you are the brand. Work With Me is second - highest-ticket offer. The Course is third - passive income engine. Retreats is its own item - a completely different buying decision. Book a Call is always visible so any visitor at any stage can get to it in one click.</div>
+    </div>
+
+    <div class="card" id="card-nav">
+      <div class="priority-bar">Needs approval before any build begins</div>
+      <div class="card-top" onclick="toggle('nav')">
+        <div>
+          <div class="card-name">Proposed Navigation Structure</div>
+          <div class="card-sub">About / Work With Me / The Course / Retreats / Resources / Blog / Book a Call</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'nav','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'nav','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-nav">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-nav">
+        <div class="detail-label">What sits under each menu item</div>
+        <ul class="detail-list">
+          <li><strong>About</strong> - full About page and optional Press sub-link</li>
+          <li><strong>Work With Me</strong> - Private Couples Sessions, Individual Therapy, Intensive Formats, Whole Person Approach</li>
+          <li><strong>The Course</strong> - Flow Energy Course, Take the Quiz First, PFilates Course, Digital Downloads shop</li>
+          <li><strong>Retreats</strong> - 1-Day Intensive, 5-Day Private Hawaii, 7-Day All Inclusive</li>
+          <li><strong>Resources</strong> - Favorites and Shop, Free Quiz, Free Resources, Press and Media</li>
+          <li><strong>Book a Call</strong> - persistent button, links direct to calendar, no extra clicks</li>
+        </ul>
+        <div class="notes-label">Notes on navigation</div>
+        <textarea class="notes" placeholder="Any items to add, rename, remove, or reorder?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ THREE DOORS ══ -->
+  <div class="section-block" id="doors">
+    <div class="sec-eyebrow">Section 02</div>
+    <div class="sec-title">The Three <em>Doors</em></div>
+    <p class="sec-desc">Three types of people land on this site. Every page decision is made with all three in mind. Approve this framework before anything gets built.</p>
+
+    <div class="doors">
+      <div class="door d1">
+        <div class="door-n">Door One</div>
+        <div class="door-title">I need help with my relationship</div>
+        <div class="door-desc">Already tried therapy. Found Stephanie on Instagram or Google. Something landed. Needs a clear path from the homepage to the course, then the retreat.</div>
+        <div class="door-path">Homepage → Quiz → Course → Retreat</div>
+      </div>
+      <div class="door d2">
+        <div class="door-n">Door Two</div>
+        <div class="door-title">I want to work with her directly</div>
+        <div class="door-desc">High-ticket. Has done their research. Needs a direct path to the retreat or private sessions without being buried in course content.</div>
+        <div class="door-path">Homepage → About → Retreat or Sessions → Discovery Call</div>
+      </div>
+      <div class="door d3">
+        <div class="door-n">Door Three</div>
+        <div class="door-title">I want to collaborate or refer</div>
+        <div class="door-desc">A practitioner, brand, or media contact. Needs the press page and a clean way to reach her. This path is currently invisible on the site.</div>
+        <div class="door-path">Homepage → About → Press and Media → Contact</div>
+      </div>
+    </div>
+
+    <div class="card" id="card-doors">
+      <div class="card-top" onclick="toggle('doors')">
+        <div>
+          <div class="card-name">Approve the Three-Door Framework</div>
+          <div class="card-sub">This becomes the organizing principle for every page decision and every piece of copy.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'doors','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'doors','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-doors">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-doors">
+        <div class="notes-label">Notes - are these three types accurate? Is there a fourth?</div>
+        <textarea class="notes" placeholder="Does the path for each person feel right? Anything to adjust?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ HOMEPAGE ══ -->
+  <div class="section-block" id="homepage">
+    <div class="sec-eyebrow">Section 03</div>
+    <div class="sec-title">Homepage <em>Wireframe</em></div>
+    <p class="sec-desc">Nine sections in a specific order. Approve each one. If you want something moved, removed, or changed, note it. Nothing gets written until this is locked.</p>
+
+    <div class="hpwf">
+      <div class="hpwf-bar">
+        <div class="hpwf-dot"></div><div class="hpwf-dot"></div><div class="hpwf-dot"></div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 1 - Hero</div>
+          <div class="hpwf-title">You, above the fold. Full-width photo. One headline. One button.</div>
+          <div class="hpwf-desc">Stephanie in her environment - not a studio. Headline speaks to the person who has already tried everything, not a category label.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp1','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp1','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 2 - Credibility Bar</div>
+          <div class="hpwf-title">All 10 award badges and publication logos. Visual only, no text.</div>
+          <div class="hpwf-desc">Earns trust silently before the page gets personal. Includes Netflix documentary mention.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp2','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp2','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 3 - Who This Is For</div>
+          <div class="hpwf-title">2 to 3 short paragraphs that describe the person reading, not a list of services.</div>
+          <div class="hpwf-desc">The person who has done talk therapy, done the books, done the couples counseling. Still circling the same core issue in different shapes.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp3','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp3','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 4 - The Whole Person Approach</div>
+          <div class="hpwf-title">Six to eight credential areas shown as visual tiles, one plain-language sentence each.</div>
+          <div class="hpwf-desc">LMFT. Clinical Sexologist. Trauma Specialist. Somatic Practitioner. Nutritionist. Pelvic Floor. Energy Healer. All one person. This is the niche, and it is nowhere on the current homepage.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp4','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp4','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 5 - Three Paths Forward</div>
+          <div class="hpwf-title">The Course, The Retreat, Work With Me. One sentence and one button each.</div>
+          <div class="hpwf-desc">Not a services menu. Three clean cards so each visitor can self-select based on where they are right now.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp5','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp5','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 6 - About Preview</div>
+          <div class="hpwf-title">3 to 4 sentences and one photo. Links to the full About page.</div>
+          <div class="hpwf-desc">Not a bio. The version that makes someone want to know more. Hawaii, the lavender farm, 15 years, what she believes about love.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp6','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp6','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 7 - Testimonials</div>
+          <div class="hpwf-title">3 curated quotes. One couple, one individual, one course or retreat buyer.</div>
+          <div class="hpwf-desc">Each speaks to transformation, not just satisfaction. Social proof hits when someone is already warm from the copy above it.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp7','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp7','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 8 - Quiz CTA</div>
+          <div class="hpwf-title">Full width. One benefit statement. One action. Links to myflowtypes.com.</div>
+          <div class="hpwf-desc">"Find out your Relationship Energy Type. Free. Takes 3 minutes." Captures everyone not ready to buy yet and feeds them into the email list automatically.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp8','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp8','btn-d')">Discuss</button>
+        </div>
+      </div>
+
+      <div class="hpwf-row">
+        <div class="hpwf-left">
+          <div class="hpwf-num">Section 9 - Recent Content</div>
+          <div class="hpwf-title">3 to 4 most recent blog posts or Instagram pulls.</div>
+          <div class="hpwf-desc">Keeps the site feeling alive. Fresh content signals authority to search engines and gives returning visitors something new.</div>
+        </div>
+        <div class="hpwf-right">
+          <button class="btn btn-a" onclick="hpStatus(event,'hp9','btn-a')">Approved</button>
+          <button class="btn btn-d" onclick="hpStatus(event,'hp9','btn-d')">Discuss</button>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px;">
+      <div class="notes-label">Overall homepage notes</div>
+      <textarea class="notes" placeholder="Anything to add, move, or change across the homepage?"></textarea>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ SERVICES ══ -->
+  <div class="section-block" id="services">
+    <div class="sec-eyebrow">Section 04</div>
+    <div class="sec-title">Services + <em>Specialty Pages</em></div>
+    <p class="sec-desc">Current 12+ thin SEO pages consolidated into 8 focused pages, organized by what someone is experiencing - not by modality name.</p>
+
+    <div class="card" id="card-wpa">
+      <div class="priority-bar">New page - must exist before any specialty pages go live</div>
+      <div class="card-top" onclick="toggle('wpa')">
+        <div>
+          <div class="card-name">The Whole Person Approach <span class="badge b-new">New page</span></div>
+          <div class="card-sub">Parent page for all services. Explains why compartmentalized care fails. Every specialty page links back here and forward to the course or retreat.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'wpa','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'wpa','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'wpa','s-cut','btn-c')">Cut</button>
+          </div>
+          <span class="card-toggle" id="t-wpa">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-wpa">
+        <ul class="detail-list">
+          <li>Opens with the problem: why seeing separate providers has not worked</li>
+          <li>All 7 areas shown visually with plain-language descriptions - not credentials</li>
+          <li>What it actually looks like to work with her - intensive formats, session experience</li>
+          <li>Three entry points: quiz / discovery call / retreat</li>
+        </ul>
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Anything specific to include or exclude here?"></textarea>
+      </div>
+    </div>
+
+    <div style="margin: 20px 0 10px; font-size:10px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:var(--taupe);">8 specialty pages - organized by what someone is experiencing</div>
+
+    <!-- 8 specialty cards -->
+    <div class="card" id="card-sp1">
+      <div class="card-top" onclick="toggle('sp1')">
+        <div>
+          <div class="card-name">We keep having the same fight <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">Couples therapy, EFT, Gottman, Flow Energy Theory. Consolidates several existing couples pages into one.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp1','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp1','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp1','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp1','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp1">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp1">
+        <div class="notes-label">Notes - any pages to add, keep separate, or combine differently?</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp2">
+      <div class="card-top" onclick="toggle('sp2')">
+        <div>
+          <div class="card-name">Our physical connection is broken <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">Clinical sexology, the 8 Forms of Intimacy, libido, desire mismatch. Written to feel safe for both partners to land on.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp2','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp2','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp2','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp2','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp2">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp2">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp3">
+      <div class="card-top" onclick="toggle('sp3')">
+        <div>
+          <div class="card-name">Something from before is showing up now <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">EMDR, EFT, attachment healing, childhood wound work. For the person who knows the issue traces back further.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp3','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp3','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp3','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp3','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp3">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp3">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp4">
+      <div class="card-top" onclick="toggle('sp4')">
+        <div>
+          <div class="card-name">My body is holding something my mind already processed <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">Somatic work, pelvic floor, nervous system regulation, PFilates. For the person who has done talk therapy and still feels it physically.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp4','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp4','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp4','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp4','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp4">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp4">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp5">
+      <div class="card-top" onclick="toggle('sp5')">
+        <div>
+          <div class="card-name">Something is off and no one can tell me what it is <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">MTHFR, genetic testing, nutrition for mental and sexual health, herbal supplementation.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp5','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp5','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp5','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp5','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp5">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp5">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp6">
+      <div class="card-top" onclick="toggle('sp6')">
+        <div>
+          <div class="card-name">I need someone who will not flinch at who I am <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">Kink-conscious therapy, ethical non-monogamy, BDSM-informed care, sexual identity work.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp6','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp6','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp6','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp6','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp6">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp6">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp7">
+      <div class="card-top" onclick="toggle('sp7')">
+        <div>
+          <div class="card-name">I am burned out in a way that rest does not fix <span class="badge b-rw">Rewrite</span></div>
+          <div class="card-sub">Breathwork, kundalini, energy theory, nervous system reset.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp7','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp7','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp7','s-cut','btn-c')">Cut</button>
+            <button class="btn btn-m" onclick="status(event,'sp7','s-merge','btn-m')">Merge</button>
+          </div>
+          <span class="card-toggle" id="t-sp7">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp7">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-sp8">
+      <div class="card-top" onclick="toggle('sp8')">
+        <div>
+          <div class="card-name">I want to do in 5 days what therapy takes 2 years to do <span class="badge b-new">Bridge page</span></div>
+          <div class="card-sub">The intensive retreat as a therapeutic format. Bridges the services section to the retreat section.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'sp8','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'sp8','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'sp8','s-cut','btn-c')">Cut</button>
+          </div>
+          <span class="card-toggle" id="t-sp8">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-sp8">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Your notes..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ COURSE + RETREATS ══ -->
+  <div class="section-block" id="course">
+    <div class="sec-eyebrow">Section 05</div>
+    <div class="sec-title">Course + <em>Retreat Pages</em></div>
+    <p class="sec-desc">Revenue-driving pages. Written first. Approve the structure before any copy begins.</p>
+
+    <div class="card" id="card-course">
+      <div class="priority-bar">Written first - feeds the passive income funnel</div>
+      <div class="card-top" onclick="toggle('course')">
+        <div>
+          <div class="card-name">Flow Relationship Energy Mastery Course <span class="badge b-new">New sales page in GHL</span></div>
+          <div class="card-sub">Full long-form sales page. $297/month subscription. Written for the person who has tried everything else.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'course','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'course','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-course">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-course">
+        <ul class="detail-list">
+          <li>Opens with the problem: you have done the work and it is still not resolved</li>
+          <li>Energy theory explained in plain language</li>
+          <li>What 45 lessons delivers and what actually changes</li>
+          <li>Pricing: $297/month, cancel anytime, with payment plan</li>
+          <li>Testimonials and FAQ addressing common objections</li>
+        </ul>
+        <div class="notes-label">Notes - confirm pricing, any objections you hear most often</div>
+        <textarea class="notes" placeholder="Pricing confirmed at $297/month? Anything specific you want on this page?"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-r1">
+      <div class="card-top" onclick="toggle('r1')">
+        <div>
+          <div class="card-name">1-Day Couples Intensive <span class="badge b-rw">Full rewrite</span></div>
+          <div class="card-sub">Entry to the retreat ecosystem. Written around the feeling of the day, not the logistics. CTA is book a discovery call.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'r1','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'r1','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'r1','s-cut','btn-c')">Cut</button>
+          </div>
+          <span class="card-toggle" id="t-r1">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-r1">
+        <div class="notes-label">Notes - confirm pricing and what is included</div>
+        <textarea class="notes" placeholder="Confirm pricing ($1,500?), what is included, and anything specific you want this page to convey..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-r5">
+      <div class="priority-bar">Primary revenue driver at $15K</div>
+      <div class="card-top" onclick="toggle('r5')">
+        <div>
+          <div class="card-name">5-Day Private Hawaii Retreat <span class="badge b-rw">Full rewrite</span></div>
+          <div class="card-sub">The flagship offer. Price moving to $15K. Written around the transformation, not the itinerary. CTA is book a discovery call.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'r5','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'r5','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-r5">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-r5">
+        <div class="notes-label">Notes - confirm pricing and any client outcomes to feature</div>
+        <textarea class="notes" placeholder="Pricing confirmed at $15K? Anything about the 5-day experience you want the page to convey?"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-r7">
+      <div class="card-top" onclick="toggle('r7')">
+        <div>
+          <div class="card-name">7-Day All Inclusive Retreat <span class="badge b-rw">Full rewrite</span></div>
+          <div class="card-sub">Price moving to $30K+. Positioned as a different category entirely. For couples who have done the course and are ready for the deepest level.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'r7','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'r7','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-r7">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-r7">
+        <div class="notes-label">Notes - confirm pricing and what makes this different from the 5-day</div>
+        <textarea class="notes" placeholder="Your notes on the 7-day offering..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ SUPPORTING ══ -->
+  <div class="section-block" id="supporting">
+    <div class="sec-eyebrow">Section 06</div>
+    <div class="sec-title">Supporting <em>Pages</em></div>
+    <p class="sec-desc">These pages hold the ecosystem together. Each one has a specific job.</p>
+
+    <div class="card" id="card-about">
+      <div class="priority-bar">Closes Door Two visitors - must be strong</div>
+      <div class="card-top" onclick="toggle('about')">
+        <div>
+          <div class="card-name">About <span class="badge b-rw">Full rewrite</span></div>
+          <div class="card-sub">Her real story - not a bio. Hawaii, the bathroom floor, Honduras, the visibility wound, the lavender farm. In her voice.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'about','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'about','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-about">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-about">
+        <ul class="detail-list">
+          <li>Origin story - why she does this work, in her actual voice</li>
+          <li>The turning point - Hawaii, the depression, the spiritual awakening</li>
+          <li>Credentials presented in a human, accessible way - not a resume dump</li>
+          <li>What it is actually like to work with her</li>
+          <li>Personal section - Savi, the farm, the morning beach meditations</li>
+          <li>CTA to book or connect</li>
+        </ul>
+        <div class="notes-label">Notes - any stories or details that must be on the About page</div>
+        <textarea class="notes" placeholder="Stories you want told, what the current About page gets wrong, what you wish people knew about you before they book..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-contact">
+      <div class="card-top" onclick="toggle('contact')">
+        <div>
+          <div class="card-name">Contact <span class="badge b-rw">Rewrite + freebie section</span></div>
+          <div class="card-sub">Rewritten with personality. Includes a freebie download section to capture people who are not yet ready to book.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'contact','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'contact','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-contact">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-contact">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Any specific freebies you want featured here?"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-press">
+      <div class="card-top" onclick="toggle('press')">
+        <div>
+          <div class="card-name">Press and Media <span class="badge b-rw">Full rebuild</span></div>
+          <div class="card-sub">All 10 awards, publications, podcast appearances, media features. Currently missing most of her awards. Built for brand deal outreach.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'press','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'press','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-press">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-press">
+        <div class="notes-label">Notes - list everything that belongs here</div>
+        <textarea class="notes" placeholder="All 10 awards, publications, podcasts, the Netflix documentary, any brand deals, anything else that belongs on a press page..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-test">
+      <div class="card-top" onclick="toggle('test')">
+        <div>
+          <div class="card-name">Testimonials <span class="badge b-rw">Redesign</span></div>
+          <div class="card-sub">Clean, scannable, trust-building. Real quotes woven into service pages and on one dedicated page. 16 Google reviews highlighted.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'test','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'test','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-test">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-test">
+        <div class="notes-label">Notes - any favorites you want featured prominently?</div>
+        <textarea class="notes" placeholder="Any specific Google reviews or client stories you want highlighted (anonymized)?"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-fav">
+      <div class="card-top" onclick="toggle('fav')">
+        <div>
+          <div class="card-name">Favorites and Shop <span class="badge b-new">New page</span></div>
+          <div class="card-sub">Amazon affiliate, Mindvalley affiliate, SimplePractice affiliate, personal recommendations. Passive income from a page people enjoy.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'fav','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'fav','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'fav','s-cut','btn-c')">Cut</button>
+          </div>
+          <span class="card-toggle" id="t-fav">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-fav">
+        <div class="notes-label">Notes - confirm affiliate programs active</div>
+        <textarea class="notes" placeholder="Amazon affiliate link, Mindvalley login, any other programs, and personal products you want to recommend..."></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-blog">
+      <div class="card-top" onclick="toggle('blog')">
+        <div>
+          <div class="card-name">Blog <span class="badge b-rw">Restructure + content strategy</span></div>
+          <div class="card-sub">Clear categories and an SEO strategy. Each post answers a question your ideal client is actually Googling. You write fast - this should work harder.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'blog','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'blog','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-blog">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-blog">
+        <div class="notes-label">Notes - topics, what the current blog is missing</div>
+        <textarea class="notes" placeholder="Topics you want to cover, or anything about the current blog that is not working..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ PAGES TO CUT ══ -->
+  <div class="section-block" id="cut">
+    <div class="sec-eyebrow">Section 07</div>
+    <div class="sec-title">Pages to <em>Cut or Consolidate</em></div>
+    <p class="sec-desc">These pages currently hurt the site experience. Approve each removal or flag for discussion. Nothing gets deleted without your sign-off.</p>
+
+    <div class="card s-cut" id="card-bp">
+      <div class="card-top" onclick="toggle('bp')">
+        <div>
+          <div class="card-name">Intimacy Blueprint pages <span class="badge b-cut">Proposed cut</span></div>
+          <div class="card-sub">All Intimacy Blueprint landing pages. Retired offer. Keeping them sends visitors to a dead end.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'bp','s-approved','btn-a')">Yes, cut it</button>
+            <button class="btn btn-d" onclick="status(event,'bp','s-discuss','btn-d')">Wait, discuss</button>
+          </div>
+          <span class="card-toggle" id="t-bp">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-bp">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Any reason to keep any part of these pages?"></textarea>
+      </div>
+    </div>
+
+    <div class="card s-cut" id="card-dup">
+      <div class="card-top" onclick="toggle('dup')">
+        <div>
+          <div class="card-name">Duplicate specialty pages (12+ existing) <span class="badge b-cut">Proposed cut</span></div>
+          <div class="card-sub">Pages saying the same thing in slightly different words for keyword density. Replaced by the 8 focused pages. URL redirects built for any with existing SEO value.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'dup','s-approved','btn-a')">Yes, cut them</button>
+            <button class="btn btn-d" onclick="status(event,'dup','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-dup">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-dup">
+        <div class="notes-label">Notes - any you feel strongly about keeping?</div>
+        <textarea class="notes" placeholder="Any specific pages from this group you want us to look at before cutting?"></textarea>
+      </div>
+    </div>
+
+    <div class="card" id="card-bk">
+      <div class="card-top" onclick="toggle('bk')">
+        <div>
+          <div class="card-name">Standalone booking page <span class="badge b-merge">Proposed merge</span></div>
+          <div class="card-sub">Folded into contact and the persistent nav CTA. The Book a Call button handles this everywhere on the site.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'bk','s-approved','btn-a')">Yes, merge it</button>
+            <button class="btn btn-d" onclick="status(event,'bk','s-discuss','btn-d')">Discuss</button>
+            <button class="btn btn-c" onclick="status(event,'bk','s-cut','btn-c')">Keep separate</button>
+          </div>
+          <span class="card-toggle" id="t-bk">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-bk">
+        <div class="notes-label">Notes</div>
+        <textarea class="notes" placeholder="Any reason to keep a dedicated booking page?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ COPY APPROACH ══ -->
+  <div class="section-block" id="copy">
+    <div class="sec-eyebrow">Section 08</div>
+    <div class="sec-title">How the <em>Copy Gets Written</em></div>
+    <p class="sec-desc">Approve the process before writing begins.</p>
+
+    <div class="copy-grid">
+      <div class="cg cg-a">
+        <div class="cg-head">The process</div>
+        <div class="cg-body">
+          All copy is drafted using the Brand Voice Guide, the story bank of real client moments, and Stephanie's actual phrases. AI is used as a drafting tool only - never a replacement for voice or judgment. Every draft is built from her words.
+          <ul class="cg-list">
+            <li>Amanda drafts each page using the voice guide as the foundation</li>
+            <li>Draft delivered in Google Doc format - mark up directly in the doc</li>
+            <li>Stephanie flags anything that does not sound like her</li>
+            <li>One round of revisions per batch, included</li>
+            <li>Nothing gets published without her eyes on it</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cg cg-b">
+        <div class="cg-head">Priority order</div>
+        <div class="cg-body">
+          Pages get written in this order, driven by revenue impact. Batch 1 gets approved before Batch 2 begins.
+          <ul class="cg-list">
+            <li><strong>Batch 1:</strong> Homepage, About, Course sales page, all three Retreat pages</li>
+            <li><strong>Batch 2:</strong> Whole Person Approach, all 8 specialty pages, Contact</li>
+            <li><strong>Batch 3:</strong> Testimonials, Press and Media, Favorites and Shop, Blog</li>
+            <li><strong>SEO:</strong> Keywords assigned before writing. Built in naturally, not stuffed.</li>
+            <li><strong>URL redirects:</strong> Built before any pages go live. SEO authority protected.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="card-cp">
+      <div class="card-top" onclick="toggle('cp')">
+        <div>
+          <div class="card-name">Approve the copy process and priority order</div>
+          <div class="card-sub">Confirm you are comfortable with how copy gets drafted, reviewed, and approved before writing begins.</div>
+        </div>
+        <div class="card-actions">
+          <div class="btns">
+            <button class="btn btn-a" onclick="status(event,'cp','s-approved','btn-a')">Approved</button>
+            <button class="btn btn-d" onclick="status(event,'cp','s-discuss','btn-d')">Discuss</button>
+          </div>
+          <span class="card-toggle" id="t-cp">▾</span>
+        </div>
+      </div>
+      <div class="card-detail" id="d-cp">
+        <div class="notes-label">Notes on the copy process or priority order</div>
+        <textarea class="notes" placeholder="Any concerns about the process? Anything to add to Batch 1? Any pages you want written before others?"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <div class="rule"></div>
+
+
+  <!-- ══ FINAL ══ -->
+  <div class="section-block" id="final">
+    <div class="sec-eyebrow">Section 09</div>
+    <div class="sec-title">Three Questions<br><em>Before We Start</em></div>
+    <p class="sec-desc">Answer as specifically as you can. The more detail here, the stronger the copy will be.</p>
+
+    <div class="final">
+      <div class="final-head">Your <em>three answers.</em></div>
+      <p class="final-sub">Fill these in and submit. Amanda will receive your full responses and all your page decisions by email and will be in touch within 24 hours.</p>
+
+      <!-- Hidden inputs collect all button selections -->
+      <div id="hidden-selections"></div>
+
+      <div class="final-grid">
+        <div class="ff full">
+          <label class="ff-label">Your name</label>
+          <input class="ff-input" id="q-name" type="text" placeholder="Dr. Stephanie Bathurst">
+        </div>
+        <div class="ff full">
+          <label class="ff-label">Three things that must be on the homepage no matter what</label>
+          <textarea class="ff-ta" id="q1" placeholder="Example: My face at the top. The Netflix documentary mention. A clear path to the quiz."></textarea>
+        </div>
+        <div class="ff full">
+          <label class="ff-label">Three feelings you want someone to have when they land on your site</label>
+          <textarea class="ff-ta" id="q2" placeholder="Example: Safe. Like she already gets it. Like I have finally found the right person."></textarea>
+        </div>
+        <div class="ff full">
+          <label class="ff-label">The one thing the current site is missing that you most want fixed</label>
+          <textarea class="ff-ta" id="q3" placeholder="Example: It does not sound like me. It looks like a therapist website, not like who I actually am."></textarea>
+        </div>
+        <div class="ff full">
+          <label class="ff-label">Anything else Amanda needs to know before writing begins</label>
+          <textarea class="ff-ta" id="q4" placeholder="Stories you want told, things you never want on the site, anything that came up while going through this document..."></textarea>
+        </div>
+      </div>
+
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">Submit Approval Document</button>
+      <div class="submit-success" id="sub-ok">Submitted! Amanda will be in touch within 24 hours to review your answers before anything gets built.</div>
+      <div class="submit-success" id="sub-err" style="color:#8A3020;">Something went wrong. Please email your responses directly to Amanda at thepassivepractice.com</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- PROGRESS -->
+<div class="progress">
+  <div class="prog-title">Progress</div>
+  <div class="prog-row"><span class="prog-lbl"><span class="prog-dot pd-a"></span>Approved</span><span class="prog-count" id="ct-a">0</span></div>
+  <div class="prog-row"><span class="prog-lbl"><span class="prog-dot pd-d"></span>Discuss</span><span class="prog-count" id="ct-d">0</span></div>
+  <div class="prog-row"><span class="prog-lbl"><span class="prog-dot pd-c"></span>Cut</span><span class="prog-count" id="ct-c">0</span></div>
+  <div class="prog-row"><span class="prog-lbl"><span class="prog-dot pd-m"></span>Merge</span><span class="prog-count" id="ct-m">0</span></div>
+  <div class="prog-row"><span class="prog-lbl"><span class="prog-dot pd-n"></span>Pending</span><span class="prog-count" id="ct-n">27</span></div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+
+const S = {};       // page selections:  id -> label string
+const N = {};       // notes:            id -> text
+const HP = {};      // homepage sections: id -> label string
+const TOTAL = 27;
+
+// Human-readable labels
+const LABELS = {
+  'nav':    'Navigation Structure',
+  'doors':  'Three-Door Framework',
+  'wpa':    'Whole Person Approach page',
+  'sp1':    'We keep having the same fight',
+  'sp2':    'Our physical connection is broken',
+  'sp3':    'Something from before is showing up now',
+  'sp4':    'My body is holding something my mind already processed',
+  'sp5':    'Something is off and no one can tell me what it is',
+  'sp6':    'I need someone who will not flinch at who I am',
+  'sp7':    'I am burned out in a way that rest does not fix',
+  'sp8':    'I want to do in 5 days what therapy takes 2 years to do',
+  'course': 'Flow Energy Course sales page',
+  'r1':     '1-Day Couples Intensive',
+  'r5':     '5-Day Private Hawaii Retreat',
+  'r7':     '7-Day All Inclusive Retreat',
+  'about':  'About page',
+  'contact':'Contact page',
+  'press':  'Press and Media page',
+  'test':   'Testimonials page',
+  'fav':    'Favorites and Shop page',
+  'blog':   'Blog',
+  'bp':     'Intimacy Blueprint pages',
+  'dup':    'Duplicate specialty pages',
+  'bk':     'Standalone booking page',
+  'cp':     'Copy process and priority order',
+  'hp1':    'Homepage - Hero section',
+  'hp2':    'Homepage - Credibility bar',
+  'hp3':    'Homepage - Who this is for',
+  'hp4':    'Homepage - Whole Person Approach',
+  'hp5':    'Homepage - Three Paths Forward',
+  'hp6':    'Homepage - About Preview',
+  'hp7':    'Homepage - Testimonials',
+  'hp8':    'Homepage - Quiz CTA',
+  'hp9':    'Homepage - Recent Content',
+};
+
+const STATUS_LABEL = {
+  's-approved': 'APPROVED',
+  's-discuss':  'DISCUSS',
+  's-cut':      'CUT IT',
+  's-merge':    'MERGE',
+  'hp-a':       'APPROVED',
+  'hp-d':       'DISCUSS',
+};
+
+// ── Status buttons ─────────────────────────────────────────────────────────
+
+function status(e, id, cls, btnClass) {
+  e.stopPropagation();
+  S[id] = cls;
+  const card = document.getElementById('card-' + id);
+  if (card) {
+    card.classList.remove('s-approved','s-discuss','s-cut','s-merge');
+    card.classList.add(cls);
+  }
+  e.target.closest('.btns').querySelectorAll('.btn').forEach(b => b.classList.remove('on'));
+  e.target.classList.add('on');
+  update();
+}
+
+function hpStatus(e, id, btnClass) {
+  e.stopPropagation();
+  HP[id] = btnClass;
+  e.target.closest('.hpwf-right').querySelectorAll('.btn').forEach(b => b.classList.remove('on'));
+  e.target.classList.add('on');
+  const row = e.target.closest('.hpwf-row');
+  if (row) row.style.borderLeft = btnClass === 'btn-a' ? '3px solid var(--olive)' : '3px solid var(--gold)';
+  update();
+}
+
+// ── Expand/collapse ────────────────────────────────────────────────────────
+
+function toggle(id) {
+  const d = document.getElementById('d-' + id);
+  const t = document.getElementById('t-' + id);
+  if (!d) return;
+  const open = d.classList.contains('open');
+  d.classList.toggle('open', !open);
+  if (t) t.classList.toggle('open', !open);
+}
+
+// ── Progress counter ───────────────────────────────────────────────────────
+
+function update() {
+  const counts = { 's-approved': 0, 's-discuss': 0, 's-cut': 0, 's-merge': 0 };
+  Object.values(S).forEach(v => { if (counts[v] !== undefined) counts[v]++; });
+  // Count homepage approvals too
+  const hpA = Object.values(HP).filter(v => v === 'btn-a').length;
+  const hpD = Object.values(HP).filter(v => v === 'btn-d').length;
+  counts['s-approved'] += hpA;
+  counts['s-discuss']  += hpD;
+  const done = Object.values(counts).reduce((a, b) => a + b, 0);
+  document.getElementById('ct-a').textContent = counts['s-approved'];
+  document.getElementById('ct-d').textContent = counts['s-discuss'];
+  document.getElementById('ct-c').textContent = counts['s-cut'];
+  document.getElementById('ct-m').textContent = counts['s-merge'];
+  document.getElementById('ct-n').textContent = Math.max(0, TOTAL - done);
+  document.getElementById('prog-label').textContent = counts['s-approved'] + ' approved';
+}
+
+// ── Collect notes from textareas ──────────────────────────────────────────
+
+function collectNotes() {
+  document.querySelectorAll('textarea.notes').forEach(el => {
+    const card = el.closest('.card');
+    if (card) {
+      const id = card.id.replace('card-', '');
+      if (el.value.trim()) N[id] = el.value.trim();
+    }
+  });
+}
+
+// ── Build the email body as a readable string ─────────────────────────────
+
+function buildBody() {
+  const line  = '------------------------------------------------';
+  const dline = '================================================';
+  const out   = [];
+
+  // Get all decisions in one map
+  const all = {};
+  Object.keys(LABELS).forEach(id => {
+    let decision = null;
+    if (HP[id])  decision = HP[id] === 'btn-a' ? 'APPROVED' : 'DISCUSS';
+    else if (S[id]) decision = STATUS_LABEL[S[id]] || null;
+    all[id] = { label: LABELS[id], decision, notes: N[id] || null };
+  });
+
+  // Count summary
+  const counts = { APPROVED: 0, DISCUSS: 0, 'CUT IT': 0, MERGE: 0, 'No response': 0 };
+  Object.values(all).forEach(v => counts[v.decision || 'No response']++);
+
+  out.push(dline);
+  out.push('  SITE APPROVAL - DR. STEPHANIE BATHURST');
+  out.push(dline);
+  out.push('');
+  out.push('  SUMMARY');
+  out.push(line);
+  out.push('  Approved:     ' + counts['APPROVED']);
+  out.push('  Needs discuss: ' + counts['DISCUSS']);
+  out.push('  Cut it:       ' + counts['CUT IT']);
+  out.push('  Merge:        ' + counts['MERGE']);
+  out.push('  No response:  ' + counts['No response']);
+  out.push('');
+
+  // Group by decision
+  const groups = [
+    { key: 'APPROVED', heading: 'APPROVED - Ready to build' },
+    { key: 'DISCUSS',  heading: 'NEEDS DISCUSSION - Flag for call' },
+    { key: 'CUT IT',   heading: 'CUT - Remove from site' },
+    { key: 'MERGE',    heading: 'MERGE - Fold into another page' },
+    { key: null,       heading: 'NO RESPONSE - Follow up needed' },
+  ];
+
+  groups.forEach(g => {
+    const items = Object.values(all).filter(v => (v.decision || null) === g.key);
+    if (!items.length) return;
+    out.push(dline);
+    out.push('  ' + g.heading);
+    out.push(dline);
+    items.forEach(item => {
+      out.push('');
+      out.push('  + ' + item.label);
+      if (item.notes) {
+        out.push('    Notes from Stephanie:');
+        item.notes.split('\n').forEach(l => out.push('    ' + l));
+      }
+    });
+    out.push('');
+  });
+
+  // Homepage section notes
+  const hpNotes = document.getElementById('notes-homepage') ? document.getElementById('notes-homepage').value.trim() : '';
+  if (hpNotes) {
+    out.push(dline);
+    out.push('  HOMEPAGE - OVERALL NOTES');
+    out.push(dline);
+    out.push('');
+    hpNotes.split('\n').forEach(l => out.push('  ' + l));
+    out.push('');
+  }
+
+  // Final four questions
+  const q1 = (document.getElementById('q1') || {}).value || '';
+  const q2 = (document.getElementById('q2') || {}).value || '';
+  const q3 = (document.getElementById('q3') || {}).value || '';
+  const q4 = (document.getElementById('q4') || {}).value || '';
+
+  out.push(dline);
+  out.push('  STEPHANIE\'S FINAL ANSWERS');
+  out.push(dline);
+  out.push('');
+  out.push('  Q1. Three things that must be on the homepage no matter what:');
+  out.push('  ' + (q1.trim() || '(no answer)'));
+  out.push('');
+  out.push('  Q2. Three feelings when someone lands on the site:');
+  out.push('  ' + (q2.trim() || '(no answer)'));
+  out.push('');
+  out.push('  Q3. The one thing the current site is most missing:');
+  out.push('  ' + (q3.trim() || '(no answer)'));
+  out.push('');
+  out.push('  Q4. Anything else Amanda needs to know:');
+  out.push('  ' + (q4.trim() || '(no answer)'));
+  out.push('');
+  out.push(dline);
+  out.push('  Submitted via The Passive Practice site approval doc');
+  out.push(dline);
+
+  return out.join('\n');
+}
+
+// ── Submit to Formspree ────────────────────────────────────────────────────
+
+async function submitForm() {
+  collectNotes();
+
+  const name = document.getElementById('q-name') ? document.getElementById('q-name').value.trim() : 'Dr. Stephanie Bathurst';
+  const body = buildBody();
+
+  const btn = document.getElementById('submit-btn');
+  const okEl  = document.getElementById('sub-ok');
+  const errEl = document.getElementById('sub-err');
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  okEl.style.display  = 'none';
+  errEl.style.display = 'none';
+
+  try {
+    const res = await fetch('https://formspree.io/f/xwvwykqq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        name:      name || 'Dr. Stephanie Bathurst',
+        _subject:  'Site Approval Responses - Dr. Stephanie Bathurst',
+        responses: body,
+      })
+    });
+
+    const data = await res.json().catch(() => ({}));
+    console.log('Formspree status:', res.status, data);
+
+    if (res.ok) {
+      okEl.style.display  = 'block';
+      btn.textContent = 'Submitted';
+      btn.style.opacity = '0.4';
+    } else {
+      // Show the actual Formspree error in the page so we can see it
+      errEl.textContent = 'Error ' + res.status + ': ' + (data.error || JSON.stringify(data)) + '. Please screenshot this and send to Amanda.';
+      errEl.style.display = 'block';
+      btn.textContent = 'Submit Approval Document';
+      btn.disabled = false;
+    }
+  } catch (err) {
+    console.error('Fetch error:', err);
+    errEl.textContent = 'Network error: ' + err.message + '. This usually means the hosting platform is blocking the request. Please screenshot this and send to Amanda.';
+    errEl.style.display = 'block';
+    btn.textContent = 'Submit Approval Document';
+    btn.disabled = false;
+  }
+}
+
+update();
+</script>
+</body>
+</html>
