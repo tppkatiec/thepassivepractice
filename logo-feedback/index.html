@@ -716,13 +716,91 @@ function endPhase1() {
 }
 
 // ── PHASE 2: DETAILED FEEDBACK ──────────────
-// Placeholder - next section
-function startPhase2() {}
-function toggleTag(btn, group) {}
-function nextDetail() {}
+
+function startPhase2() {
+  if (detailImages.length === 0) {
+    // Skip straight to results if nothing survived
+    showResults();
+    return;
+  }
+
+  document.getElementById('transition').style.display = 'none';
+  document.getElementById('phase2').style.display = 'block';
+  detailIndex = 0;
+  showDetailImage();
+}
+
+function showDetailImage() {
+  if (detailIndex >= detailImages.length) {
+    showResults();
+    return;
+  }
+
+  var filename = detailImages[detailIndex];
+  var card = document.getElementById('detail-card');
+  var img = document.getElementById('detail-img');
+
+  // Update progress
+  document.getElementById('p2-progress').textContent =
+    (detailIndex + 1) + ' of ' + detailImages.length;
+
+  // Reset tags
+  document.querySelectorAll('#tags-pos .tag, #tags-neg .tag').forEach(function(t) {
+    t.classList.remove('selected', 'selected-off');
+  });
+
+  // Reset note
+  document.getElementById('detail-note').value = '';
+
+  // Load image
+  img.src = 'images/' + filename;
+
+  // Trigger animation
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeUp 0.3s ease forwards';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleTag(btn, group) {
+  if (group === 'pos') {
+    btn.classList.toggle('selected');
+  } else {
+    btn.classList.toggle('selected-off');
+  }
+}
+
+function nextDetail() {
+  var filename = detailImages[detailIndex];
+
+  // Collect selected positive tags
+  var posTags = [];
+  document.querySelectorAll('#tags-pos .tag.selected').forEach(function(t) {
+    posTags.push(t.dataset.tag);
+  });
+
+  // Collect selected negative tags
+  var negTags = [];
+  document.querySelectorAll('#tags-neg .tag.selected-off').forEach(function(t) {
+    negTags.push(t.dataset.tag);
+  });
+
+  // Collect note
+  var note = document.getElementById('detail-note').value.trim();
+
+  // Save to data (merge with existing vote from phase 1)
+  data[filename].posTags = posTags;
+  data[filename].negTags = negTags;
+  data[filename].note = note;
+
+  detailIndex++;
+  showDetailImage();
+}
 
 // ── RESULTS ─────────────────────────────────
-// Placeholder - coming soon
+// Placeholder - next section
+function showResults() {}
 function sendResults() {}
 function copyResults() {}
 function formatResults() { return ''; }
