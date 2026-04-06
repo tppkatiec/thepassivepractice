@@ -35,6 +35,8 @@
   --iha-scroll-bg: #fdfbf8;
   --iha-sidebar-bg: #d2d3c7;
   --iha-header-bg: #e3e3dc;
+  --primary-100: var(--iha-cream) !important;
+  --primary-50: rgba(250, 245, 236, 0.5) !important;
 }
 
 body::after {
@@ -149,11 +151,49 @@ header.hl_header .btn-yellow i {
 
 #hl_header--help-icon {
   background-color: var(--iha-olive) !important;
-  border-color: var(--iha-olive) !important;
+  filter: none !important;
 }
+
 
 #location_dashboard-main-content > .mt-4 {
   margin-top: 0 !important;
+}
+
+/* Empty state icon background */
+.hl-empty-icon {
+  background-color: var(--iha-cream) !important;
+  border-radius: 50% !important;
+}
+
+/* Empty state icon color */
+.hl-empty-icon svg {
+  stroke: var(--iha-stone) !important;
+  color: var(--iha-stone) !important;
+}
+
+/* Edit Dashboard button */
+#location-dashboard_btn--edit-dashboard .n-button__border,
+#location-dashboard_btn--edit-dashboard .n-button__state-border {
+  border-color: var(--iha-olive) !important;
+}
+
+#location-dashboard_btn--edit-dashboard::before,
+#location-dashboard_btn--edit-dashboard {
+  background-color: var(--iha-olive) !important;
+}
+
+.n-button--primary-type {
+  background-color: var(--iha-olive) !important;
+}
+
+.n-button--primary-type .n-button__border,
+.n-button--primary-type .n-button__state-border {
+  border-color: var(--iha-olive) !important;
+}
+
+/* Quick Filters text */
+.hl-text-sm-medium {
+  color: var(--iha-olive) !important;
 }
 
 /* ══════════════════════════════════════════════
@@ -375,6 +415,11 @@ header.hl_header .btn-yellow i {
 /* ══════════════════════════════════════════════
    13. SIDEBAR NAVIGATION (#sidebar-v2)
    ══════════════════════════════════════════════ */
+/* Sidebar Logo */
+.agency-logo {
+  width: 200px !important;
+  height: auto !important;
+}
 
 /* Sidebar background */
 #sidebar-v2 {
@@ -406,8 +451,7 @@ header.hl_header .btn-yellow i {
 
 #location-switcher-sidbar-v2 .hl_switcher-loc-city {
   font-family: "TT Norms", Arial, sans-serif !important;
-  color: var(--iha-charcoal) !important;
-  opacity: 0.7;
+  color: #2a2a2a !important;
 }
 
 #location-switcher-sidbar-v2 .hl_location_icon rect {
@@ -421,7 +465,16 @@ header.hl_header .btn-yellow i {
 
 #location-switcher-sidbar-v2 .switcher-caret-holder i {
   color: var(--iha-charcoal) !important;
-  opacity: 0.5;
+}
+
+#location-switcher-sidbar-v2 .hl_location_icon path {
+  stroke: var(--iha-olive) !important;
+  opacity: 1 !important;
+}
+
+#location-switcher-sidbar-v2 .hl_location_icon rect {
+  fill: var(--iha-olive) !important;
+  fill-opacity: 0.3 !important;
 }
 
 /* ── Search Bar ── */
@@ -466,7 +519,7 @@ header.hl_header .btn-yellow i {
 /* Nav link text */
 #sidebar-v2 .hl_nav-header nav a .nav-title {
   font-family: "TT Norms", Arial, sans-serif !important;
-  color: var(--iha-charcoal) !important;
+  color: #2a2a2a !important;
 }
 
 /* Nav link hover */
@@ -491,7 +544,7 @@ header.hl_header .btn-yellow i {
 /* Nav icons (img-based) — tint on hover/active isn't possible with img,
    but we ensure consistent sizing and opacity */
 #sidebar-v2 .hl_nav-header nav a img {
-  opacity: 0.6;
+  opacity: 0.85;
   transition: opacity 260ms ease !important;
 }
 
@@ -529,7 +582,7 @@ header.hl_header .btn-yellow i {
 
 #sidebar-v2 .hl_nav-settings nav a .nav-title {
   font-family: "TT Norms", Arial, sans-serif !important;
-  color: var(--iha-charcoal) !important;
+  color: #2a2a2a !important;
 }
 
 #sidebar-v2 .hl_nav-settings nav a:hover {
