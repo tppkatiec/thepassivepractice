@@ -799,11 +799,187 @@ function nextDetail() {
 }
 
 // ── RESULTS ─────────────────────────────────
-// Placeholder - next section
-function showResults() {}
-function sendResults() {}
-function copyResults() {}
-function formatResults() { return ''; }
+
+function showResults() {
+  document.getElementById('phase2').style.display = 'none';
+  document.getElementById('transition').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+
+  var yesImages = [];
+  var maybeImages = [];
+  var noImages = [];
+  var posTagCounts = {};
+  var negTagCounts = {};
+  var noReasonCounts = {};
+  var notes = [];
+
+  IMAGES.forEach(function(f) {
+    var d = data[f];
+    if (!d) return;
+
+    if (d.vote === 'yes') yesImages.push(f);
+    else if (d.vote === 'maybe') maybeImages.push(f);
+    else noImages.push(f);
+
+    if (d.noReason) {
+      noReasonCounts[d.noReason] = (noReasonCounts[d.noReason] || 0) + 1;
+    }
+
+    (d.posTags || []).forEach(function(t) {
+      posTagCounts[t] = (posTagCounts[t] || 0) + 1;
+    });
+    (d.negTags || []).forEach(function(t) {
+      negTagCounts[t] = (negTagCounts[t] || 0) + 1;
+    });
+
+    if (d.note) {
+      notes.push({ image: f, note: d.note, vote: d.vote });
+    }
+  });
+
+  var html = '';
+
+  // Yes images
+  if (yesImages.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Yes (' + yesImages.length + ')</div>';
+    html += '<div class="results-grid">';
+    yesImages.forEach(function(f) {
+      html += '<div class="results-thumb"><img src="images/' + f + '" alt=""></div>';
+    });
+    html += '</div></div>';
+  }
+
+  // Maybe images
+  if (maybeImages.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Maybe (' + maybeImages.length + ')</div>';
+    html += '<div class="results-grid">';
+    maybeImages.forEach(function(f) {
+      html += '<div class="results-thumb"><img src="images/' + f + '" alt=""></div>';
+    });
+    html += '</div></div>';
+  }
+
+  // Top positive tags
+  var sortedPos = Object.entries(posTagCounts).sort(function(a, b) { return b[1] - a[1]; });
+  if (sortedPos.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">What drew you in most</div>';
+    html += '<div class="results-tag-summary">';
+    sortedPos.forEach(function(pair) {
+      html += '<span class="results-tag">' + pair[0] + '<span class="count">' + pair[1] + 'x</span></span>';
+    });
+    html += '</div></div>';
+  }
+
+  // Top negative tags (from phase 2 detail)
+  var sortedNeg = Object.entries(negTagCounts).sort(function(a, b) { return b[1] - a[1]; });
+  if (sortedNeg.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">What felt off</div>';
+    html += '<div class="results-tag-summary">';
+    sortedNeg.forEach(function(pair) {
+      html += '<span class="results-tag">' + pair[0] + '<span class="count">' + pair[1] + 'x</span></span>';
+    });
+    html += '</div></div>';
+  }
+
+  // No reasons (from phase 1 quick rejections)
+  var sortedNo = Object.entries(noReasonCounts).sort(function(a, b) { return b[1] - a[1]; });
+  if (sortedNo.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Why things got cut (' + noImages.length + ' removed)</div>';
+    html += '<div class="results-tag-summary">';
+    sortedNo.forEach(function(pair) {
+      html += '<span class="results-tag">' + pair[0] + '<span class="count">' + pair[1] + 'x</span></span>';
+    });
+    html += '</div></div>';
+  }
+
+  // Notes
+  if (notes.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Your notes</div>';
+    notes.forEach(function(n, i) {
+      var imgNum = IMAGES.indexOf(n.image) + 1;
+      html += '<div class="results-note-card">';
+      html += '<div class="note-img-label">Image ' + imgNum + ' (' + n.vote + ')</div>';
+      html += '<div class="note-text">' + n.note.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  document.getElementById('results-content').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function formatResults() {
+  var lines = [];
+  lines.push('LOGO FEEDBACK');
+  lines.push('Submitted: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}));
+  lines.push('');
+
+  var yesImages = [];
+  var maybeImages = [];
+  var noImages = [];
+
+  IMAGES.forEach(function(f, i) {
+    var d = data[f];
+    if (!d) return;
+    if (d.vote === 'yes') yesImages.push(i + 1);
+    else if (d.vote === 'maybe') maybeImages.push(i + 1);
+    else noImages.push(i + 1);
+  });
+
+  lines.push('YES: Images ' + (yesImages.length > 0 ? yesImages.join(', ') : 'none'));
+  lines.push('MAYBE: Images ' + (maybeImages.length > 0 ? maybeImages.join(', ') : 'none'));
+  lines.push('NO: Images ' + (noImages.length > 0 ? noImages.join(', ') : 'none'));
+  lines.push('');
+  lines.push('---');
+
+  // Per-image detail for kept images
+  IMAGES.forEach(function(f, i) {
+    var d = data[f];
+    if (!d) return;
+
+    if (d.vote === 'no') {
+      if (d.noReason) {
+        lines.push('Image ' + (i + 1) + ' - NO (' + d.noReason + ')');
+      }
+      return;
+    }
+
+    lines.push('');
+    lines.push('Image ' + (i + 1) + ' - ' + d.vote.toUpperCase());
+    if (d.posTags && d.posTags.length > 0) {
+      lines.push('  Drawn to: ' + d.posTags.join(', '));
+    }
+    if (d.negTags && d.negTags.length > 0) {
+      lines.push('  Feels off: ' + d.negTags.join(', '));
+    }
+    if (d.note) {
+      lines.push('  Note: "' + d.note + '"');
+    }
+  });
+
+  return lines.join('\n');
+}
+
+function sendResults() {
+  var body = encodeURIComponent(formatResults());
+  var sub = encodeURIComponent('Logo Feedback');
+  window.location.href = 'mailto:hello@thepassivepractice.com?subject=' + sub + '&body=' + body;
+}
+
+function copyResults() {
+  navigator.clipboard.writeText(formatResults()).then(function() {
+    var b = document.getElementById('copy-results-btn');
+    b.textContent = 'Copied.';
+    setTimeout(function() { b.textContent = 'Copy to Clipboard'; }, 2000);
+  });
+}
 </script>
 </body>
 </html>
