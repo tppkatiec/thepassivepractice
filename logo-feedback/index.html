@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo Feedback | The Passive Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ivory: #F4F8EE;
+  --graphite: #363030;
+  --smoke: #F6F5F5;
+  --peach: #E17351;
+  --wisteria: #7AA3E7;
+  --lime: #DEFF46;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --font-body: 'Inter', -apple-system, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-tap-highlight-color: transparent; }
+
+body {
+  background: var(--smoke);
+  color: var(--graphite);
+  font-family: var(--font-body);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+/* ── LAYOUT ────────────────────────────────── */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── INTRO SCREEN ──────────────────────────── */
+#intro {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+}
+.intro-inner {
+  max-width: 520px;
+  text-align: center;
+}
+.mono-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 24px;
+  display: block;
+}
+.intro-headline {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(36px, 8vw, 56px);
+  line-height: 1.1;
+  color: var(--graphite);
+  margin-bottom: 24px;
+}
+.intro-headline em {
+  font-style: italic;
+  color: var(--peach);
+}
+.intro-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--graphite);
+  opacity: 0.6;
+  margin-bottom: 44px;
+}
+.intro-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--graphite);
+  opacity: 0.4;
+  margin-top: 16px;
+  letter-spacing: 0.04em;
+}
+
+/* ── BUTTONS ───────────────────────────────── */
+.btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  border-radius: 2px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.18s ease;
+  display: inline-block;
+  -webkit-appearance: none;
+}
+.btn-primary {
+  background: var(--lime);
+  color: var(--graphite);
+}
+.btn-primary:hover {
+  background: #c8e83a;
+  transform: translateY(-1px);
+}
+
+/* ── PHASE 1: QUICK SORT ───────────────────── */
+#phase1 {
+  display: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 40px 0;
+}
+
+.sort-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  animation: fadeUp 0.3s ease forwards;
+}
+.sort-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  border: 1px solid rgba(54,48,48,0.06);
+}
+.sort-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.sort-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.sort-btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 18px 12px;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 4px;
+  background: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+  text-align: center;
+}
+.sort-btn:active {
+  transform: scale(0.97);
+}
+.sort-btn.yes:hover, .sort-btn.yes:active {
+  background: var(--lime);
+  border-color: var(--lime);
+}
+.sort-btn.maybe:hover, .sort-btn.maybe:active {
+  background: var(--wisteria);
+  border-color: var(--wisteria);
+  color: #FFFFFF;
+}
+.sort-btn.no:hover, .sort-btn.no:active {
+  background: var(--graphite);
+  border-color: var(--graphite);
+  color: #FFFFFF;
+}
+
+/* ── NO FOLLOW-UP ──────────────────────────── */
+.no-followup {
+  display: none;
+  animation: fadeUp 0.2s ease forwards;
+}
+.no-followup-label {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 20px;
+  color: var(--graphite);
+  text-align: center;
+  margin-bottom: 16px;
+  font-style: italic;
+}
+.no-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+.no-tag {
+  padding: 12px 18px;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 100px;
+  background: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+}
+.no-tag:active {
+  transform: scale(0.96);
+}
+.no-tag:hover {
+  border-color: var(--peach);
+  color: var(--peach);
+}
+
+/* ── PHASE TRANSITION ──────────────────────── */
+#transition {
+  display: none;
+  min-height: 100vh;
+  min-height: 100dvh;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 24px;
+  text-align: center;
+}
+.transition-stat {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 8px;
+}
+.transition-num {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(48px, 12vw, 80px);
+  color: var(--graphite);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.transition-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(54,48,48,0.5);
+  margin-bottom: 40px;
+}
+
+/* ── PHASE 2: DETAILED FEEDBACK ────────────── */
+#phase2 {
+  display: none;
+  padding: 40px 0 120px;
+}
+
+.phase2-progress {
+  text-align: center;
+  margin-bottom: 8px;
+}
+.phase2-progress-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(54,48,48,0.35);
+}
+
+.detail-card {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  animation: fadeUp 0.3s ease forwards;
+}
+
+.detail-image-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  border: 1px solid rgba(54,48,48,0.06);
+}
+.detail-image-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.tag-group {
+  margin-bottom: 20px;
+}
+.tag-group-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 10px;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.tag {
+  padding: 10px 16px;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 100px;
+  background: #FFFFFF;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--graphite);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+  user-select: none;
+}
+.tag:active { transform: scale(0.96); }
+.tag.selected {
+  background: var(--lime);
+  border-color: var(--lime);
+  color: var(--graphite);
+}
+.tag.selected-off {
+  background: var(--graphite);
+  border-color: var(--graphite);
+  color: #FFFFFF;
+}
+
+.detail-note {
+  width: 100%;
+  background: #FFFFFF;
+  border: 1px solid rgba(54,48,48,0.12);
+  border-radius: 4px;
+  padding: 14px 16px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--graphite);
+  outline: none;
+  resize: none;
+  height: 72px;
+  margin-top: 20px;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.detail-note:focus { border-color: var(--peach); }
+.detail-note::placeholder { color: rgba(54,48,48,0.3); }
+
+.detail-next {
+  margin-top: 24px;
+  text-align: center;
+}
+
+/* ── RESULTS ───────────────────────────────── */
+#results {
+  display: none;
+  padding: 80px 0 120px;
+  animation: fadeUp 0.4s ease forwards;
+}
+
+.results-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 16px;
+}
+.results-headline {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(32px, 6vw, 48px);
+  line-height: 1.1;
+  color: var(--graphite);
+  margin-bottom: 12px;
+}
+.results-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: rgba(54,48,48,0.5);
+  line-height: 1.65;
+  margin-bottom: 48px;
+}
+
+.results-section {
+  margin-bottom: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(54,48,48,0.08);
+}
+.results-section:last-of-type { border-bottom: none; }
+.results-section-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--peach);
+  margin-bottom: 16px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 8px;
+}
+.results-thumb {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid rgba(54,48,48,0.06);
+}
+.results-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.results-tag-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.results-tag {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 6px 14px;
+  border-radius: 100px;
+  background: rgba(54,48,48,0.05);
+  color: var(--graphite);
+}
+.results-tag .count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--peach);
+  margin-left: 4px;
+}
+
+.results-note-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(54,48,48,0.08);
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin-bottom: 8px;
+}
+.results-note-card .note-img-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(54,48,48,0.4);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.results-note-card .note-text {
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--graphite);
+}
+
+.results-actions {
+  text-align: center;
+  margin-top: 48px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(54,48,48,0.08);
+}
+
+/* ── ANIMATIONS ────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── MOBILE ────────────────────────────────── */
+@media (max-width: 480px) {
+  .sort-btn { padding: 16px 8px; font-size: 11px; }
+  .tag { padding: 9px 14px; font-size: 12px; }
+  .no-tag { padding: 10px 14px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-inner">
+    <span class="mono-label">Logo Feedback</span>
+    <h1 class="intro-headline">I picked these <em>for you.</em></h1>
+    <p class="intro-body">These are not your logo. They are starting points, references, vibes. Flip through them and tell me what pulls you in and what does not. There are no wrong answers.</p>
+    <button class="btn btn-primary" onclick="startSort()">Let's go</button>
+    <div class="intro-meta">Takes about 5 minutes. Two quick rounds.</div>
+  </div>
+</div>
+
+<!-- PHASE 1: QUICK SORT -->
+<div id="phase1">
+  <div class="sort-card" id="sort-card">
+    <div class="sort-image-wrap">
+      <img id="sort-img" src="" alt="Logo inspiration">
+    </div>
+    <div id="sort-buttons">
+      <div class="sort-actions">
+        <button class="sort-btn yes" onclick="sortVote('yes')">Yes</button>
+        <button class="sort-btn maybe" onclick="sortVote('maybe')">Maybe</button>
+        <button class="sort-btn no" onclick="sortVote('no')">No</button>
+      </div>
+    </div>
+    <div class="no-followup" id="no-followup">
+      <div class="no-followup-label">What's not working?</div>
+      <div class="no-tags">
+        <button class="no-tag" onclick="noReason(this)">Too busy</button>
+        <button class="no-tag" onclick="noReason(this)">Too simple</button>
+        <button class="no-tag" onclick="noReason(this)">Too feminine</button>
+        <button class="no-tag" onclick="noReason(this)">Too corporate</button>
+        <button class="no-tag" onclick="noReason(this)">Not me</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSITION -->
+<div id="transition">
+  <div>
+    <div class="transition-stat">You kept</div>
+    <div class="transition-num" id="kept-count">0</div>
+    <div class="transition-sub" id="kept-sub">Now let's look a little closer.</div>
+    <button class="btn btn-primary" onclick="startPhase2()">Continue</button>
+  </div>
+</div>
+
+<!-- PHASE 2: DETAILED FEEDBACK -->
+<div id="phase2">
+  <div class="container">
+    <div class="phase2-progress">
+      <span class="phase2-progress-text" id="p2-progress"></span>
+    </div>
+  </div>
+  <div class="detail-card" id="detail-card">
+    <div class="detail-image-wrap">
+      <img id="detail-img" src="" alt="Logo inspiration">
+    </div>
+    <div class="tag-group">
+      <div class="tag-group-label">What caught your eye</div>
+      <div class="tags" id="tags-pos">
+        <button class="tag" data-tag="The typography" onclick="toggleTag(this,'pos')">The typography</button>
+        <button class="tag" data-tag="The icon or symbol" onclick="toggleTag(this,'pos')">The icon or symbol</button>
+        <button class="tag" data-tag="The layout" onclick="toggleTag(this,'pos')">The layout</button>
+        <button class="tag" data-tag="The colors" onclick="toggleTag(this,'pos')">The colors</button>
+        <button class="tag" data-tag="The overall vibe" onclick="toggleTag(this,'pos')">The overall vibe</button>
+        <button class="tag" data-tag="The simplicity" onclick="toggleTag(this,'pos')">The simplicity</button>
+        <button class="tag" data-tag="The detail level" onclick="toggleTag(this,'pos')">The detail level</button>
+      </div>
+    </div>
+    <div class="tag-group">
+      <div class="tag-group-label">What feels off</div>
+      <div class="tags" id="tags-neg">
+        <button class="tag" data-tag="Too busy" onclick="toggleTag(this,'neg')">Too busy</button>
+        <button class="tag" data-tag="Too simple" onclick="toggleTag(this,'neg')">Too simple</button>
+        <button class="tag" data-tag="Too feminine" onclick="toggleTag(this,'neg')">Too feminine</button>
+        <button class="tag" data-tag="Too masculine" onclick="toggleTag(this,'neg')">Too masculine</button>
+        <button class="tag" data-tag="Too trendy" onclick="toggleTag(this,'neg')">Too trendy</button>
+        <button class="tag" data-tag="Too corporate" onclick="toggleTag(this,'neg')">Too corporate</button>
+        <button class="tag" data-tag="Not me" onclick="toggleTag(this,'neg')">Not me</button>
+      </div>
+    </div>
+    <textarea class="detail-note" id="detail-note" placeholder="Even one word helps."></textarea>
+    <div class="detail-next">
+      <button class="btn btn-primary" onclick="nextDetail()">Next</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<div id="results">
+  <div class="container">
+    <div class="results-eyebrow">Your Feedback</div>
+    <h2 class="results-headline">That's everything.</h2>
+    <p class="results-sub">Here is a summary of what you told me. I will use this to build something that feels like yours.</p>
+    <div id="results-content"></div>
+    <div class="results-actions">
+      <button class="btn btn-primary" onclick="sendResults()">Send to Amanda</button>
+      <button class="btn" style="background:transparent; color:rgba(54,48,48,0.4); border:1px solid rgba(54,48,48,0.15);" id="copy-results-btn" onclick="copyResults()">Copy to Clipboard</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── IMAGE LIST ──────────────────────────────
+// All images in the images/ folder
+const IMAGES = [
+  '09b46764002c0cb26f1eff69759a81d9.jpg',
+  '132ff5e0bd7a4ca4dd995d787de10b03.jpg',
+  '1cd06de8c633b405bf4dc0647f78ba53.jpg',
+  '1d6cd0b90fc45ffafbaad9668d2f6907.jpg',
+  '1d909c5f8bd4b68f394579604c55b69b.jpg',
+  '1ed7735fd82eac1bed9b8f013eb6987e.jpg',
+  '50835d760b659f8aa3e9ec1156e33b64.jpg',
+  '5b15b9ddf64fb3568b02bad242f21951.jpg',
+  '5f25454b16ba2a15c3787b5f87a758ea.jpg',
+  '781b34ebb2e41e4247edce7aa0452688.jpg',
+  '98cdd010cbf8ffc800aa5ae7e6a6b440.jpg',
+  'a68ee94640107f358093782e610a6f67.jpg',
+  'ccbb5ae9810dfb1892d523beeb0b438b.jpg',
+  'd6e4adc6a85c33423690ebf6aff7351d.jpg',
+  'dcd5e3691c47421b6a1be80e4a595bf1.jpg',
+  'ed56851821705eb703cbe14d1def94b5.jpg',
+  'ef15e2d53ac29d7ae89ec039322bd912.jpg',
+  'f41978bcc0bdd5f0664a34d8fd121725.jpg',
+  'fc96eb3df3d6f0d832765d2df8ca51f9.jpg',
+  'ff11a62dae6ff13e0deee798109a61de.jpg'
+];
+
+// ── STATE ───────────────────────────────────
+const data = {};      // { filename: { vote, noReason, posTags, negTags, note } }
+let sortIndex = 0;    // current image in phase 1
+let detailImages = []; // images that made it past phase 1
+let detailIndex = 0;   // current image in phase 2
+
+// ── PHASE 1: QUICK SORT ─────────────────────
+
+function startSort() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('phase1').style.display = 'block';
+  sortIndex = 0;
+  showSortImage();
+}
+
+function showSortImage() {
+  if (sortIndex >= IMAGES.length) {
+    endPhase1();
+    return;
+  }
+
+  const card = document.getElementById('sort-card');
+  const img = document.getElementById('sort-img');
+  const buttons = document.getElementById('sort-buttons');
+  const followup = document.getElementById('no-followup');
+
+  // Reset state for this card
+  buttons.style.display = 'block';
+  followup.style.display = 'none';
+
+  // Trigger animation
+  card.style.animation = 'none';
+  card.offsetHeight; // force reflow
+  card.style.animation = 'fadeUp 0.3s ease forwards';
+
+  img.src = 'images/' + IMAGES[sortIndex];
+}
+
+function sortVote(vote) {
+  const filename = IMAGES[sortIndex];
+  data[filename] = { vote: vote, noReason: null, posTags: [], negTags: [], note: '' };
+
+  if (vote === 'no') {
+    // Show the follow-up prompt
+    document.getElementById('sort-buttons').style.display = 'none';
+    document.getElementById('no-followup').style.display = 'block';
+  } else {
+    // Move on
+    sortIndex++;
+    showSortImage();
+  }
+}
+
+function noReason(btn) {
+  const filename = IMAGES[sortIndex];
+  data[filename].noReason = btn.textContent;
+
+  // Brief highlight then advance
+  btn.style.background = 'var(--peach)';
+  btn.style.color = '#FFFFFF';
+  btn.style.borderColor = 'var(--peach)';
+
+  setTimeout(function() {
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+    sortIndex++;
+    showSortImage();
+  }, 200);
+}
+
+function endPhase1() {
+  // Collect yes and maybe images for phase 2
+  detailImages = IMAGES.filter(function(f) {
+    return data[f] && (data[f].vote === 'yes' || data[f].vote === 'maybe');
+  });
+
+  document.getElementById('phase1').style.display = 'none';
+  document.getElementById('transition').style.display = 'flex';
+  document.getElementById('kept-count').textContent = detailImages.length;
+
+  if (detailImages.length === 0) {
+    document.getElementById('kept-sub').textContent = 'None made the cut. That tells me a lot too.';
+  } else if (detailImages.length <= 5) {
+    document.getElementById('kept-sub').textContent = 'You are selective. I like that. Let\'s look closer.';
+  } else {
+    document.getElementById('kept-sub').textContent = 'Now let\'s look a little closer.';
+  }
+}
+
+// ── PHASE 2: DETAILED FEEDBACK ──────────────
+
+function startPhase2() {
+  if (detailImages.length === 0) {
+    // Skip straight to results if nothing survived
+    showResults();
+    return;
+  }
+
+  document.getElementById('transition').style.display = 'none';
+  document.getElementById('phase2').style.display = 'block';
+  detailIndex = 0;
+  showDetailImage();
+}
+
+function showDetailImage() {
+  if (detailIndex >= detailImages.length) {
+    showResults();
+    return;
+  }
+
+  var filename = detailImages[detailIndex];
+  var card = document.getElementById('detail-card');
+  var img = document.getElementById('detail-img');
+
+  // Update progress
+  document.getElementById('p2-progress').textContent =
+    (detailIndex + 1) + ' of ' + detailImages.length;
+
+  // Reset tags
+  document.querySelectorAll('#tags-pos .tag, #tags-neg .tag').forEach(function(t) {
+    t.classList.remove('selected', 'selected-off');
+  });
+
+  // Reset note
+  document.getElementById('detail-note').value = '';
+
+  // Load image
+  img.src = 'images/' + filename;
+
+  // Trigger animation
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'fadeUp 0.3s ease forwards';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleTag(btn, group) {
+  if (group === 'pos') {
+    btn.classList.toggle('selected');
+  } else {
+    btn.classList.toggle('selected-off');
+  }
+}
+
+function nextDetail() {
+  var filename = detailImages[detailIndex];
+
+  // Collect selected positive tags
+  var posTags = [];
+  document.querySelectorAll('#tags-pos .tag.selected').forEach(function(t) {
+    posTags.push(t.dataset.tag);
+  });
+
+  // Collect selected negative tags
+  var negTags = [];
+  document.querySelectorAll('#tags-neg .tag.selected-off').forEach(function(t) {
+    negTags.push(t.dataset.tag);
+  });
+
+  // Collect note
+  var note = document.getElementById('detail-note').value.trim();
+
+  // Save to data (merge with existing vote from phase 1)
+  data[filename].posTags = posTags;
+  data[filename].negTags = negTags;
+  data[filename].note = note;
+
+  detailIndex++;
+  showDetailImage();
+}
+
+// ── RESULTS ─────────────────────────────────
+
+function showResults() {
+  document.getElementById('phase2').style.display = 'none';
+  document.getElementById('transition').style.display = 'none';
+  document.getElementById('results').style.display = 'block';
+
+  var yesImages = [];
+  var maybeImages = [];
+  var noImages = [];
+  var posTagCounts = {};
+  var negTagCounts = {};
+  var noReasonCounts = {};
+  var notes = [];
+
+  IMAGES.forEach(function(f) {
+    var d = data[f];
+    if (!d) return;
+
+    if (d.vote === 'yes') yesImages.push(f);
+    else if (d.vote === 'maybe') maybeImages.push(f);
+    else noImages.push(f);
+
+    if (d.noReason) {
+      noReasonCounts[d.noReason] = (noReasonCounts[d.noReason] || 0) + 1;
+    }
+
+    (d.posTags || []).forEach(function(t) {
+      posTagCounts[t] = (posTagCounts[t] || 0) + 1;
+    });
+    (d.negTags || []).forEach(function(t) {
+      negTagCounts[t] = (negTagCounts[t] || 0) + 1;
+    });
+
+    if (d.note) {
+      notes.push({ image: f, note: d.note, vote: d.vote });
+    }
+  });
+
+  var html = '';
+
+  // Yes images
+  if (yesImages.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Yes (' + yesImages.length + ')</div>';
+    html += '<div class="results-grid">';
+    yesImages.forEach(function(f) {
+      html += '<div class="results-thumb"><img src="images/' + f + '" alt=""></div>';
+    });
+    html += '</div></div>';
+  }
+
+  // Maybe images
+  if (maybeImages.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Maybe (' + maybeImages.length + ')</div>';
+    html += '<div class="results-grid">';
+    maybeImages.forEach(function(f) {
+      html += '<div class="results-thumb"><img src="images/' + f + '" alt=""></div>';
+    });
+    html += '</div></div>';
+  }
+
+  // Top positive tags
+  var sortedPos = Object.entries(posTagCounts).sort(function(a, b) { return b[1] - a[1]; });
+  if (sortedPos.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">What drew you in most</div>';
+    html += '<div class="results-tag-summary">';
+    sortedPos.forEach(function(pair) {
+      html += '<span class="results-tag">' + pair[0] + '<span class="count">' + pair[1] + 'x</span></span>';
+    });
+    html += '</div></div>';
+  }
+
+  // Top negative tags (from phase 2 detail)
+  var sortedNeg = Object.entries(negTagCounts).sort(function(a, b) { return b[1] - a[1]; });
+  if (sortedNeg.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">What felt off</div>';
+    html += '<div class="results-tag-summary">';
+    sortedNeg.forEach(function(pair) {
+      html += '<span class="results-tag">' + pair[0] + '<span class="count">' + pair[1] + 'x</span></span>';
+    });
+    html += '</div></div>';
+  }
+
+  // No reasons (from phase 1 quick rejections)
+  var sortedNo = Object.entries(noReasonCounts).sort(function(a, b) { return b[1] - a[1]; });
+  if (sortedNo.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Why things got cut (' + noImages.length + ' removed)</div>';
+    html += '<div class="results-tag-summary">';
+    sortedNo.forEach(function(pair) {
+      html += '<span class="results-tag">' + pair[0] + '<span class="count">' + pair[1] + 'x</span></span>';
+    });
+    html += '</div></div>';
+  }
+
+  // Notes
+  if (notes.length > 0) {
+    html += '<div class="results-section">';
+    html += '<div class="results-section-title">Your notes</div>';
+    notes.forEach(function(n, i) {
+      var imgNum = IMAGES.indexOf(n.image) + 1;
+      html += '<div class="results-note-card">';
+      html += '<div class="note-img-label">Image ' + imgNum + ' (' + n.vote + ')</div>';
+      html += '<div class="note-text">' + n.note.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  document.getElementById('results-content').innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function formatResults() {
+  var lines = [];
+  lines.push('LOGO FEEDBACK');
+  lines.push('Submitted: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}));
+  lines.push('');
+
+  var yesImages = [];
+  var maybeImages = [];
+  var noImages = [];
+
+  IMAGES.forEach(function(f, i) {
+    var d = data[f];
+    if (!d) return;
+    if (d.vote === 'yes') yesImages.push(i + 1);
+    else if (d.vote === 'maybe') maybeImages.push(i + 1);
+    else noImages.push(i + 1);
+  });
+
+  lines.push('YES: Images ' + (yesImages.length > 0 ? yesImages.join(', ') : 'none'));
+  lines.push('MAYBE: Images ' + (maybeImages.length > 0 ? maybeImages.join(', ') : 'none'));
+  lines.push('NO: Images ' + (noImages.length > 0 ? noImages.join(', ') : 'none'));
+  lines.push('');
+  lines.push('---');
+
+  // Per-image detail for kept images
+  IMAGES.forEach(function(f, i) {
+    var d = data[f];
+    if (!d) return;
+
+    if (d.vote === 'no') {
+      if (d.noReason) {
+        lines.push('Image ' + (i + 1) + ' - NO (' + d.noReason + ')');
+      }
+      return;
+    }
+
+    lines.push('');
+    lines.push('Image ' + (i + 1) + ' - ' + d.vote.toUpperCase());
+    if (d.posTags && d.posTags.length > 0) {
+      lines.push('  Drawn to: ' + d.posTags.join(', '));
+    }
+    if (d.negTags && d.negTags.length > 0) {
+      lines.push('  Feels off: ' + d.negTags.join(', '));
+    }
+    if (d.note) {
+      lines.push('  Note: "' + d.note + '"');
+    }
+  });
+
+  return lines.join('\n');
+}
+
+function sendResults() {
+  var body = encodeURIComponent(formatResults());
+  var sub = encodeURIComponent('Logo Feedback');
+  window.location.href = 'mailto:hello@thepassivepractice.com?subject=' + sub + '&body=' + body;
+}
+
+function copyResults() {
+  navigator.clipboard.writeText(formatResults()).then(function() {
+    var b = document.getElementById('copy-results-btn');
+    b.textContent = 'Copied.';
+    setTimeout(function() { b.textContent = 'Copy to Clipboard'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>
