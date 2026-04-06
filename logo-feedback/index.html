@@ -631,13 +631,98 @@ let sortIndex = 0;    // current image in phase 1
 let detailImages = []; // images that made it past phase 1
 let detailIndex = 0;   // current image in phase 2
 
-// Placeholder functions - will be built in next sections
-function startSort() {}
-function sortVote(vote) {}
-function noReason(btn) {}
+// ── PHASE 1: QUICK SORT ─────────────────────
+
+function startSort() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('phase1').style.display = 'block';
+  sortIndex = 0;
+  showSortImage();
+}
+
+function showSortImage() {
+  if (sortIndex >= IMAGES.length) {
+    endPhase1();
+    return;
+  }
+
+  const card = document.getElementById('sort-card');
+  const img = document.getElementById('sort-img');
+  const buttons = document.getElementById('sort-buttons');
+  const followup = document.getElementById('no-followup');
+
+  // Reset state for this card
+  buttons.style.display = 'block';
+  followup.style.display = 'none';
+
+  // Trigger animation
+  card.style.animation = 'none';
+  card.offsetHeight; // force reflow
+  card.style.animation = 'fadeUp 0.3s ease forwards';
+
+  img.src = 'images/' + IMAGES[sortIndex];
+}
+
+function sortVote(vote) {
+  const filename = IMAGES[sortIndex];
+  data[filename] = { vote: vote, noReason: null, posTags: [], negTags: [], note: '' };
+
+  if (vote === 'no') {
+    // Show the follow-up prompt
+    document.getElementById('sort-buttons').style.display = 'none';
+    document.getElementById('no-followup').style.display = 'block';
+  } else {
+    // Move on
+    sortIndex++;
+    showSortImage();
+  }
+}
+
+function noReason(btn) {
+  const filename = IMAGES[sortIndex];
+  data[filename].noReason = btn.textContent;
+
+  // Brief highlight then advance
+  btn.style.background = 'var(--peach)';
+  btn.style.color = '#FFFFFF';
+  btn.style.borderColor = 'var(--peach)';
+
+  setTimeout(function() {
+    btn.style.background = '';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+    sortIndex++;
+    showSortImage();
+  }, 200);
+}
+
+function endPhase1() {
+  // Collect yes and maybe images for phase 2
+  detailImages = IMAGES.filter(function(f) {
+    return data[f] && (data[f].vote === 'yes' || data[f].vote === 'maybe');
+  });
+
+  document.getElementById('phase1').style.display = 'none';
+  document.getElementById('transition').style.display = 'flex';
+  document.getElementById('kept-count').textContent = detailImages.length;
+
+  if (detailImages.length === 0) {
+    document.getElementById('kept-sub').textContent = 'None made the cut. That tells me a lot too.';
+  } else if (detailImages.length <= 5) {
+    document.getElementById('kept-sub').textContent = 'You are selective. I like that. Let\'s look closer.';
+  } else {
+    document.getElementById('kept-sub').textContent = 'Now let\'s look a little closer.';
+  }
+}
+
+// ── PHASE 2: DETAILED FEEDBACK ──────────────
+// Placeholder - next section
 function startPhase2() {}
 function toggleTag(btn, group) {}
 function nextDetail() {}
+
+// ── RESULTS ─────────────────────────────────
+// Placeholder - coming soon
 function sendResults() {}
 function copyResults() {}
 function formatResults() { return ''; }
