@@ -35,8 +35,16 @@
   --iha-scroll-bg: #fdfbf8;
   --iha-sidebar-bg: #d2d3c7;
   --iha-header-bg: #e3e3dc;
-  --primary-100: var(--iha-cream) !important;
   --primary-50: rgba(250, 245, 236, 0.5) !important;
+  --primary-100: var(--iha-cream) !important;
+  --primary-200: #c7cab8 !important;
+  --primary-300: #a8ac96 !important;
+  --primary-400: #7d8367 !important;
+  --primary-500: #6b7355 !important;
+  --primary-600: #535a43 !important;  /* iha-olive */
+  --primary-700: #434934 !important;
+  --primary-800: #353a29 !important;
+  --primary-900: #272b1e !important;
 }
 
 body::after {
@@ -905,4 +913,109 @@ header.hl_header .btn-yellow i {
 .hr-text-bold,
 .hr-text-semibold {
   color: var(--iha-charcoal) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   16. TOPMENU NAV TABS (Conversations sub-tabs)
+   ══════════════════════════════════════════════ */
+
+/* The Conversations / Manual Actions / Snippets / Trigger Links tabs
+   use topmenu-navitem (NOT hr-tabs). Target these directly. */
+
+.topmenu-navitem,
+a.topmenu-navitem {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 260ms ease !important;
+}
+
+.topmenu-navitem:hover {
+  color: var(--iha-olive) !important;
+}
+
+/* Active tab — both .active and router-link-exact-active classes */
+.topmenu-navitem.active,
+.topmenu-navitem.router-link-exact-active,
+a.topmenu-navitem.active,
+a.topmenu-navitem.router-link-exact-active {
+  color: var(--iha-olive) !important;
+  border-bottom-color: var(--iha-olive) !important;
+  font-weight: 600 !important;
+}
+
+/* The bottom border / underline indicator */
+.topmenu-navitem.active::after,
+.topmenu-navitem.router-link-exact-active::after {
+  background-color: var(--iha-olive) !important;
+  border-color: var(--iha-olive) !important;
+}
+
+/* Tab IDs starting with tb_ (tab buttons) */
+[id^="tb_"].active,
+[id^="tb_"].router-link-exact-active {
+  color: var(--iha-olive) !important;
+  border-bottom-color: var(--iha-olive) !important;
+}
+
+.topmenu-nav,
+.topmenu-navtitle {
+  font-family: "TT Norms", Arial, sans-serif !important;
+  color: var(--iha-charcoal) !important;
+}
+
+
+/* ══════════════════════════════════════════════
+   17. NAIVE UI BUTTON CSS VAR OVERRIDES
+   ══════════════════════════════════════════════ */
+
+/* Naive UI / Highrise buttons compute their background from --n-color
+   which is set inline. We can't override the inline style, but we CAN
+   override the --primary-* tokens it references (done in :root above).
+   This section is a belt-and-suspenders override for any button that
+   bypasses the cascade. */
+
+.hr-button--primary,
+.hr-button--primary-type,
+.n-button--primary-type,
+button.hr-button[class*="primary"],
+button.n-button[class*="primary"] {
+  --n-color: var(--iha-olive) !important;
+  --n-color-hover: #6b7355 !important;
+  --n-color-pressed: #434934 !important;
+  --n-color-focus: #6b7355 !important;
+  --n-text-color: var(--iha-white) !important;
+  --n-text-color-hover: var(--iha-white) !important;
+  --n-text-color-pressed: var(--iha-white) !important;
+  --n-text-color-focus: var(--iha-white) !important;
+  --n-border: 1px solid var(--iha-olive) !important;
+  --n-border-hover: 1px solid #6b7355 !important;
+  --n-border-pressed: 1px solid #434934 !important;
+  --n-border-focus: 1px solid #6b7355 !important;
+  background-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+}
+
+/* Empty state positive button (specific catch) */
+.hr-empty__button--positive,
+button.hr-empty__button--positive,
+button[id^="positive-"] {
+  --n-color: var(--iha-olive) !important;
+  --n-color-hover: #6b7355 !important;
+  --n-color-pressed: #434934 !important;
+  --n-border: 1px solid var(--iha-olive) !important;
+  --n-border-hover: 1px solid #6b7355 !important;
+  background-color: var(--iha-olive) !important;
+  color: var(--iha-white) !important;
+}
+
+.hr-empty__button--positive:hover,
+button.hr-empty__button--positive:hover {
+  background-color: #6b7355 !important;
+}
+
+/* The button content slot text */
+.hr-button__content-default-slot {
+  color: inherit !important;
 }
