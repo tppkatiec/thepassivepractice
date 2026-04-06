@@ -593,8 +593,12 @@ body {
     <p class="results-sub">Here is a summary of what you told me. I will use this to build something that feels like yours.</p>
     <div id="results-content"></div>
     <div class="results-actions">
-      <button class="btn btn-primary" onclick="sendResults()">Send to Amanda</button>
+      <button class="btn btn-primary" id="submit-btn" onclick="submitForm()">Send to Amanda</button>
       <button class="btn" style="background:transparent; color:rgba(54,48,48,0.4); border:1px solid rgba(54,48,48,0.15);" id="copy-results-btn" onclick="copyResults()">Copy to Clipboard</button>
+      <div id="sub-ok" style="display:none; margin-top:24px; font-family:var(--font-body); font-size:15px; color:var(--graphite); line-height:1.6;">
+        Sent. Amanda will be in touch soon.
+      </div>
+      <div id="sub-err" style="display:none; margin-top:24px; padding:14px 18px; background:rgba(225,115,81,0.08); border:1px solid rgba(225,115,81,0.3); border-radius:4px; font-family:var(--font-body); font-size:13px; color:var(--graphite); line-height:1.55; text-align:left;"></div>
     </div>
   </div>
 </div>
@@ -915,66 +919,222 @@ function showResults() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function formatResults() {
-  var lines = [];
-  lines.push('LOGO FEEDBACK');
-  lines.push('Submitted: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}));
-  lines.push('');
+// ── buildBody() ─────────────────────────────
+// Assembles all feedback into a formatted plain-text body for Formspree
+function buildBody() {
+  var line  = '------------------------------------------------';
+  var dline = '================================================';
+  var out   = [];
 
+  // Tally everything
   var yesImages = [];
   var maybeImages = [];
   var noImages = [];
+  var posTagCounts = {};
+  var negTagCounts = {};
+  var noReasonCounts = {};
 
   IMAGES.forEach(function(f, i) {
     var d = data[f];
     if (!d) return;
-    if (d.vote === 'yes') yesImages.push(i + 1);
-    else if (d.vote === 'maybe') maybeImages.push(i + 1);
-    else noImages.push(i + 1);
+    var num = i + 1;
+
+    if (d.vote === 'yes') yesImages.push({ num: num, file: f, data: d });
+    else if (d.vote === 'maybe') maybeImages.push({ num: num, file: f, data: d });
+    else noImages.push({ num: num, file: f, data: d });
+
+    if (d.noReason) {
+      noReasonCounts[d.noReason] = (noReasonCounts[d.noReason] || 0) + 1;
+    }
+    (d.posTags || []).forEach(function(t) {
+      posTagCounts[t] = (posTagCounts[t] || 0) + 1;
+    });
+    (d.negTags || []).forEach(function(t) {
+      negTagCounts[t] = (negTagCounts[t] || 0) + 1;
+    });
   });
 
-  lines.push('YES: Images ' + (yesImages.length > 0 ? yesImages.join(', ') : 'none'));
-  lines.push('MAYBE: Images ' + (maybeImages.length > 0 ? maybeImages.join(', ') : 'none'));
-  lines.push('NO: Images ' + (noImages.length > 0 ? noImages.join(', ') : 'none'));
-  lines.push('');
-  lines.push('---');
+  var total = yesImages.length + maybeImages.length + noImages.length;
 
-  // Per-image detail for kept images
-  IMAGES.forEach(function(f, i) {
-    var d = data[f];
-    if (!d) return;
+  // Header
+  out.push(dline);
+  out.push('  LOGO FEEDBACK');
+  out.push(dline);
+  out.push('');
+  out.push('  Submitted: ' + new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}));
+  out.push('');
 
-    if (d.vote === 'no') {
-      if (d.noReason) {
-        lines.push('Image ' + (i + 1) + ' - NO (' + d.noReason + ')');
+  // Summary
+  out.push('  SUMMARY');
+  out.push(line);
+  out.push('  Yes:    ' + yesImages.length);
+  out.push('  Maybe:  ' + maybeImages.length);
+  out.push('  No:     ' + noImages.length);
+  out.push('  Total:  ' + total + ' of ' + IMAGES.length);
+  out.push('');
+
+  // Pattern: top positive tags
+  var sortedPos = Object.keys(posTagCounts).sort(function(a, b) {
+    return posTagCounts[b] - posTagCounts[a];
+  });
+  if (sortedPos.length > 0) {
+    out.push(dline);
+    out.push('  WHAT DREW THEM IN MOST');
+    out.push(dline);
+    out.push('');
+    sortedPos.forEach(function(t) {
+      out.push('  ' + posTagCounts[t] + 'x  ' + t);
+    });
+    out.push('');
+  }
+
+  // Pattern: top negative tags
+  var sortedNeg = Object.keys(negTagCounts).sort(function(a, b) {
+    return negTagCounts[b] - negTagCounts[a];
+  });
+  if (sortedNeg.length > 0) {
+    out.push(dline);
+    out.push('  WHAT FELT OFF (in detail round)');
+    out.push(dline);
+    out.push('');
+    sortedNeg.forEach(function(t) {
+      out.push('  ' + negTagCounts[t] + 'x  ' + t);
+    });
+    out.push('');
+  }
+
+  // Pattern: no reasons
+  var sortedNo = Object.keys(noReasonCounts).sort(function(a, b) {
+    return noReasonCounts[b] - noReasonCounts[a];
+  });
+  if (sortedNo.length > 0) {
+    out.push(dline);
+    out.push('  WHY THINGS GOT CUT (quick sort)');
+    out.push(dline);
+    out.push('');
+    sortedNo.forEach(function(t) {
+      out.push('  ' + noReasonCounts[t] + 'x  ' + t);
+    });
+    out.push('');
+  }
+
+  // Per-image: YES
+  if (yesImages.length > 0) {
+    out.push(dline);
+    out.push('  YES - ' + yesImages.length + ' image(s)');
+    out.push(dline);
+    yesImages.forEach(function(item) {
+      out.push('');
+      out.push('  + Image ' + item.num + '  (' + item.file + ')');
+      if (item.data.posTags && item.data.posTags.length > 0) {
+        out.push('    Drawn to: ' + item.data.posTags.join(', '));
       }
-      return;
-    }
+      if (item.data.negTags && item.data.negTags.length > 0) {
+        out.push('    Feels off: ' + item.data.negTags.join(', '));
+      }
+      if (item.data.note) {
+        out.push('    Note: "' + item.data.note + '"');
+      }
+    });
+    out.push('');
+  }
 
-    lines.push('');
-    lines.push('Image ' + (i + 1) + ' - ' + d.vote.toUpperCase());
-    if (d.posTags && d.posTags.length > 0) {
-      lines.push('  Drawn to: ' + d.posTags.join(', '));
-    }
-    if (d.negTags && d.negTags.length > 0) {
-      lines.push('  Feels off: ' + d.negTags.join(', '));
-    }
-    if (d.note) {
-      lines.push('  Note: "' + d.note + '"');
-    }
-  });
+  // Per-image: MAYBE
+  if (maybeImages.length > 0) {
+    out.push(dline);
+    out.push('  MAYBE - ' + maybeImages.length + ' image(s)');
+    out.push(dline);
+    maybeImages.forEach(function(item) {
+      out.push('');
+      out.push('  + Image ' + item.num + '  (' + item.file + ')');
+      if (item.data.posTags && item.data.posTags.length > 0) {
+        out.push('    Drawn to: ' + item.data.posTags.join(', '));
+      }
+      if (item.data.negTags && item.data.negTags.length > 0) {
+        out.push('    Feels off: ' + item.data.negTags.join(', '));
+      }
+      if (item.data.note) {
+        out.push('    Note: "' + item.data.note + '"');
+      }
+    });
+    out.push('');
+  }
 
-  return lines.join('\n');
+  // Per-image: NO
+  if (noImages.length > 0) {
+    out.push(dline);
+    out.push('  NO - ' + noImages.length + ' image(s)');
+    out.push(dline);
+    noImages.forEach(function(item) {
+      out.push('');
+      var reason = item.data.noReason ? ' - ' + item.data.noReason : '';
+      out.push('  - Image ' + item.num + reason);
+    });
+    out.push('');
+  }
+
+  out.push(dline);
+  out.push('  Submitted via The Passive Practice logo feedback tool');
+  out.push(dline);
+
+  return out.join('\n');
 }
 
-function sendResults() {
-  var body = encodeURIComponent(formatResults());
-  var sub = encodeURIComponent('Logo Feedback');
-  window.location.href = 'mailto:hello@thepassivepractice.com?subject=' + sub + '&body=' + body;
+// ── submitForm() ────────────────────────────
+// POSTs the formatted body to Formspree as JSON
+async function submitForm() {
+  var body = buildBody();
+
+  var btn   = document.getElementById('submit-btn');
+  var okEl  = document.getElementById('sub-ok');
+  var errEl = document.getElementById('sub-err');
+
+  btn.textContent     = 'Sending...';
+  btn.disabled        = true;
+  okEl.style.display  = 'none';
+  errEl.style.display = 'none';
+
+  try {
+    var res = await fetch('https://formspree.io/f/xqegnawb', {
+      method:  'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept':        'application/json',
+      },
+      body: JSON.stringify({
+        _subject:  'Logo Feedback Submission',
+        responses: body,
+      }),
+    });
+
+    var resData = await res.json().catch(function() { return {}; });
+    console.log('Formspree status:', res.status, resData);
+
+    if (res.ok) {
+      okEl.style.display  = 'block';
+      btn.textContent     = 'Submitted';
+      btn.style.opacity   = '0.4';
+    } else {
+      errEl.textContent   = 'Error ' + res.status + ': '
+        + (resData.error || JSON.stringify(resData))
+        + '. Please screenshot this and send to Amanda.';
+      errEl.style.display = 'block';
+      btn.textContent     = 'Send to Amanda';
+      btn.disabled        = false;
+    }
+  } catch (err) {
+    console.error('Fetch error:', err);
+    errEl.textContent   = 'Network error: ' + err.message
+      + '. This usually means the hosting platform is blocking the request.'
+      + ' Please use Copy to Clipboard and send manually.';
+    errEl.style.display = 'block';
+    btn.textContent     = 'Send to Amanda';
+    btn.disabled        = false;
+  }
 }
 
 function copyResults() {
-  navigator.clipboard.writeText(formatResults()).then(function() {
+  navigator.clipboard.writeText(buildBody()).then(function() {
     var b = document.getElementById('copy-results-btn');
     b.textContent = 'Copied.';
     setTimeout(function() { b.textContent = 'Copy to Clipboard'; }, 2000);
