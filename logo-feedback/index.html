@@ -6,7 +6,7 @@
 <title>Logo Feedback | The Passive Practice</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
 :root {
   --ivory: #F4F8EE;
@@ -15,7 +15,7 @@
   --peach: #E17351;
   --wisteria: #7AA3E7;
   --lime: #DEFF46;
-  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-display: 'Playfair Display', Georgia, serif;
   --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
   --font-body: 'Inter', -apple-system, sans-serif;
 }
@@ -34,7 +34,7 @@ body {
 
 /* ── LAYOUT ────────────────────────────────── */
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -49,7 +49,7 @@ body {
   padding: 60px 24px;
 }
 .intro-inner {
-  max-width: 520px;
+  max-width: 650px;
   text-align: center;
 }
 .mono-label {
@@ -63,7 +63,7 @@ body {
 }
 .intro-headline {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(36px, 8vw, 56px);
   line-height: 1.1;
   color: var(--graphite);
@@ -75,11 +75,11 @@ body {
 }
 .intro-body {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 17px;
   line-height: 1.75;
   color: var(--graphite);
   opacity: 0.6;
-  margin-bottom: 44px;
+  margin-bottom: 52px;
 }
 .intro-meta {
   font-family: var(--font-mono);
@@ -141,6 +141,7 @@ body {
   border: 1px solid rgba(54,48,48,0.06);
 }
 .sort-image-wrap img {
+  mix-blend-mode: multiply;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -193,7 +194,7 @@ body {
 }
 .no-followup-label {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
   font-size: 20px;
   color: var(--graphite);
   text-align: center;
@@ -246,7 +247,7 @@ body {
 }
 .transition-num {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(48px, 12vw, 80px);
   color: var(--graphite);
   line-height: 1;
@@ -296,6 +297,7 @@ body {
   border: 1px solid rgba(54,48,48,0.06);
 }
 .detail-image-wrap img {
+  mix-blend-mode: multiply;
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
@@ -384,7 +386,7 @@ body {
 }
 .results-headline {
   font-family: var(--font-display);
-  font-weight: 300;
+  font-weight: 400;
   font-size: clamp(32px, 6vw, 48px);
   line-height: 1.1;
   color: var(--graphite);
@@ -492,18 +494,38 @@ body {
   .tag { padding: 9px 14px; font-size: 12px; }
   .no-tag { padding: 10px 14px; font-size: 13px; }
 }
+
+.intro-disclaimer {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(54,48,48,0.45);
+  line-height: 1.65;
+  max-width: 420px;
+  margin: 0 auto 28px;
+  padding: 14px 18px;
+  border: 1px solid rgba(54,48,48,0.1);
+  border-radius: 4px;
+  background: rgba(54,48,48,0.03);
+  text-align: left;
+}
+
 </style>
 </head>
 <body>
 
+<!-- PROGRESS BAR -->
+<div id="progress-bar-wrap" style="position:fixed;top:0;left:0;right:0;height:3px;background:rgba(54,48,48,0.08);z-index:100;">
+  <div id="progress-bar" style="height:100%;background:var(--peach);width:0%;transition:width 0.5s cubic-bezier(0.4,0,0.2,1);"></div>
+</div>
+
 <!-- INTRO -->
 <div id="intro">
   <div class="intro-inner">
-    <span class="mono-label">Logo Feedback</span>
+    <span class="mono-label">Visual Preferences</span>
     <h1 class="intro-headline">I picked these <em>for you.</em></h1>
-    <p class="intro-body">These are not your logo. They are starting points, references, vibes. Flip through them and tell me what pulls you in and what does not. There are no wrong answers.</p>
+    <p class="intro-body">These images include a mix of typography, iconography, color palettes, and full brand concepts. None will be used in your branding. They exist purely so we can understand what resonates with you visually and what does not.</p>
     <button class="btn btn-primary" onclick="startSort()">Let's go</button>
-    <div class="intro-meta">Takes about 5 minutes. Two quick rounds.</div>
+    <div class="intro-meta">Takes about 5 minutes. Two quick rounds. No wrong answers.</div>
   </div>
 </div>
 
@@ -602,7 +624,7 @@ body {
 <script>
 // ── IMAGE LIST ──────────────────────────────
 // All images in the images/ folder
-const IMAGES = [
+const IMAGES_BASE = [
   '09b46764002c0cb26f1eff69759a81d9.jpg',
   '132ff5e0bd7a4ca4dd995d787de10b03.jpg',
   '1cd06de8c633b405bf4dc0647f78ba53.jpg',
@@ -624,6 +646,8 @@ const IMAGES = [
   'fc96eb3df3d6f0d832765d2df8ca51f9.jpg',
   'ff11a62dae6ff13e0deee798109a61de.jpg'
 ];
+// Shuffle so every session starts in a different order
+const IMAGES = IMAGES_BASE.slice().sort(function() { return Math.random() - 0.5; });
 
 // ── STATE ───────────────────────────────────
 const data = {};      // { filename: { vote, noReason, posTags, negTags, note } }
@@ -644,7 +668,12 @@ function showSortImage() {
   if (sortIndex >= IMAGES.length) {
     endPhase1();
     return;
+  // Progress bar phase 1
+  document.getElementById('progress-bar').style.width = ((sortIndex / IMAGES.length) * 50) + '%';
   }
+  // Update progress bar (phase 1 = 0-50%)
+  var pct = (sortIndex / IMAGES.length) * 50;
+  document.getElementById('progress-bar').style.width = pct + '%';
 
   const card = document.getElementById('sort-card');
   const img = document.getElementById('sort-img');
@@ -660,7 +689,7 @@ function showSortImage() {
   card.offsetHeight; // force reflow
   card.style.animation = 'fadeUp 0.3s ease forwards';
 
-  img.src = 'images/' + IMAGES[sortIndex];
+  img.src = 'https://raw.githubusercontent.com/tppkatiec/thepassivepractice/main/logo-feedback/images/' + IMAGES[sortIndex];
 }
 
 function sortVote(vote) {
@@ -731,6 +760,9 @@ function startPhase2() {
 }
 
 function showDetailImage() {
+  // Update progress bar (phase 2 = 50-100%)
+  var pct = 50 + (detailIndex / Math.max(detailImages.length, 1)) * 50;
+  document.getElementById('progress-bar').style.width = pct + '%';
   if (detailIndex >= detailImages.length) {
     showResults();
     return;
@@ -753,7 +785,7 @@ function showDetailImage() {
   document.getElementById('detail-note').value = '';
 
   // Load image
-  img.src = 'images/' + filename;
+  img.src = 'https://raw.githubusercontent.com/tppkatiec/thepassivepractice/main/logo-feedback/images/' + filename;
 
   // Trigger animation
   card.style.animation = 'none';
@@ -801,6 +833,7 @@ function nextDetail() {
 // ── RESULTS ─────────────────────────────────
 
 function showResults() {
+  document.getElementById('progress-bar').style.width = '100%';
   document.getElementById('phase2').style.display = 'none';
   document.getElementById('transition').style.display = 'none';
   document.getElementById('results').style.display = 'block';
@@ -845,7 +878,7 @@ function showResults() {
     html += '<div class="results-section-title">Yes (' + yesImages.length + ')</div>';
     html += '<div class="results-grid">';
     yesImages.forEach(function(f) {
-      html += '<div class="results-thumb"><img src="images/' + f + '" alt=""></div>';
+      html += '<div class="results-thumb"><img src="https://raw.githubusercontent.com/tppkatiec/thepassivepractice/main/logo-feedback/images/' + f + '" alt=""></div>';
     });
     html += '</div></div>';
   }
@@ -856,7 +889,7 @@ function showResults() {
     html += '<div class="results-section-title">Maybe (' + maybeImages.length + ')</div>';
     html += '<div class="results-grid">';
     maybeImages.forEach(function(f) {
-      html += '<div class="results-thumb"><img src="images/' + f + '" alt=""></div>';
+      html += '<div class="results-thumb"><img src="https://raw.githubusercontent.com/tppkatiec/thepassivepractice/main/logo-feedback/images/' + f + '" alt=""></div>';
     });
     html += '</div></div>';
   }
@@ -968,9 +1001,35 @@ function formatResults() {
 }
 
 function sendResults() {
-  var body = encodeURIComponent(formatResults());
-  var sub = encodeURIComponent('Logo Feedback');
-  window.location.href = 'mailto:hello@thepassivepractice.com?subject=' + sub + '&body=' + body;
+  var btn = document.querySelector('.results-actions .btn-primary');
+  var body = formatResults();
+
+  if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
+
+  fetch('https://formspree.io/f/xwvwykqq', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+    body: JSON.stringify({
+      _subject: 'Logo Feedback - Dr. Stephanie Bathurst',
+      feedback: body,
+    }),
+  })
+  .then(function(res) {
+    return res.json().then(function(d) { return { ok: res.ok, data: d }; });
+  })
+  .then(function(r) {
+    if (r.ok) {
+      if (btn) { btn.textContent = 'Sent! Thank you.'; btn.style.opacity = '0.5'; }
+      else { alert('Sent! Amanda will review your feedback shortly.'); }
+    } else {
+      if (btn) { btn.textContent = 'Send to Amanda'; btn.disabled = false; }
+      alert('Something went wrong. Please copy your results and email Amanda at hello@thepassivepractice.com');
+    }
+  })
+  .catch(function(err) {
+    if (btn) { btn.textContent = 'Send to Amanda'; btn.disabled = false; }
+    alert('Network error. Please copy your results and email Amanda at hello@thepassivepractice.com');
+  });
 }
 
 function copyResults() {
