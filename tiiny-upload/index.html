@@ -924,7 +924,7 @@ input[type="range"]::-moz-range-thumb {
     <div class="swatch-reactions" id="swatch-reactions"></div>
     <div class="mood-line" id="mood-line"></div>
     <div class="results-actions">
-      <button class="btn btn-primary" onclick="send()">Send to Amanda</button>
+      <button class="btn btn-primary" id="send-btn" onclick="send()">Send to Amanda</button>
       <button class="btn btn-ghost" id="copy-btn" onclick="copy()">Copy to Clipboard</button>
     </div>
     <p class="results-note">Your intake is complete. I review everything you have shared and will be in touch within 2 business days.</p>
@@ -1125,56 +1125,241 @@ function showResults() {
 }
 
 // ── SUBMISSION ────────────────────────────────────────────
+const FORMSPREE_URL = 'https://formspree.io/f/xgoryyqq';
+
+const DISPLAY = {
+  shape: {
+    bouba: 'Round & soft',
+    kiki: 'Sharp & defined'
+  },
+  place: {
+    forest: 'A forest clearing (grounded, still, alive)',
+    kitchen: 'A warm kitchen (safe, present, human)',
+    gallery: 'A curated gallery (precise, spacious, considered)',
+    coast: 'The coast at sunrise (open, clear, expansive)',
+    mountain: 'A mountain trail (effort, clarity, reward)',
+    library: 'A quiet library (depth, knowledge, calm)'
+  },
+  time: {
+    morning: 'Early morning',
+    golden: 'Golden hour',
+    midday: 'Bright midday',
+    dusk: 'Dusk'
+  },
+  elements: {
+    stars: 'Stars & starbursts',
+    organic: 'Organic & flowing',
+    botanical: 'Botanical & nature',
+    geometric: 'Geometric & structured',
+    handdrawn: 'Hand-drawn & textured',
+    minimal: 'Clean & minimal',
+    arches: 'Arches & curves',
+    abstract: 'Abstract & artistic',
+    dots: 'Dots & speckles'
+  },
+  feeling: {
+    calm: 'Calm',
+    safe: 'Held',
+    capable: 'Confident',
+    inspired: 'Inspired',
+    grounded: 'Grounded',
+    seen: 'Seen',
+    energized: 'Energized',
+    curious: 'Curious'
+  },
+  typography: {
+    'serif-elegant': 'Elegant (classic serif)',
+    'sans-clean': 'Clean (modern sans-serif)',
+    'bold-statement': 'Bold (statement)',
+    'thin-delicate': 'Delicate (thin and airy)',
+    'mono-structured': 'Structured (monospace)',
+    'handwritten-personal': 'Personal (handwritten)'
+  },
+  mood: {
+    airy: 'Bright and airy (natural light, breathing room)',
+    balanced: 'Warm and balanced (a lamp on, comfortable)',
+    moody: 'Dim and moody (candlelight, intentional shadow)'
+  },
+  boldness: {
+    statement: 'A bold pop of color (one unexpected moment)',
+    cohesive: 'A cohesive mood (everything flows)',
+    neutral: 'Quiet sophistication (restraint is the statement)'
+  },
+  avoid: {
+    corporate: 'Corporate & clinical',
+    perky: 'Motivational & perky',
+    vague: 'Vague & spiritual',
+    trendy: 'Trendy & hashtag-heavy',
+    formal: 'Formal & presenting',
+    hedging: 'Hedging & apologetic'
+  }
+};
+
+function label(group, value) {
+  if (!value) return '(not selected)';
+  return DISPLAY[group]?.[value] || value;
+}
+
+function labelArray(group, arr) {
+  if (!Array.isArray(arr) || arr.length === 0) return '(not selected)';
+  return arr.map(v => DISPLAY[group]?.[v] || v).join(', ');
+}
+
+function paceLabel(v) {
+  const n = parseInt(v || 50);
+  const descriptor = n < 30 ? 'Slow & deliberate' : n > 70 ? 'Quick & alive' : 'Balanced pace';
+  return `${descriptor} (${n}/100)`;
+}
+
+function reactionLabel(hex) {
+  const r = reactions[hex];
+  if (r === 'love') return 'LOVE IT';
+  if (r === 'nope') return 'NOT FEELING IT';
+  return '(no reaction)';
+}
+
 function formatResults() {
   const pal = selectPalette();
-  const avoid = Array.isArray(A.avoid) ? A.avoid.join(', ') : 'not selected';
-  const elements = Array.isArray(A.elements) ? A.elements.join(', ') : 'not selected';
-  const typography = Array.isArray(A.typography) ? A.typography.join(', ') : 'not selected';
   return `BRAND DISCOVERY INTAKE
 ${A.practice || 'Untitled Practice'} / ${A.name || ''}
 Submitted: ${new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'})}
 
-YOUR PRACTICE
-Name: ${A.name}
-Practice: ${A.practice}
-What you do: ${A.what}
-Who it's for: ${A.who}
+━━━ YOUR PRACTICE ━━━
 
-YOUR VOICE
-What felt right: ${A.right}
-Never wants to sound like: ${avoid}
-What clients search: ${A.search}
-What clients say after: ${A.referral}
+Q01. Name
+${A.name || '(blank)'}
 
-YOUR FEEL
-Shape: ${A.shape}
-Place: ${A.place}
-Time of day: ${A.time}
-Design elements: ${elements}
-Pace (0=slow 100=quick): ${A.pace}
+Q01. Practice name
+${A.practice || '(blank)'}
 
-YOUR PALETTE
-Feeling: ${A.feeling}
-Typography: ${typography}
-Depth: ${A.mood}
-Boldness: ${A.boldness}
+Q02. In one sentence, what do you actually do?
+${A.what || '(blank)'}
 
-GENERATED DIRECTION
-Mood: ${pal.m}
-Colors: ${pal.c.join(', ')}
-Names: ${pal.n.join(', ')}
+Q03. Who is this work for, really?
+${A.who || '(blank)'}
 
-COLOR REACTIONS
-${pal.c.map((hex, i) => {
-  const r = reactions[hex];
-  return r ? `${pal.n[i]} (${hex}): ${r === 'love' ? 'LOVE IT' : 'NOT FEELING IT'}` : `${pal.n[i]} (${hex}): no reaction`;
-}).join('\n')}`;
+━━━ YOUR VOICE ━━━
+
+Q04. Something you have said, written, or thought that felt exactly right
+${A.right || '(blank)'}
+
+Q05. Never wants to sound like
+${labelArray('avoid', A.avoid)}
+
+Q06. What the ideal client is typing into Google
+${A.search || '(blank)'}
+
+Q07. What clients say to friends after working with you
+${A.referral || '(blank)'}
+
+━━━ YOUR FEEL ━━━
+
+Q08. Shape
+${label('shape', A.shape)}
+
+Q09. Place
+${label('place', A.place)}
+
+Q10. Time of day
+${label('time', A.time)}
+
+Q11. Design elements they are drawn to
+${labelArray('elements', A.elements)}
+
+Q12. Pace
+${paceLabel(A.pace)}
+
+━━━ YOUR PALETTE ━━━
+
+Q13. First-impression emotion
+${label('feeling', A.feeling)}
+
+Q14. Typography (pick up to 2)
+${labelArray('typography', A.typography)}
+
+Q15. Depth
+${label('mood', A.mood)}
+
+Q16. Statement
+${label('boldness', A.boldness)}
+
+━━━ GENERATED DIRECTION ━━━
+
+Mood descriptor
+${pal.m}
+
+Palette
+${pal.c.map((hex, i) => `  ${pal.n[i]} — ${hex}`).join('\n')}
+
+━━━ COLOR REACTIONS ━━━
+${pal.c.map((hex, i) => `${pal.n[i]} (${hex}): ${reactionLabel(hex)}`).join('\n')}`;
 }
 
-function send() {
-  const body = encodeURIComponent(formatResults());
-  const sub  = encodeURIComponent(`Brand Intake / ${A.practice || A.name || 'New Client'}`);
-  window.location.href = `mailto:hello@thepassivepractice.com?subject=${sub}&body=${body}`;
+function buildSubmission() {
+  const pal = selectPalette();
+  const data = {
+    _subject: `Brand Intake / ${A.practice || A.name || 'New Client'}`,
+    'Submitted': new Date().toLocaleDateString('en-US', {year:'numeric',month:'long',day:'numeric'}),
+
+    '01. Name': A.name || '(blank)',
+    '01. Practice name': A.practice || '(blank)',
+    '02. What you actually do': A.what || '(blank)',
+    '03. Who this work is for': A.who || '(blank)',
+
+    '04. Something that felt exactly right': A.right || '(blank)',
+    '05. Never wants to sound like': labelArray('avoid', A.avoid),
+    '06. What clients Google': A.search || '(blank)',
+    '07. What clients say after': A.referral || '(blank)',
+
+    '08. Shape': label('shape', A.shape),
+    '09. Place': label('place', A.place),
+    '10. Time of day': label('time', A.time),
+    '11. Design elements': labelArray('elements', A.elements),
+    '12. Pace': paceLabel(A.pace),
+
+    '13. First-impression emotion': label('feeling', A.feeling),
+    '14. Typography (up to 2)': labelArray('typography', A.typography),
+    '15. Depth': label('mood', A.mood),
+    '16. Statement': label('boldness', A.boldness),
+
+    'Generated mood': pal.m,
+    'Generated palette': pal.c.map((hex, i) => `${pal.n[i]} ${hex}`).join(' | '),
+  };
+
+  pal.c.forEach((hex, i) => {
+    data[`Color reaction — ${pal.n[i]} (${hex})`] = reactionLabel(hex);
+  });
+
+  data['Full formatted intake'] = formatResults();
+  return data;
+}
+
+async function send() {
+  const btn = document.getElementById('send-btn');
+  const original = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch(FORMSPREE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(buildSubmission())
+    });
+
+    if (response.ok) {
+      btn.textContent = 'Sent to Amanda ✓';
+    } else {
+      throw new Error('Submission failed');
+    }
+  } catch (err) {
+    btn.textContent = 'Error, try Copy instead';
+    btn.disabled = false;
+    setTimeout(() => { btn.textContent = original; }, 3500);
+  }
 }
 
 function copy() {
