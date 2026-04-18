@@ -9,29 +9,88 @@
 
   // ── Squarespace class patterns ──
   const SQS_PATTERNS = [
-    /^sqs-/,            // sqs-block, sqs-layout, sqs-row, sqs-col-*, sqs-gallery, etc.
-    /^sqsrte-/,         // rich text editor classes
-    /^fe-/,             // Fluid Engine (newer layout engine)
-    /^yui3-/,           // legacy YUI layout system
-    /^page-section/,    // page-section, page-section-*
-    /^section-/,        // section-background, section-border, section-divider
+    /^sqs-/,                  // all sqs-* (blocks, layout, gallery, cart, svg-icon, etc.)
+    /^sqsrte-/,               // rich text editor classes
+    /^fe-/,                   // Fluid Engine (fe-block, fe-block-{id}, fe-{sectionId})
+    /^fluid-engine/,
+    /^yui3-/,                 // legacy YUI widgets
+    /^page-section/,          // page-section, page-section-*
+    /^section-background/,    // section-background, section-background-overlay
+    /^section-border/,
+    /^section-divider/,
+    /^section-/,
     /^content-wrapper$/,
     /^content-wrap$/,
     /^content$/,
-    /^Main$/,
-    /^Site/,            // Site, Site-inner
-    /^Header/,          // Header, Header-inner, Header-nav
-    /^Footer/,          // Footer, Footer-inner
-    /^Parent-item$/,
-    /^header-/,         // header-nav-item, header-actions
-    /^footer-/,         // footer-block, footer-blocks
-    /^image-block/,     // image-block, image-block-wrapper, image-block-outer-wrapper
-    /^button-block/,
-    /^gallery-/,        // gallery-*
-    /^summary-/,        // summary-*
+    /^sections$/,
+    /^collection-content-wrapper/,
+    /^collection-/,           // collection-{id}, collection-type-*, collection-layout-*
+    /^homepage$/,
+    /^view-list$/,
+    /^view-item$/,
+    /^has-/,                  // has-primary-nav, has-cart, has-logo-image, etc.
+    /^tweak-/,                // tweak-* (Site Styles toggles)
+    /^scale-/,                // scale-heading-1-font-size, etc.
+    /^button-style-/,
+    /^button-corner-style-/,
+    /^(small|medium|large)-button-shape-/,
+    /^image-block-/,          // image-block-card, image-block-outer-wrapper, etc.
+    /^gallery-design-/,
+    /^gallery-aspect-ratio-/,
+    /^gallery-transitions-/,
+    /^gallery-/,
+    /^event-/,                // event-thumbnails, event-list-*, event-date-label
+    /^product-list-/,
+    /^product-item-/,
+    /^product-/,
+    /^show-product-/,
+    /^newsletter-style-/,
+    /^opentable-style-/,
+    /^lightbox-style-/,
+    /^social-icons-/,
+    /^social-icon-/,
+    /^ancillary-/,            // ancillary-header-*-position-*
+    /^index-/,                // index-section, index-gallery-*, index-item
+    /^page-banner-/,
+    /^page-description$/,
+    /^page-text-wrapper$/,
+    /^page-title$/,
+    /^main-content$/,
+    /^main-nav$/,
+    /^mobileNav$/,
+    /^nav-wrapper$/,
+    /^primary-nav-wrapper$/,
+    /^secondary-nav-wrapper$/,
+    /^logo-wrapper$/,
+    /^site-/,                 // site-header, site-footer, site-container, etc.
+    /^summary-/,              // summary-block-*, summary-title, summary-item
+    /^image-list$/,
+    /^image-meta$/,
+    /^image$/,
+    /^image-caption-wrapper$/,
+    /^spacer-block$/,
+    /^html-block$/,
+    /^social-account-links/,
     /^user-items-list/,
-    /^tweak-/,          // tweak-* classes for site styles
-    /^site-/,
+    /^form-wrapper$/,
+    /^field-list$/,
+    /^form-submission/,
+    /^native-currency-code-/,
+    /^mobile-style-available$/,
+    /^touch-styles$/,
+    // ── 7.0 Brine/Bedford PascalCase BEM ──
+    /^Main$/,
+    /^Site/,
+    /^Header/,
+    /^Footer/,
+    /^Mobile-bar/,
+    /^Mobile-overlay/,
+    /^Parent-item$/,
+    /^Icon/,
+    /^Index-/,
+    /^header-/,
+    /^footer-/,
+    /^js-/,                   // js-index-item-image, js-* hooks
   ];
 
   const SQS_BLOCK_TYPES = {
@@ -48,6 +107,7 @@
     "sqs-block-quote": "Quote Block",
     "sqs-block-twitter": "Twitter Block",
     "sqs-block-social-links": "Social Links Block",
+    "sqs-block-socialaccountlinks": "Social Links (v2) Block",
     "sqs-block-audio": "Audio Block",
     "sqs-block-markdown": "Markdown Block",
     "sqs-block-menu": "Menu Block",
@@ -70,6 +130,15 @@
     "sqs-block-archive": "Archive Block",
     "sqs-block-instagram": "Instagram Block",
     "sqs-block-tag-cloud": "Tag Cloud Block",
+    "sqs-block-tock": "Tock Block",
+    "sqs-block-zola": "Zola Block",
+    "sqs-block-acuity": "Acuity Block",
+    "sqs-block-foursquare": "Foursquare Block",
+    "sqs-block-yelp-review": "Yelp Review Block",
+    "sqs-block-flickr": "Flickr Block",
+    "sqs-block-500px": "500px Block",
+    "sqs-block-soundcloud": "SoundCloud Block",
+    "sqs-block-website-component": "Website Component Block",
   };
 
   // ── Helpers ──
