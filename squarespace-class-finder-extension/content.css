@@ -1,0 +1,139 @@
+/* ── Squarespace Class Finder: Highlight ── */
+.sqsf-highlight {
+  outline: 2px solid #000 !important;
+  outline-offset: -1px;
+  background: rgba(255, 255, 255, 0.08) !important;
+  cursor: crosshair !important;
+  transition: outline-color 0.15s, background 0.15s;
+}
+
+.sqsf-tooltip {
+  position: fixed;
+  z-index: 2147483647;
+  max-width: 420px;
+  min-width: 220px;
+  font-family: "SF Mono", "Fira Code", Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #e0e0e0;
+  background: #0f0f0f;
+  border: 1px solid #333;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  padding: 0;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s, transform 0.15s;
+  overflow: hidden;
+}
+.sqsf-tooltip.visible { opacity: 1; transform: translateY(0); }
+.sqsf-tooltip.pinned { pointer-events: auto; }
+
+.sqsf-tooltip .sqsf-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #000;
+  border-bottom: 1px solid #222;
+  font-weight: 600;
+  font-size: 11px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sqsf-tooltip .sqsf-tag {
+  background: #fff;
+  color: #000;
+  padding: 1px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+}
+.sqsf-tooltip .sqsf-close {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #666;
+  font-size: 16px;
+  line-height: 1;
+  padding: 0 0 0 8px;
+}
+.sqsf-tooltip .sqsf-close:hover { color: #fff; }
+.sqsf-tooltip .sqsf-body { padding: 10px 12px; }
+.sqsf-tooltip .sqsf-row { margin-bottom: 8px; }
+.sqsf-tooltip .sqsf-row:last-child { margin-bottom: 0; }
+.sqsf-tooltip .sqsf-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  margin-bottom: 2px;
+}
+.sqsf-tooltip .sqsf-value {
+  color: #e0e0e0;
+  word-break: break-all;
+}
+.sqsf-tooltip .sqsf-selector {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  background: #000;
+  border-top: 1px solid #222;
+  cursor: pointer;
+  user-select: all;
+  transition: background 0.15s;
+}
+.sqsf-tooltip .sqsf-selector:hover { background: #1a1a1a; }
+.sqsf-tooltip .sqsf-selector code {
+  flex: 1;
+  color: #fff;
+  font-size: 12px;
+}
+.sqsf-tooltip .sqsf-selector .sqsf-copy-icon {
+  color: #666;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.sqsf-tooltip .sqsf-selector.copied .sqsf-copy-icon { color: #34d399; }
+
+.sqsf-tooltip .sqsf-class-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 2px;
+}
+.sqsf-tooltip .sqsf-class-pill {
+  background: #222;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.sqsf-tooltip .sqsf-class-pill:hover {
+  background: #fff;
+  color: #000;
+}
+.sqsf-tooltip .sqsf-class-pill.copied {
+  background: #065f46;
+  color: #34d399;
+}
+.sqsf-tooltip .sqsf-class-pill.sqs {
+  background: #1e3a8a;
+  color: #dbeafe;
+}
+.sqsf-tooltip .sqsf-class-pill.sqs:hover {
+  background: #3b82f6;
+  color: #fff;
+}
+.sqsf-tooltip .sqsf-pinned-badge {
+  font-size: 9px;
+  color: #facc15;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
