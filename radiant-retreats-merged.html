@@ -64,6 +64,15 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
     rgba(60,46,39,0.92) 100%
   );
 }
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A96E' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+}
 .hero-content {
   position: relative; z-index: 2;
   text-align: center;
@@ -127,10 +136,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
   text-transform: uppercase;
   text-decoration: none;
   padding: 20px 52px;
-  transition: background 0.3s, transform 0.25s;
+  border-radius: 100px;
+  transition: background 0.3s, transform 0.25s, box-shadow 0.3s;
   cursor: pointer; border: none;
 }
-.btn-gold:hover { background: var(--gold-lt); transform: translateY(-3px); }
+.btn-gold:hover { background: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(60,46,39,0.35); }
 .btn-ghost {
   display: inline-block;
   background: transparent;
@@ -143,10 +153,11 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
   text-decoration: none;
   padding: 19px 48px;
   border: 1px solid rgba(255,255,255,0.45);
-  transition: background 0.3s, border-color 0.3s, transform 0.25s;
+  border-radius: 100px;
+  transition: background 0.3s, border-color 0.3s, transform 0.25s, box-shadow 0.3s;
   cursor: pointer;
 }
-.btn-ghost:hover { background: rgba(255,255,255,0.10); border-color: var(--gold-lt); transform: translateY(-3px); }
+.btn-ghost:hover { background: rgba(255,255,255,0.10); border-color: var(--gold-lt); transform: translateY(-3px); box-shadow: 0 20px 40px rgba(0,0,0,0.25); }
 
 .hero-scroll {
   position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
@@ -162,7 +173,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
 .inn { max-width: 1160px; margin: 0 auto; }
 .ey {
   font-family:'Jost',sans-serif; font-weight:300; font-size:10px;
-  letter-spacing:0.45em; text-transform:uppercase; color:var(--gold);
+  letter-spacing:0.3em; text-transform:uppercase; color:var(--gold);
   margin-bottom:18px; display:block;
 }
 .DI { font-family:'Cormorant Garamond',serif; font-weight:300; line-height:1.1; letter-spacing:0.01em; }
@@ -226,7 +237,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
 
 /* ── MATERIALS BAND ──────────────────────── */
 .materials { background:var(--warm); }
-.mat-grid { display:grid; grid-template-columns:1fr 1fr; gap:4px; background:var(--gold); border:1px solid var(--gold); }
+.mat-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gold); border:1px solid var(--gold); }
 .mat-item { background:var(--cream); padding:32px 36px; }
 .mat-item h4 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:20px; color:var(--burg); margin-bottom:8px; }
 .mat-item p { font-family:'Jost',sans-serif; font-weight:300; font-size:14px; line-height:1.8; color:var(--taupe-dk); }
@@ -245,9 +256,9 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
 /* ── RETREAT SECTION ─────────────────────── */
 .retreat-intro { background: var(--cream); }
 .ret-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:center; }
-.frame { position:relative; }
-.frame::after { content:''; position:absolute; top:18px; left:18px; right:-18px; bottom:-18px; border:1px solid var(--gold); opacity:.3; pointer-events:none; z-index:0; }
-.frame img { position:relative; z-index:1; width:100%; height:580px; object-fit:cover; object-position:center top; display:block; }
+.frame { position:relative; display:flex; flex-direction:column; gap:18px; }
+.frame::after { content:''; position:absolute; top:18px; left:18px; right:-18px; bottom:-18px; border:1px solid var(--gold); border-radius:18px; opacity:.3; pointer-events:none; z-index:0; }
+.frame img { position:relative; z-index:1; width:100%; height:340px; object-fit:cover; object-position:center top; display:block; border-radius:18px; }
 .ret-text .DI { font-size:clamp(34px,3.8vw,50px); color:var(--burg); margin-bottom:26px; }
 .ret-text .DI em { font-style:italic; }
 .ret-list { list-style:none; display:flex; flex-direction:column; gap:14px; margin: 28px 0 32px; }
@@ -264,7 +275,7 @@ body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--d
 .dc-n { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:48px; color:var(--gold); line-height:1; margin-bottom:8px; }
 .dc-t { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:17px; color:var(--burg); margin-bottom:8px; line-height:1.3; }
 .dc-b { font-family:'Jost',sans-serif; font-weight:300; font-size:12.5px; line-height:1.85; color:var(--taupe); }
-.includes { display:grid; grid-template-columns:1fr 1fr; gap:2px; background:var(--gold); border:1px solid var(--gold); }
+.includes { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--gold); border:1px solid var(--gold); }
 .inc { background:var(--cream); padding:26px 28px; display:flex; gap:14px; align-items:flex-start; }
 .inc-ico { font-family:'Cormorant Garamond',serif; font-size:17px; color:var(--gold); flex-shrink:0; line-height:1.9; }
 .inc h4 { font-family:'Cormorant Garamond',serif; font-weight:500; font-size:17px; color:var(--burg); margin-bottom:4px; }
@@ -347,7 +358,7 @@ footer { background:var(--dark); padding:48px 24px; text-align:center; }
   .includes{grid-template-columns:1fr;}
   .cer-img{height:360px;}
   .mat-grid{grid-template-columns:1fr;}
-  .frame img{height:400px;}
+  .frame img{height:260px;}
 }
 @media(max-width:600px){
   .days-row{grid-template-columns:1fr;}
@@ -499,6 +510,7 @@ footer { background:var(--dark); padding:48px 24px; text-align:center; }
     <div class="ret-grid">
       <div class="frame rv">
         <img src="https://assets.cdn.filesafe.space/pQOSziNlQfmZyiwxgCTP/media/699f62975dbbe86eb85d571c.jpeg" alt="Couples connecting at the retreat" loading="lazy">
+        <img src="https://assets.cdn.filesafe.space/pQOSziNlQfmZyiwxgCTP/media/699f629795735c4f5dca3311.jpg" alt="A moment from the retreat" loading="lazy">
       </div>
       <div class="ret-text">
         <span class="ey rv">The experience</span>
