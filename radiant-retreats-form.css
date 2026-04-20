@@ -1,38 +1,38 @@
 /* ──────────────────────────────────────────────────────────────
    Radiant Retreats — Form Aesthetic (GoHighLevel Custom CSS)
 
-   Paste this into the form builder:
-     Advanced tab  ->  Custom CSS
+   Paste into: Form Builder → Advanced → Custom CSS
+   Raw CSS only (no <style> tags).
 
-   IMPORTANT:
-   - paste RAW CSS only (do NOT wrap in <style> tags)
-   - uses !important because GHL's theme styles are very specific
-   - starts with @import for Google Fonts so the brand fonts load
-     inside the form iframe even though the parent page has its own
+   If something still doesn't style:
+   1. Right-click the misbehaving element in a preview -> Inspect
+   2. Note the element's class attribute
+   3. Drop the class name in here and ping me to add it
    ────────────────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
 
 /* ── Brand palette ─────────────────────────────────────────── */
 :root {
-  --rr-burg:      #3D2B1F;  /* deep brown                            */
-  --rr-gold:      #C9A96E;  /* accent gold                           */
-  --rr-gold-lt:   #E8DDD0;  /* sand / lighter gold                   */
-  --rr-cream:     #F5F0E8;  /* form background                       */
-  --rr-warm:      #E8DDD0;  /* input border                          */
-  --rr-taupe:     #B8A898;  /* muted body / placeholder              */
-  --rr-taupe-dk:  #79655c;  /* standard body / label                 */
-  --rr-dark:      #3D2B1F;  /* input text                            */
-  --rr-white:     #FFFFFF;  /* input field background                */
+  --rr-burg:      #3D2B1F;
+  --rr-gold:      #C9A96E;
+  --rr-gold-lt:   #E8DDD0;
+  --rr-cream:     #F5F0E8;
+  --rr-warm:      #E8DDD0;
+  --rr-taupe:     #B8A898;
+  --rr-taupe-dk:  #79655c;
+  --rr-dark:      #3D2B1F;
+  --rr-white:     #FFFFFF;
 }
 
-/* ── Overall form canvas ───────────────────────────────────── */
+/* ── Canvas ────────────────────────────────────────────────── */
 html,
 body,
 .form-builder--container,
 .form-builder--wrapper,
 .ghl-form-handler-wrapper,
-.form-wrapper {
+.form-wrapper,
+[class*="form-container"] {
   background: var(--rr-cream) !important;
   font-family: 'Jost', sans-serif !important;
   color: var(--rr-dark) !important;
@@ -40,11 +40,8 @@ body,
 
 /* ── Labels ────────────────────────────────────────────────── */
 label,
-.form-builder--label,
-.form-builder--item-label,
-.form-field-label,
-.hl-form-field-label,
-.input-field-label {
+[class*="label" i],
+[class*="Label"] {
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
   font-size: 11px !important;
@@ -54,14 +51,14 @@ label,
   margin-bottom: 8px !important;
 }
 
-/* Required asterisks inherit the muted gold */
-label .required,
-.form-builder--required,
-.required-asterisk {
+/* Required asterisks tint gold */
+.required,
+[class*="required" i],
+[class*="asterisk" i] {
   color: var(--rr-gold) !important;
 }
 
-/* ── Inputs, selects, textareas ────────────────────────────── */
+/* ── Inputs / selects / textareas ──────────────────────────── */
 input[type="text"],
 input[type="email"],
 input[type="tel"],
@@ -72,9 +69,9 @@ input[type="search"],
 input[type="date"],
 select,
 textarea,
-.form-builder--input,
-.hl-form-field-input,
-.input-field {
+[class*="input-field"],
+[class*="form-field-input"],
+.hl-form-field-input {
   border: 1px solid var(--rr-warm) !important;
   background: var(--rr-white) !important;
   padding: 14px 18px !important;
@@ -88,11 +85,18 @@ textarea,
   transition: border-color .3s, box-shadow .3s !important;
 }
 
+/* Selects often have an internal padding + left icon — keep extra
+   right space for the chevron and trim left padding so the
+   placeholder doesn't get clipped. */
+select,
+[class*="select"] select {
+  padding: 14px 40px 14px 14px !important;
+  text-indent: 0 !important;
+}
+
 input:focus,
 select:focus,
-textarea:focus,
-.form-builder--input:focus,
-.hl-form-field-input:focus {
+textarea:focus {
   border-color: var(--rr-gold) !important;
   outline: none !important;
   box-shadow: 0 0 0 1px var(--rr-gold) !important;
@@ -110,11 +114,12 @@ textarea {
   resize: vertical !important;
 }
 
-/* ── Leading icons inside input fields (GHL email / phone) ── */
-.input-field-icon,
-.hl-form-field-icon,
-.input-icon {
+/* Leading icons inside input fields (email, phone) */
+[class*="input-icon"],
+[class*="field-icon"],
+svg[class*="icon"] {
   color: var(--rr-taupe) !important;
+  fill: var(--rr-taupe) !important;
 }
 
 /* ── Checkboxes & radios ───────────────────────────────────── */
@@ -123,15 +128,25 @@ input[type="radio"] {
   accent-color: var(--rr-gold) !important;
 }
 
-/* ── Submit / primary button ───────────────────────────────── */
+/* ── Submit / primary button ───────────────────────────────────
+   GHL uses a mix of <button>, <div role="button">, and custom
+   components. Wildcard selectors + lots of fallbacks.
+   ────────────────────────────────────────────────────────────── */
 button,
 button[type="submit"],
 input[type="submit"],
-.form-builder--button,
-.form-builder--submit,
+input[type="button"],
 .hl-btn,
 .n1-btn,
-.ghl-btn-primary {
+.ghl-btn-primary,
+.form-builder--button,
+.form-builder--submit,
+.ghl-submit-button,
+[class*="submit-button"],
+[class*="SubmitButton"],
+[class*="btn-primary" i],
+[type="submit"],
+[role="button"] {
   background: var(--rr-gold) !important;
   background-color: var(--rr-gold) !important;
   color: var(--rr-dark) !important;
@@ -148,13 +163,30 @@ input[type="submit"],
   transition: background .3s, transform .25s, box-shadow .3s !important;
 }
 
+/* Make sure any nested span / div inside the button inherits the
+   brown text color instead of staying white. */
+button *,
+[type="submit"] *,
+[role="button"] *,
+.hl-btn *,
+[class*="submit-button"] *,
+[class*="btn-primary" i] * {
+  color: var(--rr-dark) !important;
+  background: transparent !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.38em !important;
+  text-transform: uppercase !important;
+}
+
 button:hover,
 button[type="submit"]:hover,
 input[type="submit"]:hover,
-.form-builder--button:hover,
 .hl-btn:hover,
-.n1-btn:hover,
-.ghl-btn-primary:hover {
+.form-builder--button:hover,
+[class*="submit-button"]:hover,
+[type="submit"]:hover {
   background: var(--rr-gold-lt) !important;
   background-color: var(--rr-gold-lt) !important;
   color: var(--rr-dark) !important;
@@ -162,7 +194,7 @@ input[type="submit"]:hover,
   box-shadow: 0 20px 40px rgba(60, 46, 39, 0.35) !important;
 }
 
-/* ── Links (privacy / terms under the submit) ──────────────── */
+/* ── Links (privacy / terms) ───────────────────────────────── */
 a,
 a:visited {
   color: var(--rr-gold) !important;
@@ -173,16 +205,17 @@ a:hover {
   color: var(--rr-burg) !important;
 }
 
-/* ── Phone country-code dropdown (GHL uses intl-tel-input) ─── */
+/* ── Phone country-code dropdown (intl-tel-input) ──────────── */
 .iti__selected-flag,
-.iti--container {
+.iti--container,
+.iti {
   background: var(--rr-white) !important;
 }
 
-/* ── Success / thank-you message ───────────────────────────── */
-.form-submitted,
-.form-success,
-.success-msg {
+/* ── Success / thank-you ───────────────────────────────────── */
+[class*="form-submitted"],
+[class*="success"],
+.form-success {
   background: var(--rr-burg) !important;
   color: var(--rr-white) !important;
   font-family: 'Cormorant Garamond', serif !important;
@@ -193,7 +226,7 @@ a:hover {
   text-align: center !important;
 }
 
-/* ── Mobile iOS zoom prevention ────────────────────────────── */
+/* ── iOS zoom prevention ───────────────────────────────────── */
 @media (max-width: 600px) {
   input,
   select,
