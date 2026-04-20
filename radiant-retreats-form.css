@@ -1,13 +1,15 @@
 /* ──────────────────────────────────────────────────────────────
    Radiant Retreats — Form Aesthetic (GoHighLevel Custom CSS)
 
-   Paste into: Form Builder → Advanced → Custom CSS
+   Paste into: Form Builder -> Advanced -> Custom CSS
    Raw CSS only (no <style> tags).
 
-   If something still doesn't style:
-   1. Right-click the misbehaving element in a preview -> Inspect
-   2. Note the element's class attribute
-   3. Drop the class name in here and ping me to add it
+   Targets the real GHL DOM:
+   - inputs use .form-control (not native typed selectors)
+   - "select" is a Vue multiselect (.multiselect, .multiselect__*)
+   - submit is a styled <button.btn.btn-dark.button-element> with
+     an inner <div> that has inline color:white, font-family:Inter —
+     overridden via .button-element * { !important }
    ────────────────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
@@ -28,20 +30,19 @@
 /* ── Canvas ────────────────────────────────────────────────── */
 html,
 body,
+.fields-container,
+.builder-inline,
 .form-builder--container,
-.form-builder--wrapper,
-.ghl-form-handler-wrapper,
-.form-wrapper,
-[class*="form-container"] {
+.form-builder--wrapper {
   background: var(--rr-cream) !important;
   font-family: 'Jost', sans-serif !important;
   color: var(--rr-dark) !important;
 }
 
 /* ── Labels ────────────────────────────────────────────────── */
-label,
-[class*="label" i],
-[class*="Label"] {
+.label-alignment,
+.field-label,
+label {
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
   font-size: 11px !important;
@@ -49,29 +50,30 @@ label,
   text-transform: uppercase !important;
   color: var(--rr-taupe-dk) !important;
   margin-bottom: 8px !important;
+  display: block !important;
 }
 
-/* Required asterisks tint gold */
-.required,
-[class*="required" i],
-[class*="asterisk" i] {
+/* Required-field asterisk (rendered as <span>*</span> inside label) */
+label span,
+.label-alignment span,
+.field-label span {
   color: var(--rr-gold) !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  margin-left: 4px !important;
 }
 
-/* ── Inputs / selects / textareas ──────────────────────────── */
+/* ── Text inputs ───────────────────────────────────────────── */
+.form-control,
 input[type="text"],
 input[type="email"],
 input[type="tel"],
-input[type="url"],
 input[type="number"],
+input[type="url"],
 input[type="password"],
 input[type="search"],
-input[type="date"],
-select,
-textarea,
-[class*="input-field"],
-[class*="form-field-input"],
-.hl-form-field-input {
+textarea {
+  width: 100% !important;
   border: 1px solid var(--rr-warm) !important;
   background: var(--rr-white) !important;
   padding: 14px 18px !important;
@@ -85,23 +87,15 @@ textarea,
   transition: border-color .3s, box-shadow .3s !important;
 }
 
-/* Selects often have an internal padding + left icon — keep extra
-   right space for the chevron and trim left padding so the
-   placeholder doesn't get clipped. */
-select,
-[class*="select"] select {
-  padding: 14px 40px 14px 14px !important;
-  text-indent: 0 !important;
-}
-
+.form-control:focus,
 input:focus,
-select:focus,
 textarea:focus {
   border-color: var(--rr-gold) !important;
   outline: none !important;
   box-shadow: 0 0 0 1px var(--rr-gold) !important;
 }
 
+.form-control::placeholder,
 input::placeholder,
 textarea::placeholder {
   color: var(--rr-taupe) !important;
@@ -109,17 +103,108 @@ textarea::placeholder {
   opacity: 1 !important;
 }
 
-textarea {
-  min-height: 110px !important;
-  resize: vertical !important;
+/* Preserve the left-padding for the email field so the mail icon
+   doesn't overlap the placeholder. GHL sets 36px inline. */
+.email-input .form-control,
+.email-input input {
+  padding-left: 36px !important;
 }
 
-/* Leading icons inside input fields (email, phone) */
-[class*="input-icon"],
-[class*="field-icon"],
-svg[class*="icon"] {
+/* Leading email / phone icons */
+.input-icon {
   color: var(--rr-taupe) !important;
-  fill: var(--rr-taupe) !important;
+  stroke: var(--rr-taupe) !important;
+}
+.email-input,
+.phone-input,
+.block.relative {
+  position: relative !important;
+}
+
+/* ── Multiselect ("Select an option" dropdown) ─────────────── */
+.multiselect,
+.multi_select_form {
+  min-height: 50px !important;
+  background: var(--rr-white) !important;
+  border: 1px solid var(--rr-warm) !important;
+  border-radius: 6px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  color: var(--rr-dark) !important;
+  box-shadow: none !important;
+}
+
+.multiselect__tags {
+  min-height: 50px !important;
+  padding: 14px 40px 0 14px !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+  font-size: 15px !important;
+}
+
+.multiselect__placeholder {
+  color: var(--rr-taupe) !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  padding: 0 !important;
+  margin-bottom: 0 !important;
+  display: inline-block !important;
+}
+
+.multiselect__input,
+.multiselect__single {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  color: var(--rr-dark) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  line-height: 1.3 !important;
+}
+
+.multiselect__select {
+  height: 50px !important;
+  padding: 0 10px !important;
+}
+.multiselect__select::before {
+  border-color: var(--rr-taupe) transparent transparent !important;
+  border-width: 5px 5px 0 5px !important;
+}
+
+.multiselect--active {
+  border-color: var(--rr-gold) !important;
+  box-shadow: 0 0 0 1px var(--rr-gold) !important;
+}
+
+.multiselect__content-wrapper {
+  background: var(--rr-white) !important;
+  border: 1px solid var(--rr-warm) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 30px rgba(60, 46, 39, 0.12) !important;
+  margin-top: 4px !important;
+}
+
+.multiselect__option {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  color: var(--rr-dark) !important;
+  padding: 12px 16px !important;
+  background: transparent !important;
+  min-height: auto !important;
+}
+.multiselect__option--highlight,
+.multiselect__option:hover {
+  background: var(--rr-cream) !important;
+  color: var(--rr-burg) !important;
+}
+.multiselect__option--selected {
+  background: var(--rr-gold) !important;
+  color: var(--rr-dark) !important;
+  font-weight: 500 !important;
 }
 
 /* ── Checkboxes & radios ───────────────────────────────────── */
@@ -128,94 +213,85 @@ input[type="radio"] {
   accent-color: var(--rr-gold) !important;
 }
 
-/* ── Submit / primary button ───────────────────────────────────
-   GHL uses a mix of <button>, <div role="button">, and custom
-   components. Wildcard selectors + lots of fallbacks.
-   ────────────────────────────────────────────────────────────── */
-button,
+/* ── Submit button ─────────────────────────────────────────── */
+.btn.btn-dark,
+.button-element,
 button[type="submit"],
-input[type="submit"],
-input[type="button"],
-.hl-btn,
-.n1-btn,
-.ghl-btn-primary,
-.form-builder--button,
-.form-builder--submit,
-.ghl-submit-button,
-[class*="submit-button"],
-[class*="SubmitButton"],
-[class*="btn-primary" i],
-[type="submit"],
-[role="button"] {
+button.btn {
   background: var(--rr-gold) !important;
   background-color: var(--rr-gold) !important;
-  color: var(--rr-dark) !important;
-  font-family: 'Jost', sans-serif !important;
-  font-weight: 500 !important;
-  font-size: 11px !important;
-  letter-spacing: 0.38em !important;
-  text-transform: uppercase !important;
-  padding: 20px 52px !important;
   border: none !important;
   border-radius: 100px !important;
+  padding: 20px 52px !important;
   box-shadow: none !important;
   cursor: pointer !important;
   transition: background .3s, transform .25s, box-shadow .3s !important;
 }
 
-/* Make sure any nested span / div inside the button inherits the
-   brown text color instead of staying white. */
-button *,
-[type="submit"] *,
-[role="button"] *,
-.hl-btn *,
-[class*="submit-button"] *,
-[class*="btn-primary" i] * {
+.btn.btn-dark:hover,
+.button-element:hover,
+button[type="submit"]:hover,
+button.btn:hover {
+  background: var(--rr-gold-lt) !important;
+  background-color: var(--rr-gold-lt) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 20px 40px rgba(60, 46, 39, 0.35) !important;
+}
+
+/* GHL wraps the button text in:
+     <div class="button-content"><div class="button-text">
+       <div style="color:#fff;font-family:Inter;..."><p>SEND MY APPLICATION</p></div>
+     </div></div>
+   The inner inline style sets color:white + font-family:Inter, which
+   beats our .btn background rule for text. Override every descendant: */
+.btn.btn-dark *,
+.button-element *,
+.button-content,
+.button-content *,
+.button-text,
+.button-text *,
+button.btn * {
   color: var(--rr-dark) !important;
   background: transparent !important;
+  background-color: transparent !important;
   font-family: 'Jost', sans-serif !important;
   font-weight: 500 !important;
   font-size: 11px !important;
   letter-spacing: 0.38em !important;
   text-transform: uppercase !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
 }
 
-button:hover,
-button[type="submit"]:hover,
-input[type="submit"]:hover,
-.hl-btn:hover,
-.form-builder--button:hover,
-[class*="submit-button"]:hover,
-[type="submit"]:hover {
-  background: var(--rr-gold-lt) !important;
-  background-color: var(--rr-gold-lt) !important;
-  color: var(--rr-dark) !important;
-  transform: translateY(-3px) !important;
-  box-shadow: 0 20px 40px rgba(60, 46, 39, 0.35) !important;
+/* ── Privacy / Terms links in the footer text block ────────── */
+.text-element,
+.heading-element {
+  font-family: 'Jost', sans-serif !important;
+  color: var(--rr-taupe-dk) !important;
 }
 
-/* ── Links (privacy / terms) ───────────────────────────────── */
+.text-element a,
 a,
 a:visited {
   color: var(--rr-gold) !important;
   text-decoration: underline !important;
   text-underline-offset: 3px !important;
 }
+.text-element a:hover,
 a:hover {
   color: var(--rr-burg) !important;
 }
 
-/* ── Phone country-code dropdown (intl-tel-input) ──────────── */
+/* ── Phone country-code picker (intl-tel-input, if enabled) ── */
+.iti,
 .iti__selected-flag,
-.iti--container,
-.iti {
+.iti--container {
   background: var(--rr-white) !important;
 }
 
-/* ── Success / thank-you ───────────────────────────────────── */
+/* ── Success / thank-you state ─────────────────────────────── */
 [class*="form-submitted"],
-[class*="success"],
-.form-success {
+[class*="success"] {
   background: var(--rr-burg) !important;
   color: var(--rr-white) !important;
   font-family: 'Cormorant Garamond', serif !important;
@@ -228,9 +304,11 @@ a:hover {
 
 /* ── iOS zoom prevention ───────────────────────────────────── */
 @media (max-width: 600px) {
-  input,
-  select,
-  textarea {
+  .form-control,
+  input, textarea,
+  .multiselect__input,
+  .multiselect__single,
+  .multiselect__placeholder {
     font-size: 16px !important;
   }
 }
