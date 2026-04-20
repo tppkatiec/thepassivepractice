@@ -1,229 +1,345 @@
 /* ──────────────────────────────────────────────────────────────
-   Radiant Retreats — Form Aesthetic Stylesheet
-   Paste this into a GoHighLevel code block (or a <style> tag on
-   the page hosting the form), then wrap your form embed in:
+   Radiant Retreats — Form Aesthetic (GoHighLevel Custom CSS)
 
-     <div class="rr-form">
-       [ your GHL / Formspree / etc. form embed HTML ]
-     </div>
+   Paste into: Form Builder -> Advanced -> Custom CSS
+   Raw CSS only (no <style> tags).
 
-   Works against raw <input>/<select>/<textarea>/<button> tags, so
-   whatever markup the embed outputs should pick up the look.
+   Targets the real GHL DOM:
+   - inputs use .form-control (not native typed selectors)
+   - "select" is a Vue multiselect (.multiselect, .multiselect__*)
+   - submit is a styled <button.btn.btn-dark.button-element> with
+     an inner <div> that has inline color:white, font-family:Inter —
+     overridden via .button-element * { !important }
    ────────────────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
 
-/* ── Wrapper + palette ─────────────────────────────────────── */
-.rr-form {
-  /* Brand palette (scoped — nothing leaks to the rest of the page) */
-  --rr-burg:      #3D2B1F;  /* deep brown                            */
-  --rr-gold:      #C9A96E;  /* accent gold                           */
-  --rr-gold-lt:   #E8DDD0;  /* sand / lighter gold                   */
-  --rr-cream:     #F5F0E8;  /* section background                    */
-  --rr-warm:      #E8DDD0;  /* input border                          */
-  --rr-taupe:     #B8A898;  /* muted body / placeholder              */
-  --rr-taupe-dk:  #79655c;  /* standard body / label                 */
-  --rr-dark:      #3D2B1F;  /* input text                            */
-  --rr-white:     #FFFFFF;  /* input field background                */
-
-  max-width: 700px;
-  margin: 0 auto;
-  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 48px);
-  background: var(--rr-cream);
-  font-family: 'Jost', sans-serif;
-  color: var(--rr-dark);
-  box-sizing: border-box;
-}
-.rr-form *,
-.rr-form *::before,
-.rr-form *::after { box-sizing: border-box; }
-
-/* ── Optional heading/intro treatments ─────────────────────── */
-.rr-form h1,
-.rr-form h2,
-.rr-form h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-  color: var(--rr-burg);
-  margin: 0 0 16px;
-}
-.rr-form h2 { font-size: clamp(28px, 3.4vw, 44px); }
-.rr-form h2 em { font-style: italic; color: var(--rr-gold); }
-
-.rr-form p {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: clamp(15px, 1.6vw, 17px);
-  line-height: 1.85;
-  color: var(--rr-taupe-dk);
-  margin: 0 0 20px;
-}
-
-/* Little "eyebrow" label above a heading (optional) */
-.rr-form .eyebrow {
-  display: block;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--rr-gold);
-  margin-bottom: 18px;
+/* ── Canvas ────────────────────────────────────────────────── */
+html,
+body,
+.fields-container,
+.builder-inline,
+.form-builder--container,
+.form-builder--wrapper {
+  background: #F5F0E8 !important;
+  font-family: 'Jost', sans-serif !important;
+  color: #3D2B1F !important;
 }
 
 /* ── Labels ────────────────────────────────────────────────── */
-.rr-form label,
-.rr-form .form-label {
-  display: block;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--rr-taupe-dk);
-  margin-bottom: 8px;
+.label-alignment,
+.field-label,
+label {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.3em !important;
+  text-transform: uppercase !important;
+  color: #79655c !important;
+  margin-bottom: 8px !important;
+  display: block !important;
 }
 
-/* ── Text fields, selects, textareas ───────────────────────── */
-.rr-form input[type="text"],
-.rr-form input[type="email"],
-.rr-form input[type="tel"],
-.rr-form input[type="url"],
-.rr-form input[type="number"],
-.rr-form input[type="password"],
-.rr-form input[type="search"],
-.rr-form input[type="date"],
-.rr-form select,
-.rr-form textarea {
-  width: 100%;
-  border: 1px solid var(--rr-warm);
-  background: var(--rr-white);
-  padding: 14px 18px;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  color: var(--rr-dark);
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 0;
-  transition: border-color .3s;
-  margin-bottom: 16px;
-  line-height: 1.4;
+/* Required-field asterisk (rendered as <span>*</span> inside label) */
+label span,
+.label-alignment span,
+.field-label span {
+  color: #C9A96E !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  margin-left: 4px !important;
 }
 
-.rr-form input:focus,
-.rr-form select:focus,
-.rr-form textarea:focus {
-  border-color: var(--rr-gold);
+/* ── Text inputs ───────────────────────────────────────────── */
+.form-control,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="url"],
+input[type="password"],
+input[type="search"],
+textarea {
+  width: 100% !important;
+  border: 1px solid #E8DDD0 !important;
+  background: #FFFFFF !important;
+  padding: 14px 18px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  color: #3D2B1F !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  transition: border-color .3s, box-shadow .3s !important;
 }
 
-.rr-form textarea {
-  min-height: 110px;
-  resize: vertical;
+.form-control:focus,
+input:focus,
+textarea:focus {
+  border-color: #C9A96E !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #C9A96E !important;
 }
 
-.rr-form input::placeholder,
-.rr-form textarea::placeholder {
-  color: var(--rr-taupe);
-  font-weight: 300;
-  opacity: 1;
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: #B8A898 !important;
+  font-weight: 300 !important;
+  opacity: 1 !important;
 }
 
-/* Custom dropdown caret for <select> */
-.rr-form select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%2379655c' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 20px center;
-  padding-right: 44px;
+/* Preserve the left-padding for the email field so the mail icon
+   doesn't overlap the placeholder. GHL sets 36px inline. */
+.email-input .form-control,
+.email-input input {
+  padding-left: 36px !important;
+}
+
+/* Leading email / phone icons */
+.input-icon {
+  color: #B8A898 !important;
+  stroke: #B8A898 !important;
+}
+.email-input,
+.phone-input,
+.block.relative {
+  position: relative !important;
+}
+
+/* ── Multiselect ("Select an option" dropdown) ─────────────── */
+.multiselect,
+.multi_select_form {
+  min-height: 50px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E8DDD0 !important;
+  border-radius: 6px !important;
+  outline: none !important;
+  box-shadow: none !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  color: #3D2B1F !important;
+  position: relative !important;
+}
+
+.multiselect:focus,
+.multiselect:focus-within,
+.multiselect--active,
+.multi_select_form--active {
+  border-color: #C9A96E !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px #C9A96E !important;
+}
+
+.multiselect__tags {
+  min-height: 48px !important;
+  padding: 13px 40px 13px 14px !important;
+  margin: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  border-radius: 6px !important;
+  font-size: 15px !important;
+  display: flex !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+}
+
+.multiselect__tags-wrap {
+  display: inline !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.multiselect__placeholder {
+  color: #B8A898 !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-block !important;
+  line-height: 1.3 !important;
+}
+
+.multiselect__input,
+.multiselect__single {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  color: #3D2B1F !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  line-height: 1.3 !important;
+}
+
+.multiselect__select {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  width: 40px !important;
+  height: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.multiselect__select::before {
+  position: static !important;
+  margin: 0 !important;
+  border-color: #B8A898 transparent transparent !important;
+  border-width: 5px 5px 0 5px !important;
+}
+
+.multiselect__content-wrapper {
+  background: #FFFFFF !important;
+  border: 1px solid #E8DDD0 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 30px rgba(60, 46, 39, 0.12) !important;
+  margin-top: 4px !important;
+  z-index: 50 !important;
+}
+
+.multiselect__content {
+  padding: 6px 0 !important;
+}
+
+.multiselect__option {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  color: #3D2B1F !important;
+  padding: 12px 16px !important;
+  background: transparent !important;
+  min-height: auto !important;
+  line-height: 1.4 !important;
+}
+.multiselect__option--highlight,
+.multiselect__option:hover {
+  background: #F5F0E8 !important;
+  color: #3D2B1F !important;
+}
+.multiselect__option--selected {
+  background: #C9A96E !important;
+  color: #3D2B1F !important;
+  font-weight: 500 !important;
+}
+
+/* Kill the default multiselect spinner background */
+.multiselect__spinner {
+  background: transparent !important;
 }
 
 /* ── Checkboxes & radios ───────────────────────────────────── */
-.rr-form input[type="checkbox"],
-.rr-form input[type="radio"] {
-  accent-color: var(--rr-gold);
-  width: auto;
-  margin-right: 8px;
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: #C9A96E !important;
 }
 
 /* ── Submit button ─────────────────────────────────────────── */
-.rr-form button,
-.rr-form input[type="submit"],
-.rr-form .btn-gold {
-  display: inline-block;
-  background: var(--rr-gold);
-  color: var(--rr-dark);
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 20px 52px;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background .3s, transform .25s, box-shadow .3s;
-}
-.rr-form button:hover,
-.rr-form input[type="submit"]:hover,
-.rr-form .btn-gold:hover {
-  background: var(--rr-gold-lt);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 40px rgba(60, 46, 39, .35);
-}
-.rr-form button:focus-visible,
-.rr-form input[type="submit"]:focus-visible {
-  outline: 2px solid var(--rr-gold);
-  outline-offset: 4px;
+.btn.btn-dark,
+.button-element,
+button[type="submit"],
+button.btn {
+  background: #C9A96E !important;
+  background-color: #C9A96E !important;
+  border: none !important;
+  border-radius: 100px !important;
+  padding: 20px 52px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background .3s, transform .25s, box-shadow .3s !important;
 }
 
-/* Wrap a submit + note in this if you want centered alignment */
-.rr-form .form-submit {
-  margin-top: 28px;
-  text-align: center;
-}
-.rr-form .form-note {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 13px;
-  color: var(--rr-taupe);
-  margin-top: 18px;
-  text-align: center;
+.btn.btn-dark:hover,
+.button-element:hover,
+button[type="submit"]:hover,
+button.btn:hover {
+  background: #E8DDD0 !important;
+  background-color: #E8DDD0 !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 20px 40px rgba(60, 46, 39, 0.35) !important;
 }
 
-/* ── Two-column grid helper (optional) ─────────────────────── */
-.rr-form .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.rr-form .form-grid.single {
-  grid-template-columns: 1fr;
+/* GHL wraps the button text in:
+     <div class="button-content"><div class="button-text">
+       <div style="color:#fff;font-family:Inter;..."><p>SEND MY APPLICATION</p></div>
+     </div></div>
+   The inner inline style sets color:white + font-family:Inter, which
+   beats our .btn background rule for text. Override every descendant: */
+.btn.btn-dark *,
+.button-element *,
+.button-content,
+.button-content *,
+.button-text,
+.button-text *,
+button.btn * {
+  color: #3D2B1F !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.38em !important;
+  text-transform: uppercase !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
 }
 
-/* ── Success message ───────────────────────────────────────── */
-.rr-form .form-success {
-  background: var(--rr-burg);
-  color: var(--rr-white);
-  padding: 28px 36px;
-  text-align: center;
-  margin-top: 24px;
-}
-.rr-form .form-success p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-  font-style: italic;
-  color: var(--rr-white);
-  margin: 0;
+/* ── Privacy / Terms links in the footer text block ────────── */
+.text-element,
+.heading-element {
+  font-family: 'Jost', sans-serif !important;
+  color: #79655c !important;
 }
 
-/* ── Responsive ────────────────────────────────────────────── */
+.text-element a,
+a,
+a:visited {
+  color: #C9A96E !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
+}
+.text-element a:hover,
+a:hover {
+  color: #3D2B1F !important;
+}
+
+/* ── Phone country-code picker (intl-tel-input, if enabled) ── */
+.iti,
+.iti__selected-flag,
+.iti--container {
+  background: #FFFFFF !important;
+}
+
+/* ── Success / thank-you state ─────────────────────────────── */
+[class*="form-submitted"],
+[class*="success"] {
+  background: #3D2B1F !important;
+  color: #FFFFFF !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 20px !important;
+  font-style: italic !important;
+  padding: 28px 36px !important;
+  border-radius: 6px !important;
+  text-align: center !important;
+}
+
+/* ── iOS zoom prevention ───────────────────────────────────── */
 @media (max-width: 600px) {
-  .rr-form .form-grid { grid-template-columns: 1fr; }
-  .rr-form input,
-  .rr-form select,
-  .rr-form textarea { font-size: 16px; } /* prevents iOS auto-zoom */
+  .form-control,
+  input, textarea,
+  .multiselect__input,
+  .multiselect__single,
+  .multiselect__placeholder {
+    font-size: 16px !important;
+  }
 }
