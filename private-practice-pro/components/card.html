@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TPPP · Cards</title>
+<link rel="stylesheet" href="../src/tokens.css" />
+<link rel="stylesheet" href="../src/typography.css" />
+<link rel="stylesheet" href="../src/base.css" />
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: var(--space-6);
+  }
+
+  .card {
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .card h3 { color: var(--color-ink); margin: 0; }
+  .card p  { color: var(--color-ink); margin: 0; }
+
+  .card-meta {
+    font-family: var(--font-subhead);
+    font-size: var(--fs-subhead);
+    letter-spacing: var(--ls-subhead);
+    text-transform: uppercase;
+    color: var(--color-bg);
+    font-weight: 700;
+  }
+
+  .card-accent {
+    background: var(--color-accent-blush);
+    color: var(--color-ink);
+  }
+  .card-dark {
+    background: var(--color-ink);
+    color: var(--color-surface);
+  }
+  .card-dark h3, .card-dark p { color: var(--color-surface); }
+  .card-dark .card-meta { color: var(--color-accent-lime); }
+</style>
+</head>
+<body>
+  <main class="container" style="padding: var(--space-16) 0;">
+    <span class="eyebrow">Component · Cards</span>
+    <h2>Editorial cards</h2>
+    <p>Three surface variants — use sparingly in grids of 2–4.</p>
+
+    <div class="grid">
+      <article class="card">
+        <span class="card-meta">01 · Foundations</span>
+        <h3>Clarify your offer</h3>
+        <p>Name the one thing your practice does better than anyone else in town.</p>
+      </article>
+      <article class="card card-accent">
+        <span class="card-meta">02 · Systems</span>
+        <h3>Install the calm</h3>
+        <p>Replace ad-hoc admin with a calendar and intake that run on their own.</p>
+      </article>
+      <article class="card card-dark">
+        <span class="card-meta">03 · Growth</span>
+        <h3>Grow on your terms</h3>
+        <p>A referral engine designed around your capacity, not against it.</p>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

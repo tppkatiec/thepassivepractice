@@ -1,0 +1,53 @@
+/* The Private Practice Pro — Base styles
+   Minimal reset + default page chrome for the TPPP brand.
+   Import order: tokens.css → typography.css → base.css */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--color-bg);
+  color: var(--color-surface);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, svg, video { display: block; max-width: 100%; height: auto; }
+
+a {
+  color: var(--color-accent-lime);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 120ms ease, color 120ms ease;
+}
+a:hover { border-bottom-color: currentColor; }
+
+hr {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--color-surface) 20%, transparent);
+  margin: var(--space-8) 0;
+}
+
+::selection {
+  background: var(--color-accent-lime);
+  color: var(--color-ink);
+}
+
+/* Simple container */
+.container {
+  width: min(1100px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+/* Surfaces on dark bg */
+.surface {
+  background: var(--color-surface);
+  color: var(--color-ink);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+}
+.surface h1, .surface h2, .surface h3, .surface h4, .surface p {
+  color: var(--color-ink);
+}
