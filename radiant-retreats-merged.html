@@ -47,13 +47,17 @@
   --burgundy:  #7A1F2E;
 }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html, body {
-  width: 100%;
-  min-height: 100vh;
-  max-width: none !important;
-}
 html { scroll-behavior: smooth; }
-body { font-family: 'Jost', sans-serif; background: var(--cream); color: var(--dark); overflow-x: hidden; }
+
+/* Page container — all styling lives on .rr-page so it survives
+   being injected into another page's <body> (GHL, tiiny, etc.) */
+.rr-page {
+  width: 100%;
+  font-family: 'Jost', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+  overflow-x: hidden;
+}
 
 /* ── HERO ──────────────────────────────────── */
 .hero {
@@ -390,6 +394,7 @@ footer { background:var(--dark); padding:48px 24px; text-align:center; }
 </style>
 <meta property="og:title" content="Radiant Retreats — Become a Referral Partner"><meta name="description" content="Become a Radiant Retreats Referral Partner — $500 per couple enrolled."><meta property="og:description" content="Become a Radiant Retreats Referral Partner — $500 per couple enrolled."><meta property="og:type" content="website"></head>
 <body>
+<div class="rr-page">
 
 <!-- ═══ HERO ═══════════════════════════════════════════════ -->
 <section class="hero" id="top">
@@ -697,6 +702,8 @@ footer { background:var(--dark); padding:48px 24px; text-align:center; }
   <div class="f-logo">Radiant Retreats</div>
   <p class="f-sub">A program of Bathurst Family Therapy  ·  Haleiwa, Hawai‘i  ·  2026</p>
 </footer>
+
+</div><!-- /.rr-page -->
 
 <script>
 // Reveal on scroll
