@@ -1,229 +1,203 @@
 /* ──────────────────────────────────────────────────────────────
-   Radiant Retreats — Form Aesthetic Stylesheet
-   Paste this into a GoHighLevel code block (or a <style> tag on
-   the page hosting the form), then wrap your form embed in:
+   Radiant Retreats — Form Aesthetic (GoHighLevel Custom CSS)
 
-     <div class="rr-form">
-       [ your GHL / Formspree / etc. form embed HTML ]
-     </div>
+   Paste this into the form builder:
+     Advanced tab  ->  Custom CSS
 
-   Works against raw <input>/<select>/<textarea>/<button> tags, so
-   whatever markup the embed outputs should pick up the look.
+   IMPORTANT:
+   - paste RAW CSS only (do NOT wrap in <style> tags)
+   - uses !important because GHL's theme styles are very specific
+   - starts with @import for Google Fonts so the brand fonts load
+     inside the form iframe even though the parent page has its own
    ────────────────────────────────────────────────────────────── */
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
 
-/* ── Wrapper + palette ─────────────────────────────────────── */
-.rr-form {
-  /* Brand palette (scoped — nothing leaks to the rest of the page) */
+/* ── Brand palette ─────────────────────────────────────────── */
+:root {
   --rr-burg:      #3D2B1F;  /* deep brown                            */
   --rr-gold:      #C9A96E;  /* accent gold                           */
   --rr-gold-lt:   #E8DDD0;  /* sand / lighter gold                   */
-  --rr-cream:     #F5F0E8;  /* section background                    */
+  --rr-cream:     #F5F0E8;  /* form background                       */
   --rr-warm:      #E8DDD0;  /* input border                          */
   --rr-taupe:     #B8A898;  /* muted body / placeholder              */
   --rr-taupe-dk:  #79655c;  /* standard body / label                 */
   --rr-dark:      #3D2B1F;  /* input text                            */
   --rr-white:     #FFFFFF;  /* input field background                */
-
-  max-width: 700px;
-  margin: 0 auto;
-  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 48px);
-  background: var(--rr-cream);
-  font-family: 'Jost', sans-serif;
-  color: var(--rr-dark);
-  box-sizing: border-box;
-}
-.rr-form *,
-.rr-form *::before,
-.rr-form *::after { box-sizing: border-box; }
-
-/* ── Optional heading/intro treatments ─────────────────────── */
-.rr-form h1,
-.rr-form h2,
-.rr-form h3 {
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300;
-  line-height: 1.1;
-  letter-spacing: 0.01em;
-  color: var(--rr-burg);
-  margin: 0 0 16px;
-}
-.rr-form h2 { font-size: clamp(28px, 3.4vw, 44px); }
-.rr-form h2 em { font-style: italic; color: var(--rr-gold); }
-
-.rr-form p {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: clamp(15px, 1.6vw, 17px);
-  line-height: 1.85;
-  color: var(--rr-taupe-dk);
-  margin: 0 0 20px;
 }
 
-/* Little "eyebrow" label above a heading (optional) */
-.rr-form .eyebrow {
-  display: block;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 10px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--rr-gold);
-  margin-bottom: 18px;
+/* ── Overall form canvas ───────────────────────────────────── */
+html,
+body,
+.form-builder--container,
+.form-builder--wrapper,
+.ghl-form-handler-wrapper,
+.form-wrapper {
+  background: var(--rr-cream) !important;
+  font-family: 'Jost', sans-serif !important;
+  color: var(--rr-dark) !important;
 }
 
 /* ── Labels ────────────────────────────────────────────────── */
-.rr-form label,
-.rr-form .form-label {
-  display: block;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 11px;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--rr-taupe-dk);
-  margin-bottom: 8px;
+label,
+.form-builder--label,
+.form-builder--item-label,
+.form-field-label,
+.hl-form-field-label,
+.input-field-label {
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.3em !important;
+  text-transform: uppercase !important;
+  color: var(--rr-taupe-dk) !important;
+  margin-bottom: 8px !important;
 }
 
-/* ── Text fields, selects, textareas ───────────────────────── */
-.rr-form input[type="text"],
-.rr-form input[type="email"],
-.rr-form input[type="tel"],
-.rr-form input[type="url"],
-.rr-form input[type="number"],
-.rr-form input[type="password"],
-.rr-form input[type="search"],
-.rr-form input[type="date"],
-.rr-form select,
-.rr-form textarea {
-  width: 100%;
-  border: 1px solid var(--rr-warm);
-  background: var(--rr-white);
-  padding: 14px 18px;
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 15px;
-  color: var(--rr-dark);
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  border-radius: 0;
-  transition: border-color .3s;
-  margin-bottom: 16px;
-  line-height: 1.4;
+/* Required asterisks inherit the muted gold */
+label .required,
+.form-builder--required,
+.required-asterisk {
+  color: var(--rr-gold) !important;
 }
 
-.rr-form input:focus,
-.rr-form select:focus,
-.rr-form textarea:focus {
-  border-color: var(--rr-gold);
+/* ── Inputs, selects, textareas ────────────────────────────── */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="date"],
+select,
+textarea,
+.form-builder--input,
+.hl-form-field-input,
+.input-field {
+  border: 1px solid var(--rr-warm) !important;
+  background: var(--rr-white) !important;
+  padding: 14px 18px !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 15px !important;
+  line-height: 1.4 !important;
+  color: var(--rr-dark) !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  transition: border-color .3s, box-shadow .3s !important;
 }
 
-.rr-form textarea {
-  min-height: 110px;
-  resize: vertical;
+input:focus,
+select:focus,
+textarea:focus,
+.form-builder--input:focus,
+.hl-form-field-input:focus {
+  border-color: var(--rr-gold) !important;
+  outline: none !important;
+  box-shadow: 0 0 0 1px var(--rr-gold) !important;
 }
 
-.rr-form input::placeholder,
-.rr-form textarea::placeholder {
-  color: var(--rr-taupe);
-  font-weight: 300;
-  opacity: 1;
+input::placeholder,
+textarea::placeholder {
+  color: var(--rr-taupe) !important;
+  font-weight: 300 !important;
+  opacity: 1 !important;
 }
 
-/* Custom dropdown caret for <select> */
-.rr-form select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%2379655c' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 20px center;
-  padding-right: 44px;
+textarea {
+  min-height: 110px !important;
+  resize: vertical !important;
+}
+
+/* ── Leading icons inside input fields (GHL email / phone) ── */
+.input-field-icon,
+.hl-form-field-icon,
+.input-icon {
+  color: var(--rr-taupe) !important;
 }
 
 /* ── Checkboxes & radios ───────────────────────────────────── */
-.rr-form input[type="checkbox"],
-.rr-form input[type="radio"] {
-  accent-color: var(--rr-gold);
-  width: auto;
-  margin-right: 8px;
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--rr-gold) !important;
 }
 
-/* ── Submit button ─────────────────────────────────────────── */
-.rr-form button,
-.rr-form input[type="submit"],
-.rr-form .btn-gold {
-  display: inline-block;
-  background: var(--rr-gold);
-  color: var(--rr-dark);
-  font-family: 'Jost', sans-serif;
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 20px 52px;
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition: background .3s, transform .25s, box-shadow .3s;
-}
-.rr-form button:hover,
-.rr-form input[type="submit"]:hover,
-.rr-form .btn-gold:hover {
-  background: var(--rr-gold-lt);
-  transform: translateY(-3px);
-  box-shadow: 0 20px 40px rgba(60, 46, 39, .35);
-}
-.rr-form button:focus-visible,
-.rr-form input[type="submit"]:focus-visible {
-  outline: 2px solid var(--rr-gold);
-  outline-offset: 4px;
+/* ── Submit / primary button ───────────────────────────────── */
+button,
+button[type="submit"],
+input[type="submit"],
+.form-builder--button,
+.form-builder--submit,
+.hl-btn,
+.n1-btn,
+.ghl-btn-primary {
+  background: var(--rr-gold) !important;
+  background-color: var(--rr-gold) !important;
+  color: var(--rr-dark) !important;
+  font-family: 'Jost', sans-serif !important;
+  font-weight: 500 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.38em !important;
+  text-transform: uppercase !important;
+  padding: 20px 52px !important;
+  border: none !important;
+  border-radius: 100px !important;
+  box-shadow: none !important;
+  cursor: pointer !important;
+  transition: background .3s, transform .25s, box-shadow .3s !important;
 }
 
-/* Wrap a submit + note in this if you want centered alignment */
-.rr-form .form-submit {
-  margin-top: 28px;
-  text-align: center;
-}
-.rr-form .form-note {
-  font-family: 'Jost', sans-serif;
-  font-weight: 300;
-  font-size: 13px;
-  color: var(--rr-taupe);
-  margin-top: 18px;
-  text-align: center;
-}
-
-/* ── Two-column grid helper (optional) ─────────────────────── */
-.rr-form .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.rr-form .form-grid.single {
-  grid-template-columns: 1fr;
+button:hover,
+button[type="submit"]:hover,
+input[type="submit"]:hover,
+.form-builder--button:hover,
+.hl-btn:hover,
+.n1-btn:hover,
+.ghl-btn-primary:hover {
+  background: var(--rr-gold-lt) !important;
+  background-color: var(--rr-gold-lt) !important;
+  color: var(--rr-dark) !important;
+  transform: translateY(-3px) !important;
+  box-shadow: 0 20px 40px rgba(60, 46, 39, 0.35) !important;
 }
 
-/* ── Success message ───────────────────────────────────────── */
-.rr-form .form-success {
-  background: var(--rr-burg);
-  color: var(--rr-white);
-  padding: 28px 36px;
-  text-align: center;
-  margin-top: 24px;
+/* ── Links (privacy / terms under the submit) ──────────────── */
+a,
+a:visited {
+  color: var(--rr-gold) !important;
+  text-decoration: underline !important;
+  text-underline-offset: 3px !important;
 }
-.rr-form .form-success p {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 20px;
-  font-style: italic;
-  color: var(--rr-white);
-  margin: 0;
+a:hover {
+  color: var(--rr-burg) !important;
 }
 
-/* ── Responsive ────────────────────────────────────────────── */
+/* ── Phone country-code dropdown (GHL uses intl-tel-input) ─── */
+.iti__selected-flag,
+.iti--container {
+  background: var(--rr-white) !important;
+}
+
+/* ── Success / thank-you message ───────────────────────────── */
+.form-submitted,
+.form-success,
+.success-msg {
+  background: var(--rr-burg) !important;
+  color: var(--rr-white) !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 20px !important;
+  font-style: italic !important;
+  padding: 28px 36px !important;
+  border-radius: 6px !important;
+  text-align: center !important;
+}
+
+/* ── Mobile iOS zoom prevention ────────────────────────────── */
 @media (max-width: 600px) {
-  .rr-form .form-grid { grid-template-columns: 1fr; }
-  .rr-form input,
-  .rr-form select,
-  .rr-form textarea { font-size: 16px; } /* prevents iOS auto-zoom */
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
 }
