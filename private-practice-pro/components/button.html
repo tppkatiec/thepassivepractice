@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TPPP · Buttons</title>
+<link rel="stylesheet" href="../src/tokens.css" />
+<link rel="stylesheet" href="../src/typography.css" />
+<link rel="stylesheet" href="../src/base.css" />
+<style>
+  /* Button system
+     Primary (lime CTA) → main call-to-action, max one per view
+     Secondary (ghost on bg) → supporting actions
+     Tertiary (text link) → inline
+  */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-subhead);
+    font-size: var(--fs-subhead);
+    font-weight: 700;
+    letter-spacing: var(--ls-subhead);
+    text-transform: uppercase;
+    padding: 0.9rem 1.5rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 120ms ease, background 120ms ease, color 120ms ease;
+    text-decoration: none;
+  }
+  .btn:hover { transform: translateY(-1px); border-bottom-color: transparent; }
+
+  .btn-primary {
+    background: var(--color-accent-lime);
+    color: var(--color-ink);
+  }
+  .btn-primary:hover { background: color-mix(in srgb, var(--color-accent-lime) 85%, white); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--color-surface);
+    border-color: var(--color-surface);
+  }
+  .btn-secondary:hover { background: var(--color-surface); color: var(--color-ink); }
+
+  .btn-tertiary {
+    padding: 0;
+    background: transparent;
+    color: var(--color-accent-lime);
+    border-radius: 0;
+    border-bottom: 1px solid currentColor;
+  }
+
+  .row { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-bottom: var(--space-8); }
+</style>
+</head>
+<body>
+  <main class="container" style="padding: var(--space-16) 0;">
+    <span class="eyebrow">Component · Buttons</span>
+    <h2>Calls to action</h2>
+    <p>One primary per view. Lime is reserved for the most important action.</p>
+
+    <div class="row">
+      <button class="btn btn-primary">Book a consult →</button>
+      <button class="btn btn-secondary">Learn more</button>
+      <a class="btn btn-tertiary" href="#">Read the guide</a>
+    </div>
+  </main>
+</body>
+</html>

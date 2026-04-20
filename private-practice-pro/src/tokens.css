@@ -1,0 +1,66 @@
+/* The Private Practice Pro — Design Tokens
+   Import once at the root of any page: @import "tokens.css"; */
+
+:root {
+  /* Color — primary palette */
+  --color-bg:             #6772c3;   /* page background */
+  --color-primary:        #8890cf;   /* lighter lavender, dominant element */
+  --color-ink:            #3a506a;   /* deep slate, grounding text */
+  --color-surface:        #fafafb;   /* off-white, cards, body on dark bg */
+
+  /* Color — pops (use sparingly) */
+  --color-accent-lime:    #daff00;   /* electric, CTAs, attention only */
+  --color-accent-blush:   #dcbed7;   /* soft, gentle emphasis */
+
+  /* Semantic aliases */
+  --color-text-on-bg:     var(--color-surface);
+  --color-text-on-light:  var(--color-ink);
+  --color-cta:            var(--color-accent-lime);
+  --color-cta-ink:        var(--color-ink);
+
+  /* Type — families */
+  --font-header:    'Instrument Serif', Georgia, serif;
+  --font-subhead:   'Clash Display', 'Inter', system-ui, sans-serif;
+  --font-body:      'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Type — sizes */
+  --fs-display:     clamp(3rem, 8vw, 6rem);
+  --fs-h1:          clamp(2.25rem, 5vw, 3.75rem);
+  --fs-h2:          clamp(1.75rem, 3.5vw, 2.5rem);
+  --fs-h3:          1.5rem;
+  --fs-subhead:     0.875rem;
+  --fs-body:        1rem;
+  --fs-small:       0.8125rem;
+
+  /* Type — tracking */
+  --ls-header:      -0.02em;
+  --ls-subhead:     0.16em;
+  --ls-body:        0;
+
+  /* Type — leading */
+  --lh-tight:       1.05;
+  --lh-snug:        1.25;
+  --lh-normal:      1.55;
+
+  /* Radius */
+  --radius-sm:      4px;
+  --radius-md:      10px;
+  --radius-lg:      20px;
+  --radius-pill:    999px;
+
+  /* Spacing (4pt scale) */
+  --space-1:        0.25rem;
+  --space-2:        0.5rem;
+  --space-3:        0.75rem;
+  --space-4:        1rem;
+  --space-6:        1.5rem;
+  --space-8:        2rem;
+  --space-12:       3rem;
+  --space-16:       4rem;
+  --space-24:       6rem;
+
+  /* Shadow */
+  --shadow-sm:      0 1px 2px rgba(58, 80, 106, 0.08);
+  --shadow-md:      0 8px 24px rgba(58, 80, 106, 0.12);
+  --shadow-lg:      0 24px 60px rgba(58, 80, 106, 0.18);
+}
