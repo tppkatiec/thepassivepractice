@@ -629,56 +629,25 @@ footer { background:var(--dark); padding:48px 24px; text-align:center; }
           Fill in your details below and we will send you the full affiliate welcome packet, including your personalized tracking link, promo code, pitch deck, and ready-to-use email copy. We will follow up within one business day.
         </p>
       </div>
-      <form id="affiliate-form" onsubmit="handleSubmit(event)" novalidate>
-        <div class="form-grid rv d1">
-          <div class="f-group">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="fname" placeholder="Your first name" required>
-          </div>
-          <div class="f-group">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="lname" placeholder="Your last name" required>
-          </div>
-          <div class="f-group">
-            <label for="email">Email Address</label>
-            <input type="email" id="email" name="email" placeholder="Your email address" required>
-          </div>
-          <div class="f-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="Your phone number">
-          </div>
-          <div class="f-group">
-            <label for="role">How Would You Describe Yourself?</label>
-            <select id="role" name="role" required>
-              <option value="" disabled selected>Select one</option>
-              <option>Therapist / Psychologist</option>
-              <option>Relationship Coach</option>
-              <option>Wellness Practitioner</option>
-              <option>Podcast Host / Content Creator</option>
-              <option>Yoga / Pilates / Fitness Professional</option>
-              <option>Acupuncturist / Naturopath</option>
-              <option>Business or Health Brand</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="f-group">
-            <label for="platform">Your Website or Instagram</label>
-            <input type="text" id="platform" name="platform" placeholder="Optional but helpful">
-          </div>
-        </div>
-        <div class="form-grid single rv d2" style="margin-top:16px;">
-          <div class="f-group">
-            <label for="message">Who in Your World Might Benefit from This Retreat?</label>
-            <textarea id="message" name="message" placeholder="Tell us a little about your audience or the kinds of clients you work with. This helps us send you the most relevant materials."></textarea>
-          </div>
-        </div>
-        <div class="form-submit rv d3">
-          <button type="submit" class="btn-gold">Send My Application →</button>
-          <p class="form-note">We respect your time and your inbox. No spam, ever. Affiliate welcome packet sent within one business day.</p>
-        </div>
-      </form>
-      <div class="form-success" id="success-msg">
-        <p>✨   Thank you. We will be in touch within one business day with your complete affiliate welcome packet.</p>
+      <div class="rv d1 form-embed">
+        <iframe
+          src="https://brand.bathurstfamilytherapy.org/widget/form/3KkgSHLb9JrOX4Tl90w1"
+          style="width:100%;border:none;border-radius:8px;min-height:640px;display:block;"
+          id="inline-3KkgSHLb9JrOX4Tl90w1"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Form 10"
+          data-height="499"
+          data-layout-iframe-id="inline-3KkgSHLb9JrOX4Tl90w1"
+          data-form-id="3KkgSHLb9JrOX4Tl90w1"
+          title="Form 10">
+        </iframe>
+        <script src="https://brand.bathurstfamilytherapy.org/js/form_embed.js"></script>
       </div>
     </div>
   </div>
@@ -722,17 +691,6 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// Form submission
-function handleSubmit(e) {
-  e.preventDefault();
-  const form = document.getElementById('affiliate-form');
-  const success = document.getElementById('success-msg');
-  // In production: POST form data to your endpoint
-  // For now, show success message
-  form.style.display = 'none';
-  success.style.display = 'block';
-  success.scrollIntoView({behavior:'smooth', block:'center'});
-}
 </script>
 </body>
 </html>
