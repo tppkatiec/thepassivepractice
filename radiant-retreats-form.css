@@ -14,19 +14,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap');
 
-/* ── Brand palette ─────────────────────────────────────────── */
-:root {
-  --rr-burg:      #3D2B1F;
-  --rr-gold:      #C9A96E;
-  --rr-gold-lt:   #E8DDD0;
-  --rr-cream:     #F5F0E8;
-  --rr-warm:      #E8DDD0;
-  --rr-taupe:     #B8A898;
-  --rr-taupe-dk:  #79655c;
-  --rr-dark:      #3D2B1F;
-  --rr-white:     #FFFFFF;
-}
-
 /* ── Canvas ────────────────────────────────────────────────── */
 html,
 body,
@@ -34,9 +21,9 @@ body,
 .builder-inline,
 .form-builder--container,
 .form-builder--wrapper {
-  background: var(--rr-cream) !important;
+  background: #F5F0E8 !important;
   font-family: 'Jost', sans-serif !important;
-  color: var(--rr-dark) !important;
+  color: #3D2B1F !important;
 }
 
 /* ── Labels ────────────────────────────────────────────────── */
@@ -48,7 +35,7 @@ label {
   font-size: 11px !important;
   letter-spacing: 0.3em !important;
   text-transform: uppercase !important;
-  color: var(--rr-taupe-dk) !important;
+  color: #79655c !important;
   margin-bottom: 8px !important;
   display: block !important;
 }
@@ -57,7 +44,7 @@ label {
 label span,
 .label-alignment span,
 .field-label span {
-  color: var(--rr-gold) !important;
+  color: #C9A96E !important;
   font-weight: 400 !important;
   letter-spacing: normal !important;
   margin-left: 4px !important;
@@ -74,14 +61,14 @@ input[type="password"],
 input[type="search"],
 textarea {
   width: 100% !important;
-  border: 1px solid var(--rr-warm) !important;
-  background: var(--rr-white) !important;
+  border: 1px solid #E8DDD0 !important;
+  background: #FFFFFF !important;
   padding: 14px 18px !important;
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
   font-size: 15px !important;
   line-height: 1.4 !important;
-  color: var(--rr-dark) !important;
+  color: #3D2B1F !important;
   border-radius: 6px !important;
   box-shadow: none !important;
   transition: border-color .3s, box-shadow .3s !important;
@@ -90,15 +77,15 @@ textarea {
 .form-control:focus,
 input:focus,
 textarea:focus {
-  border-color: var(--rr-gold) !important;
+  border-color: #C9A96E !important;
   outline: none !important;
-  box-shadow: 0 0 0 1px var(--rr-gold) !important;
+  box-shadow: 0 0 0 1px #C9A96E !important;
 }
 
 .form-control::placeholder,
 input::placeholder,
 textarea::placeholder {
-  color: var(--rr-taupe) !important;
+  color: #B8A898 !important;
   font-weight: 300 !important;
   opacity: 1 !important;
 }
@@ -112,8 +99,8 @@ textarea::placeholder {
 
 /* Leading email / phone icons */
 .input-icon {
-  color: var(--rr-taupe) !important;
-  stroke: var(--rr-taupe) !important;
+  color: #B8A898 !important;
+  stroke: #B8A898 !important;
 }
 .email-input,
 .phone-input,
@@ -125,12 +112,12 @@ textarea::placeholder {
 .multiselect,
 .multi_select_form {
   min-height: 50px !important;
-  background: var(--rr-white) !important;
-  border: 1px solid var(--rr-warm) !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E8DDD0 !important;
   border-radius: 6px !important;
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
-  color: var(--rr-dark) !important;
+  color: #3D2B1F !important;
   box-shadow: none !important;
 }
 
@@ -144,7 +131,7 @@ textarea::placeholder {
 }
 
 .multiselect__placeholder {
-  color: var(--rr-taupe) !important;
+  color: #B8A898 !important;
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
   font-size: 15px !important;
@@ -158,7 +145,7 @@ textarea::placeholder {
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
   font-size: 15px !important;
-  color: var(--rr-dark) !important;
+  color: #3D2B1F !important;
   padding: 0 !important;
   margin: 0 !important;
   background: transparent !important;
@@ -170,18 +157,18 @@ textarea::placeholder {
   padding: 0 10px !important;
 }
 .multiselect__select::before {
-  border-color: var(--rr-taupe) transparent transparent !important;
+  border-color: #B8A898 transparent transparent !important;
   border-width: 5px 5px 0 5px !important;
 }
 
 .multiselect--active {
-  border-color: var(--rr-gold) !important;
-  box-shadow: 0 0 0 1px var(--rr-gold) !important;
+  border-color: #C9A96E !important;
+  box-shadow: 0 0 0 1px #C9A96E !important;
 }
 
 .multiselect__content-wrapper {
-  background: var(--rr-white) !important;
-  border: 1px solid var(--rr-warm) !important;
+  background: #FFFFFF !important;
+  border: 1px solid #E8DDD0 !important;
   border-radius: 6px !important;
   box-shadow: 0 10px 30px rgba(60, 46, 39, 0.12) !important;
   margin-top: 4px !important;
@@ -191,26 +178,26 @@ textarea::placeholder {
   font-family: 'Jost', sans-serif !important;
   font-weight: 300 !important;
   font-size: 14px !important;
-  color: var(--rr-dark) !important;
+  color: #3D2B1F !important;
   padding: 12px 16px !important;
   background: transparent !important;
   min-height: auto !important;
 }
 .multiselect__option--highlight,
 .multiselect__option:hover {
-  background: var(--rr-cream) !important;
-  color: var(--rr-burg) !important;
+  background: #F5F0E8 !important;
+  color: #3D2B1F !important;
 }
 .multiselect__option--selected {
-  background: var(--rr-gold) !important;
-  color: var(--rr-dark) !important;
+  background: #C9A96E !important;
+  color: #3D2B1F !important;
   font-weight: 500 !important;
 }
 
 /* ── Checkboxes & radios ───────────────────────────────────── */
 input[type="checkbox"],
 input[type="radio"] {
-  accent-color: var(--rr-gold) !important;
+  accent-color: #C9A96E !important;
 }
 
 /* ── Submit button ─────────────────────────────────────────── */
@@ -218,8 +205,8 @@ input[type="radio"] {
 .button-element,
 button[type="submit"],
 button.btn {
-  background: var(--rr-gold) !important;
-  background-color: var(--rr-gold) !important;
+  background: #C9A96E !important;
+  background-color: #C9A96E !important;
   border: none !important;
   border-radius: 100px !important;
   padding: 20px 52px !important;
@@ -232,8 +219,8 @@ button.btn {
 .button-element:hover,
 button[type="submit"]:hover,
 button.btn:hover {
-  background: var(--rr-gold-lt) !important;
-  background-color: var(--rr-gold-lt) !important;
+  background: #E8DDD0 !important;
+  background-color: #E8DDD0 !important;
   transform: translateY(-3px) !important;
   box-shadow: 0 20px 40px rgba(60, 46, 39, 0.35) !important;
 }
@@ -251,7 +238,7 @@ button.btn:hover {
 .button-text,
 .button-text *,
 button.btn * {
-  color: var(--rr-dark) !important;
+  color: #3D2B1F !important;
   background: transparent !important;
   background-color: transparent !important;
   font-family: 'Jost', sans-serif !important;
@@ -267,33 +254,33 @@ button.btn * {
 .text-element,
 .heading-element {
   font-family: 'Jost', sans-serif !important;
-  color: var(--rr-taupe-dk) !important;
+  color: #79655c !important;
 }
 
 .text-element a,
 a,
 a:visited {
-  color: var(--rr-gold) !important;
+  color: #C9A96E !important;
   text-decoration: underline !important;
   text-underline-offset: 3px !important;
 }
 .text-element a:hover,
 a:hover {
-  color: var(--rr-burg) !important;
+  color: #3D2B1F !important;
 }
 
 /* ── Phone country-code picker (intl-tel-input, if enabled) ── */
 .iti,
 .iti__selected-flag,
 .iti--container {
-  background: var(--rr-white) !important;
+  background: #FFFFFF !important;
 }
 
 /* ── Success / thank-you state ─────────────────────────────── */
 [class*="form-submitted"],
 [class*="success"] {
-  background: var(--rr-burg) !important;
-  color: var(--rr-white) !important;
+  background: #3D2B1F !important;
+  color: #FFFFFF !important;
   font-family: 'Cormorant Garamond', serif !important;
   font-size: 20px !important;
   font-style: italic !important;
