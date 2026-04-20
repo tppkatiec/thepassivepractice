@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TPPP · Form</title>
+<link rel="stylesheet" href="../src/tokens.css" />
+<link rel="stylesheet" href="../src/typography.css" />
+<link rel="stylesheet" href="../src/base.css" />
+<style>
+  .form-wrap {
+    max-width: 560px;
+    background: var(--color-surface);
+    color: var(--color-ink);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+  }
+  .form-wrap h3, .form-wrap p { color: var(--color-ink); }
+
+  .field { display: flex; flex-direction: column; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .field label {
+    font-family: var(--font-subhead);
+    font-size: var(--fs-subhead);
+    font-weight: 700;
+    letter-spacing: var(--ls-subhead);
+    text-transform: uppercase;
+    color: var(--color-bg);
+  }
+  .field input, .field textarea, .field select {
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    color: var(--color-ink);
+    background: var(--color-surface);
+    border: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
+    outline: none;
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--color-bg);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-bg) 20%, transparent);
+  }
+  .field .hint { font-size: var(--fs-small); color: color-mix(in srgb, var(--color-ink) 70%, white); }
+
+  .submit {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-subhead); font-size: var(--fs-subhead); font-weight: 700;
+    letter-spacing: var(--ls-subhead); text-transform: uppercase;
+    padding: 0.9rem 1.5rem; border: 0; border-radius: var(--radius-pill);
+    background: var(--color-accent-lime); color: var(--color-ink); cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <main class="container" style="padding: var(--space-16) 0;">
+    <span class="eyebrow">Component · Form</span>
+    <h2 style="margin-bottom: var(--space-6);">Intake form</h2>
+
+    <form class="form-wrap">
+      <h3>Tell us about your practice</h3>
+      <p style="margin-bottom: var(--space-6);">Two minutes. We'll reply within a business day.</p>
+
+      <div class="field">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Dr. Jane Rivera" />
+      </div>
+
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="jane@practice.com" />
+      </div>
+
+      <div class="field">
+        <label for="stage">Practice stage</label>
+        <select id="stage">
+          <option>Just opened (0–1 yr)</option>
+          <option>Established (2–5 yrs)</option>
+          <option>Seasoned (5+ yrs)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="goal">What's the one thing?</label>
+        <textarea id="goal" rows="4" placeholder="The single change that would matter most this quarter."></textarea>
+        <span class="hint">Be specific — we read every answer.</span>
+      </div>
+
+      <button class="submit" type="submit">Send intake →</button>
+    </form>
+  </main>
+</body>
+</html>

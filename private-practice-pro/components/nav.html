@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TPPP · Nav</title>
+<link rel="stylesheet" href="../src/tokens.css" />
+<link rel="stylesheet" href="../src/typography.css" />
+<link rel="stylesheet" href="../src/base.css" />
+<style>
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) 0;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 20%, transparent);
+  }
+  .brand {
+    font-family: var(--font-header);
+    font-size: 1.5rem;
+    letter-spacing: var(--ls-header);
+    color: var(--color-surface);
+  }
+  .brand em { color: var(--color-accent-lime); font-style: normal; }
+
+  .nav-links {
+    display: flex; gap: var(--space-6); list-style: none; margin: 0; padding: 0;
+  }
+  .nav-links a {
+    font-family: var(--font-subhead);
+    font-size: var(--fs-subhead);
+    font-weight: 600;
+    letter-spacing: var(--ls-subhead);
+    text-transform: uppercase;
+    color: var(--color-surface);
+    border-bottom: 1px solid transparent;
+  }
+  .nav-links a:hover { border-bottom-color: var(--color-accent-lime); color: var(--color-accent-lime); }
+
+  .nav-cta {
+    font-family: var(--font-subhead);
+    font-size: var(--fs-subhead);
+    font-weight: 700;
+    letter-spacing: var(--ls-subhead);
+    text-transform: uppercase;
+    background: var(--color-accent-lime);
+    color: var(--color-ink);
+    padding: 0.6rem 1.1rem;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+  <header class="container">
+    <nav class="nav">
+      <div class="brand">The Private <em>Practice</em> Pro</div>
+      <ul class="nav-links">
+        <li><a href="#">Frameworks</a></li>
+        <li><a href="#">Membership</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">About</a></li>
+      </ul>
+      <a class="nav-cta" href="#">Book consult →</a>
+    </nav>
+  </header>
+</body>
+</html>

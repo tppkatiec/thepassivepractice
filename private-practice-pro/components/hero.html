@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>TPPP · Hero</title>
+<link rel="stylesheet" href="../src/tokens.css" />
+<link rel="stylesheet" href="../src/typography.css" />
+<link rel="stylesheet" href="../src/base.css" />
+<style>
+  .hero {
+    padding: var(--space-24) 0 var(--space-16);
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+  .hero h1 { max-width: 16ch; }
+  .hero p  { max-width: 52ch; font-size: 1.125rem; }
+  .hero-cta { display: flex; gap: var(--space-4); flex-wrap: wrap; margin-top: var(--space-4); }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-subhead); font-size: var(--fs-subhead); font-weight: 700;
+    letter-spacing: var(--ls-subhead); text-transform: uppercase;
+    padding: 0.9rem 1.5rem; border-radius: var(--radius-pill);
+    border: 1px solid transparent; text-decoration: none;
+  }
+  .btn-primary { background: var(--color-accent-lime); color: var(--color-ink); }
+  .btn-secondary { background: transparent; color: var(--color-surface); border-color: var(--color-surface); }
+
+  .hero-aside {
+    border-left: 1px solid color-mix(in srgb, var(--color-surface) 30%, transparent);
+    padding-left: var(--space-6);
+    max-width: 40ch;
+  }
+
+  @media (min-width: 860px) {
+    .hero { grid-template-columns: 1.4fr 1fr; align-items: end; }
+  }
+</style>
+</head>
+<body>
+  <main class="container hero">
+    <div>
+      <span class="eyebrow">The Private Practice Pro</span>
+      <h1>Headline goes here.</h1>
+      <p>Lead paragraph placeholder — replace with real copy.</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#">Start with a consult →</a>
+        <a class="btn btn-secondary" href="#">See the frameworks</a>
+      </div>
+    </div>
+    <aside class="hero-aside">
+      <p class="pullquote">"I stopped working Fridays and my revenue went <em>up</em>."</p>
+      <p style="font-size: var(--fs-small); opacity: 0.8;">— Member, Year Two</p>
+    </aside>
+  </main>
+</body>
+</html>

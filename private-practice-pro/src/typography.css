@@ -1,0 +1,56 @@
+/* The Private Practice Pro — Typography
+   Loads Instrument Serif + Inter (Google Fonts) and Clash Display (Fontshare).
+   Import after tokens.css. */
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+
+/* Headers — Instrument Serif, tight tracking */
+h1, h2, h3, h4, .h-display, .h-header {
+  font-family: var(--font-header);
+  font-weight: 400;
+  letter-spacing: var(--ls-header);
+  line-height: var(--lh-tight);
+  color: var(--color-surface);
+  margin: 0 0 var(--space-4);
+}
+
+h1, .h-display { font-size: var(--fs-display); }
+h2             { font-size: var(--fs-h1); }
+h3             { font-size: var(--fs-h2); line-height: var(--lh-snug); }
+h4             { font-size: var(--fs-h3); line-height: var(--lh-snug); }
+
+/* Subheaders — Clash Display, uppercase, wide tracking */
+.subhead, .eyebrow {
+  font-family: var(--font-subhead);
+  font-weight: 700;
+  font-size: var(--fs-subhead);
+  letter-spacing: var(--ls-subhead);
+  text-transform: uppercase;
+  line-height: var(--lh-snug);
+  color: var(--color-accent-lime);
+  display: inline-block;
+  margin: 0 0 var(--space-3);
+}
+
+/* Body — Inter */
+body, p, li, input, button, textarea, select, a {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  letter-spacing: var(--ls-body);
+}
+
+p { margin: 0 0 var(--space-4); color: var(--color-surface); }
+
+small, .text-small { font-size: var(--fs-small); }
+
+/* Italic variant of Instrument Serif is especially nice for pullquotes */
+.pullquote {
+  font-family: var(--font-header);
+  font-style: italic;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-header);
+  color: var(--color-accent-blush);
+}

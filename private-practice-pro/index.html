@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Private Practice Pro · Design System</title>
+<meta name="description" content="The Private Practice Pro brand + component library — colors, type, and UI primitives." />
+<link rel="stylesheet" href="src/tokens.css" />
+<link rel="stylesheet" href="src/typography.css" />
+<link rel="stylesheet" href="src/base.css" />
+<style>
+  /* Preview-only layout */
+  section { padding: var(--space-16) 0; border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 15%, transparent); }
+  section:last-of-type { border-bottom: 0; }
+
+  .swatches { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: var(--space-4); }
+  .swatch {
+    border-radius: var(--radius-md); overflow: hidden;
+    background: var(--color-surface); color: var(--color-ink);
+    box-shadow: var(--shadow-sm);
+  }
+  .swatch .chip { height: 110px; }
+  .swatch .meta { padding: var(--space-3) var(--space-4); }
+  .swatch .name { font-family: var(--font-subhead); font-size: var(--fs-subhead); font-weight: 700; letter-spacing: var(--ls-subhead); text-transform: uppercase; }
+  .swatch .hex  { font-family: var(--font-body); font-size: var(--fs-small); }
+
+  .type-row { display: grid; gap: var(--space-4); }
+  .type-label {
+    font-family: var(--font-subhead); font-size: var(--fs-subhead); font-weight: 700;
+    letter-spacing: var(--ls-subhead); text-transform: uppercase; color: var(--color-accent-lime);
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--space-2);
+    font-family: var(--font-subhead); font-size: var(--fs-subhead); font-weight: 700;
+    letter-spacing: var(--ls-subhead); text-transform: uppercase;
+    padding: 0.9rem 1.5rem; border-radius: var(--radius-pill);
+    border: 1px solid transparent; text-decoration: none; cursor: pointer;
+  }
+  .btn-primary { background: var(--color-accent-lime); color: var(--color-ink); }
+  .btn-secondary { background: transparent; color: var(--color-surface); border-color: var(--color-surface); }
+  .btn-tertiary { padding: 0; background: transparent; color: var(--color-accent-lime); border-bottom: 1px solid currentColor; border-radius: 0; }
+
+  .row { display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: center; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-6); }
+  .card { background: var(--color-surface); color: var(--color-ink); border-radius: var(--radius-lg); padding: var(--space-8); box-shadow: var(--shadow-md); }
+  .card h3, .card p { color: var(--color-ink); }
+  .card.accent { background: var(--color-accent-blush); }
+  .card.dark   { background: var(--color-ink); color: var(--color-surface); }
+  .card.dark h3, .card.dark p { color: var(--color-surface); }
+  .card .meta {
+    font-family: var(--font-subhead); font-size: var(--fs-subhead); font-weight: 700;
+    letter-spacing: var(--ls-subhead); text-transform: uppercase;
+    color: var(--color-bg); display: block; margin-bottom: var(--space-2);
+  }
+  .card.dark .meta { color: var(--color-accent-lime); }
+
+  footer { padding: var(--space-8) 0; text-align: center; font-size: var(--fs-small); opacity: 0.75; }
+</style>
+</head>
+<body>
+
+<header class="container">
+  <nav style="display:flex; align-items:center; justify-content:space-between; padding: var(--space-4) 0; border-bottom: 1px solid color-mix(in srgb, var(--color-surface) 20%, transparent);">
+    <div style="font-family: var(--font-header); font-size: 1.5rem; letter-spacing: var(--ls-header);">
+      The Private <em style="color: var(--color-accent-lime); font-style: normal;">Practice</em> Pro
+    </div>
+    <a class="btn btn-primary" href="#intake">Book consult →</a>
+  </nav>
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+  <section>
+    <span class="eyebrow">Design System · v0.1</span>
+    <h1 style="max-width: 18ch;">The Private Practice Pro.</h1>
+    <p style="max-width: 56ch; font-size: 1.125rem;">
+      A living reference for the brand system — colors, type, and the core components
+      any new surface should be built from.
+    </p>
+    <div class="row" style="margin-top: var(--space-6);">
+      <a class="btn btn-primary" href="#components">See components →</a>
+      <a class="btn btn-secondary" href="brand/guidelines.md">Read guidelines</a>
+      <a class="btn btn-tertiary" href="src/tokens.json">tokens.json</a>
+    </div>
+  </section>
+
+  <!-- COLOR -->
+  <section id="color">
+    <span class="eyebrow">01 · Color</span>
+    <h2>Palette</h2>
+    <p>Two purples carry 60% of any layout. Lime and blush are pops — never more than 10%.</p>
+
+    <div class="swatches" style="margin-top: var(--space-6);">
+      <div class="swatch"><div class="chip" style="background:#6772c3"></div><div class="meta"><div class="name">BG</div><div class="hex">#6772c3</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#8890cf"></div><div class="meta"><div class="name">Primary</div><div class="hex">#8890cf</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#3a506a"></div><div class="meta"><div class="name">Ink</div><div class="hex">#3a506a</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#fafafb; border-bottom: 1px solid #eee;"></div><div class="meta"><div class="name">Surface</div><div class="hex">#fafafb</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#daff00"></div><div class="meta"><div class="name">Lime</div><div class="hex">#daff00</div></div></div>
+      <div class="swatch"><div class="chip" style="background:#dcbed7"></div><div class="meta"><div class="name">Blush</div><div class="hex">#dcbed7</div></div></div>
+    </div>
+  </section>
+
+  <!-- TYPE -->
+  <section id="type">
+    <span class="eyebrow">02 · Typography</span>
+    <h2>Type system</h2>
+
+    <div class="type-row" style="margin-top: var(--space-6);">
+      <div>
+        <div class="type-label">Header · Instrument Serif · -0.02em</div>
+        <div style="font-family: var(--font-header); font-size: var(--fs-display); line-height: var(--lh-tight); letter-spacing: var(--ls-header);">
+          Calm, credible, editorial.
+        </div>
+      </div>
+
+      <div>
+        <div class="type-label">Subhead · Clash Display · 0.16em · UPPER</div>
+        <div style="font-family: var(--font-subhead); font-weight: 700; font-size: 1rem; letter-spacing: var(--ls-subhead); text-transform: uppercase;">
+          The Private Practice Pro
+        </div>
+      </div>
+
+      <div>
+        <div class="type-label">Body · Inter</div>
+        <p style="max-width: 60ch; font-size: 1.0625rem;">
+          The Private Practice Pro helps established practitioners replace hustle with
+          <strong>systems</strong> — so the business runs like your best session: focused, unhurried,
+          and built to repeat.
+        </p>
+      </div>
+
+      <div>
+        <div class="type-label">Pullquote · Instrument Serif Italic</div>
+        <p class="pullquote" style="max-width: 36ch;">"I stopped working Fridays and my revenue went <em>up</em>."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPONENTS -->
+  <section id="components">
+    <span class="eyebrow">03 · Components</span>
+    <h2>Primitives</h2>
+
+    <h3 style="margin-top: var(--space-8);">Buttons</h3>
+    <div class="row">
+      <button class="btn btn-primary">Book a consult →</button>
+      <button class="btn btn-secondary">Learn more</button>
+      <a class="btn btn-tertiary" href="#">Read the guide</a>
+    </div>
+
+    <h3 style="margin-top: var(--space-12);">Cards</h3>
+    <div class="cards">
+      <article class="card">
+        <span class="meta">01 · Foundations</span>
+        <h3 style="margin-top:0;">Clarify your offer</h3>
+        <p>Name the one thing your practice does better than anyone else in town.</p>
+      </article>
+      <article class="card accent">
+        <span class="meta">02 · Systems</span>
+        <h3 style="margin-top:0;">Install the calm</h3>
+        <p>Replace ad-hoc admin with a calendar and intake that run on their own.</p>
+      </article>
+      <article class="card dark">
+        <span class="meta">03 · Growth</span>
+        <h3 style="margin-top:0;">Grow on your terms</h3>
+        <p>A referral engine designed around your capacity, not against it.</p>
+      </article>
+    </div>
+
+    <p style="margin-top: var(--space-8);">
+      More component examples:
+      <a href="components/button.html">buttons</a>,
+      <a href="components/card.html">cards</a>,
+      <a href="components/hero.html">hero</a>,
+      <a href="components/nav.html">nav</a>,
+      <a href="components/form.html">form</a>.
+    </p>
+  </section>
+
+  <!-- USAGE -->
+  <section id="usage">
+    <span class="eyebrow">04 · Using this system</span>
+    <h2>For designers + tools</h2>
+    <div class="cards">
+      <div class="card">
+        <span class="meta">Claude Design</span>
+        <h3 style="margin-top:0;">Point the intake at this folder</h3>
+        <p>Use the repo URL or this subfolder. Claude will copy the tokens, CSS, and component examples it needs.</p>
+      </div>
+      <div class="card">
+        <span class="meta">Canva / Figma</span>
+        <h3 style="margin-top:0;">Import tokens.json</h3>
+        <p>Hex values, type stacks, radius, and spacing all encoded. Clash Display is on Fontshare.</p>
+      </div>
+      <div class="card">
+        <span class="meta">Dev</span>
+        <h3 style="margin-top:0;">@import and go</h3>
+        <p>Drop <code>src/tokens.css</code> + <code>src/typography.css</code> into any page.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>The Private Practice Pro · design system v0.1</footer>
+
+</main>
+
+</body>
+</html>
