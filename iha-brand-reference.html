@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IHA Brand Style Reference</title>
+<style>
+@font-face {
+  font-family: "Tan Mon Cheri";
+  src: url("https://assets.cdn.filesafe.space/TnV9noTnK31Dh4UXbSiG/media/69c2f2c3a848b1fe07a626c1.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Julius Sans One";
+  src: url("https://assets.cdn.filesafe.space/TnV9noTnK31Dh4UXbSiG/media/69c2f294cf4f9a3caa126b80.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "TT Norms";
+  src: url("https://assets.cdn.filesafe.space/TnV9noTnK31Dh4UXbSiG/media/69c2f3347fba4b8e6bcfbbb7.otf") format("opentype");
+  font-display: swap;
+}
+
+:root {
+  --iha-rust: #8c421f;
+  --iha-charcoal: #484747;
+  --iha-olive: #535a43;
+  --iha-sage: #989a7f;
+  --iha-mist: #c7c8b9;
+  --iha-cream: #faf5ec;
+  --iha-stone: #d5cfc2;
+  --iha-white: #ffffff;
+  --iha-scroll-bg: #fdfbf8;
+  --iha-sidebar-bg: #d2d3c7;
+  --iha-header-bg: #e3e3dc;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: "TT Norms", Arial, sans-serif;
+  color: var(--iha-charcoal);
+  background: radial-gradient(circle at top left, rgba(199,200,185,0.18), transparent 28%),
+              linear-gradient(180deg, #f7f2e9 0%, var(--iha-cream) 100%);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  line-height: 1.65;
+}
+
+.container {
+  width: min(calc(100% - 48px), 1100px);
+  margin: 0 auto;
+  padding: 80px 0;
+}
+
+/* ── Header ── */
+.brand-header {
+  text-align: center;
+  padding: 100px 0 60px;
+}
+
+.brand-header h1 {
+  font-family: "Tan Mon Cheri", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  color: var(--iha-olive);
+  margin-bottom: 24px;
+}
+
+.brand-header .kicker {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--iha-rust);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.brand-header p {
+  font-size: 1.1rem;
+  color: rgba(72,71,71,0.85);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ── Section ── */
+.section {
+  padding: 64px 0;
+}
+
+.section + .section {
+  border-top: 1px solid rgba(152,154,127,0.2);
+}
+
+.section-title {
+  font-family: "Tan Mon Cheri", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  color: var(--iha-olive);
+  margin-bottom: 12px;
+}
+
+.section-kicker {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--iha-rust);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.section-desc {
+  color: rgba(72,71,71,0.82);
+  margin-bottom: 40px;
+  max-width: 700px;
+}
+
+/* ── Color Palette ── */
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.color-card {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(83,90,67,0.12);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(72,71,71,0.05);
+}
+
+.color-swatch {
+  height: 100px;
+  width: 100%;
+}
+
+.color-info {
+  padding: 14px 16px;
+}
+
+.color-name {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--iha-charcoal);
+  margin-bottom: 4px;
+}
+
+.color-hex {
+  font-family: "TT Norms", Arial, sans-serif;
+  font-size: 0.85rem;
+  color: rgba(72,71,71,0.65);
+}
+
+/* ── Typography ── */
+.type-specimen {
+  margin-bottom: 40px;
+}
+
+.type-specimen .label {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iha-sage);
+  margin-bottom: 8px;
+}
+
+.type-display {
+  font-family: "Tan Mon Cheri", Georgia, serif;
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: 0.01em;
+  color: var(--iha-olive);
+}
+
+.type-kicker-demo {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--iha-rust);
+}
+
+.type-body-demo {
+  font-family: "TT Norms", Arial, sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: rgba(72,71,71,0.92);
+  max-width: 600px;
+}
+
+/* ── Buttons ── */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.btn {
+  appearance: none;
+  cursor: pointer;
+  border: 1px solid var(--iha-olive);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #a6a88d 0%, var(--iha-sage) 100%);
+  color: var(--iha-white);
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.2;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 16px 28px;
+  min-height: 56px;
+  box-shadow: 0 10px 24px rgba(83,90,67,0.16);
+  transition: transform 260ms ease, box-shadow 260ms ease, background 260ms ease;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, #7f8668 0%, var(--iha-olive) 100%);
+  box-shadow: 0 16px 30px rgba(83,90,67,0.22);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--iha-olive);
+  border-color: rgba(83,90,67,0.45);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background: rgba(152,154,127,0.11);
+  color: var(--iha-olive);
+  transform: translateY(-2px);
+}
+
+.btn-rust {
+  background: linear-gradient(180deg, #a5542a 0%, var(--iha-rust) 100%);
+  border-color: var(--iha-rust);
+  box-shadow: 0 12px 28px rgba(140,66,31,0.18);
+}
+
+.btn-rust:hover {
+  background: linear-gradient(180deg, #8f451f 0%, #753517 100%);
+}
+
+.btn-dashboard {
+  background-color: var(--iha-olive);
+  border-color: var(--iha-olive);
+  border-radius: 8px;
+  min-height: 36px;
+  padding: 8px 14px;
+  font-size: 0.82rem;
+  box-shadow: 0 1px 2px rgba(16,24,40,0.05);
+}
+
+.btn-dashboard:hover {
+  background-color: #6b7355;
+  border-color: #6b7355;
+}
+
+/* ── Cards ── */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(83,90,67,0.12);
+  border-radius: 24px;
+  box-shadow: 0 18px 50px rgba(72,71,71,0.09);
+  backdrop-filter: blur(4px);
+  padding: clamp(22px, 3vw, 36px);
+}
+
+.card h3 {
+  font-family: "Tan Mon Cheri", Georgia, serif;
+  font-size: 1.8rem;
+  color: var(--iha-olive);
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: rgba(72,71,71,0.85);
+  font-size: 0.95rem;
+}
+
+.dashboard-card {
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(72,71,71,0.05);
+  border: 1px solid rgba(83,90,67,0.08);
+}
+
+.dashboard-card-header {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--iha-olive);
+  font-weight: 600;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #c7c8b9;
+  margin-bottom: 16px;
+}
+
+/* ── Form Elements ── */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--iha-charcoal);
+}
+
+.form-input {
+  width: 100%;
+  min-height: 56px;
+  border: 1px solid rgba(83,90,67,0.18);
+  border-radius: 18px;
+  background: rgba(255,255,255,0.82);
+  color: var(--iha-charcoal);
+  padding: 14px 18px;
+  font-family: "TT Norms", Arial, sans-serif;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
+  transition: border-color 260ms ease, box-shadow 260ms ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgba(140,66,31,0.38);
+  background: var(--iha-white);
+  box-shadow: 0 0 0 4px rgba(140,66,31,0.08), 0 14px 32px rgba(72,71,71,0.08);
+}
+
+.form-input::placeholder {
+  color: rgba(72,71,71,0.46);
+}
+
+/* ── Divider ── */
+.divider {
+  width: min(120px, 24vw);
+  height: 1px;
+  margin: 28px 0;
+  background: linear-gradient(90deg, rgba(152,154,127,0), rgba(152,154,127,0.9), rgba(152,154,127,0));
+}
+
+/* ── Olive section ── */
+.olive-section {
+  background: linear-gradient(180deg, rgba(83,90,67,0.98) 0%, rgba(72,78,58,0.98) 100%);
+  color: var(--iha-cream);
+  border-radius: 24px;
+  padding: 56px clamp(24px, 4vw, 48px);
+  margin: 40px 0;
+}
+
+.olive-section h2 {
+  color: var(--iha-cream);
+}
+
+.olive-section .section-kicker {
+  color: var(--iha-mist);
+}
+
+.olive-section p {
+  color: rgba(250,245,236,0.9);
+}
+
+/* ── Dashboard Preview ── */
+.dashboard-preview {
+  background-color: var(--iha-scroll-bg);
+  border-radius: 16px;
+  padding: 32px;
+  border: 1px solid rgba(83,90,67,0.08);
+}
+
+.dashboard-header-bar {
+  background-color: var(--iha-header-bg);
+  border-radius: 10px;
+  padding: 16px 24px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid rgba(83,90,67,0.1);
+}
+
+.dashboard-header-bar h3 {
+  font-family: "Tan Mon Cheri", Georgia, serif;
+  text-transform: uppercase;
+  color: var(--iha-charcoal);
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+.sidebar-preview {
+  background-color: var(--iha-sidebar-bg);
+  border-radius: 12px;
+  padding: 20px 16px;
+  width: 200px;
+  flex-shrink: 0;
+  border: 1px solid rgba(83,90,67,0.1);
+}
+
+.sidebar-nav-item {
+  font-family: "TT Norms", Arial, sans-serif;
+  font-size: 0.85rem;
+  color: var(--iha-charcoal);
+  padding: 8px 12px;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  cursor: default;
+  transition: background 260ms ease;
+}
+
+.sidebar-nav-item:hover {
+  background-color: rgba(83,90,67,0.1);
+}
+
+.sidebar-nav-item.active {
+  background-color: rgba(83,90,67,0.18);
+  font-weight: 600;
+  color: var(--iha-olive);
+}
+
+.dashboard-layout {
+  display: flex;
+  gap: 24px;
+}
+
+.dashboard-main {
+  flex: 1;
+}
+
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Spacing tokens ── */
+.token-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.token-item {
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(83,90,67,0.08);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.token-label {
+  font-family: "Julius Sans One", Arial, sans-serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--iha-sage);
+  margin-bottom: 4px;
+}
+
+.token-value {
+  font-family: "TT Norms", Arial, sans-serif;
+  font-size: 0.9rem;
+  color: var(--iha-charcoal);
+}
+
+@media (max-width: 767px) {
+  .color-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-grid { grid-template-columns: 1fr; }
+  .dashboard-layout { flex-direction: column; }
+  .dashboard-cards { grid-template-columns: 1fr; }
+  .sidebar-preview { width: 100%; }
+  .button-row { flex-direction: column; align-items: flex-start; }
+  .token-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="brand-header">
+    <span class="kicker">Brand Style Reference</span>
+    <h1>Integrative Healthcare Alliance</h1>
+    <p>A complete visual reference of the IHA brand system — colors, typography, components, and design tokens — for use across GoHighLevel, web, and marketing materials.</p>
+  </header>
+
+
+  <!-- ═══ COLOR PALETTE ═══ -->
+  <section class="section">
+    <span class="section-kicker">01 — Color Palette</span>
+    <h2 class="section-title">Brand Colors</h2>
+    <p class="section-desc">The IHA palette is rooted in nature — warm earth tones, muted greens, and soft neutrals that convey trust, calm, and professionalism.</p>
+
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #8c421f;"></div>
+        <div class="color-info">
+          <div class="color-name">Rust</div>
+          <div class="color-hex">#8c421f</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #484747;"></div>
+        <div class="color-info">
+          <div class="color-name">Charcoal</div>
+          <div class="color-hex">#484747</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #535a43;"></div>
+        <div class="color-info">
+          <div class="color-name">Olive</div>
+          <div class="color-hex">#535a43</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #989a7f;"></div>
+        <div class="color-info">
+          <div class="color-name">Sage</div>
+          <div class="color-hex">#989a7f</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #c7c8b9;"></div>
+        <div class="color-info">
+          <div class="color-name">Mist</div>
+          <div class="color-hex">#c7c8b9</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #d5cfc2;"></div>
+        <div class="color-info">
+          <div class="color-name">Stone</div>
+          <div class="color-hex">#d5cfc2</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #faf5ec;"></div>
+        <div class="color-info">
+          <div class="color-name">Cream</div>
+          <div class="color-hex">#faf5ec</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #ffffff; border-bottom: 1px solid rgba(83,90,67,0.1);"></div>
+        <div class="color-info">
+          <div class="color-name">White</div>
+          <div class="color-hex">#ffffff</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1.6rem; margin-top: 48px;">UI-Specific Colors</h3>
+    <p class="section-desc">Extended palette used in the GoHighLevel dashboard interface.</p>
+    <div class="color-grid">
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #fdfbf8;"></div>
+        <div class="color-info">
+          <div class="color-name">Scroll BG</div>
+          <div class="color-hex">#fdfbf8</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #d2d3c7;"></div>
+        <div class="color-info">
+          <div class="color-name">Sidebar BG</div>
+          <div class="color-hex">#d2d3c7</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #e3e3dc;"></div>
+        <div class="color-info">
+          <div class="color-name">Header BG</div>
+          <div class="color-hex">#e3e3dc</div>
+        </div>
+      </div>
+      <div class="color-card">
+        <div class="color-swatch" style="background-color: #6b7355;"></div>
+        <div class="color-info">
+          <div class="color-name">Olive Hover</div>
+          <div class="color-hex">#6b7355</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ TYPOGRAPHY ═══ -->
+  <section class="section">
+    <span class="section-kicker">02 — Typography</span>
+    <h2 class="section-title">Type System</h2>
+    <p class="section-desc">Three fonts, three roles. Tan Mon Cheri for headlines, Julius Sans One for kickers and labels, TT Norms for everything else.</p>
+
+    <div class="type-specimen">
+      <div class="label">Display / Headlines — Tan Mon Cheri</div>
+      <div class="type-display" style="font-size: clamp(3rem, 6vw, 5.8rem);">Healing Starts Here</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">H2 — Tan Mon Cheri</div>
+      <div class="type-display" style="font-size: clamp(2.4rem, 4.4vw, 4.3rem);">Integrative Approach</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">H3 — Tan Mon Cheri</div>
+      <div class="type-display" style="font-size: clamp(1.9rem, 3.1vw, 3rem);">Whole-Body Wellness</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="type-specimen">
+      <div class="label">Kicker / Eyebrow / Labels — Julius Sans One</div>
+      <div class="type-kicker-demo">Our Services &mdash; What We Offer</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">Dashboard Card Headers — Julius Sans One (600 weight)</div>
+      <div style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--iha-olive); font-weight: 600;">Opportunity Status</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="type-specimen">
+      <div class="label">Body / Paragraph — TT Norms</div>
+      <div class="type-body-demo">At Integrative Healthcare Alliance, we combine the best of conventional and alternative medicine to help you feel your best. Our team of practitioners works together to create personalized treatment plans that address the root cause of your health concerns.</div>
+    </div>
+
+    <div class="type-specimen">
+      <div class="label">Bold / Emphasis Rules</div>
+      <div class="type-body-demo">
+        <strong style="color: var(--iha-rust); font-weight: 500;">Bold text uses Rust (#8c421f)</strong> and
+        <em style="color: var(--iha-olive);">italic text uses Olive (#535a43)</em>.
+        Links use <a href="#" style="color: var(--iha-rust); text-decoration-color: rgba(140,66,31,0.35); text-underline-offset: 0.14em;">Rust with subtle underline</a>.
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BUTTONS ═══ -->
+  <section class="section">
+    <span class="section-kicker">03 — Buttons</span>
+    <h2 class="section-title">Button Styles</h2>
+    <p class="section-desc">Landing page buttons use pill-shaped, gradient styles. Dashboard buttons use flat, compact 8px radius.</p>
+
+    <div class="label" style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--iha-sage); margin-bottom: 12px;">Landing Page Buttons</div>
+    <div class="button-row">
+      <a class="btn" href="#">Book Now</a>
+      <a class="btn btn-outline" href="#">Learn More</a>
+      <a class="btn btn-rust" href="#">Get Started</a>
+    </div>
+
+    <div class="label" style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--iha-sage); margin-bottom: 12px; margin-top: 32px;">Dashboard / UI Buttons</div>
+    <div class="button-row">
+      <a class="btn btn-dashboard" href="#">Edit Dashboard</a>
+      <a class="btn btn-dashboard" href="#" style="background-color: transparent; color: var(--iha-olive); border-color: rgba(83,90,67,0.3); box-shadow: none;">Cancel</a>
+      <a class="btn btn-dashboard" href="#" style="background-color: transparent; color: var(--iha-olive); border: none; box-shadow: none; text-decoration: underline; text-underline-offset: 3px; text-decoration-color: rgba(83,90,67,0.3);">Text Link</a>
+    </div>
+  </section>
+
+
+  <!-- ═══ CARDS ═══ -->
+  <section class="section">
+    <span class="section-kicker">04 — Surfaces &amp; Cards</span>
+    <h2 class="section-title">Card System</h2>
+    <p class="section-desc">Two card treatments: frosted glass cards for landing pages and clean white cards for the dashboard.</p>
+
+    <div class="label" style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--iha-sage); margin-bottom: 16px;">Landing Page Card</div>
+    <div class="card-grid" style="margin-bottom: 40px;">
+      <div class="card">
+        <h3>Acupuncture</h3>
+        <p>Traditional acupuncture therapy to restore balance and promote natural healing throughout the body.</p>
+      </div>
+      <div class="card">
+        <h3>Functional Medicine</h3>
+        <p>A systems-based approach that focuses on identifying and addressing the root cause of disease.</p>
+      </div>
+    </div>
+
+    <div class="label" style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--iha-sage); margin-bottom: 16px;">Dashboard Widget Card</div>
+    <div class="card-grid">
+      <div class="card dashboard-card">
+        <div class="dashboard-card-header">Opportunity Status</div>
+        <p style="text-align: center; color: var(--iha-sage); padding: 24px 0;">No Data Found</p>
+      </div>
+      <div class="card dashboard-card">
+        <div class="dashboard-card-header">Conversion Rate</div>
+        <p style="text-align: center; font-size: 2.4rem; font-weight: 300; color: var(--iha-charcoal); padding: 16px 0;">0%</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ FORMS ═══ -->
+  <section class="section">
+    <span class="section-kicker">05 — Form Elements</span>
+    <h2 class="section-title">Input Styles</h2>
+    <p class="section-desc">Soft, rounded inputs with subtle borders. Focus states use a rust-tinted glow ring.</p>
+
+    <div style="max-width: 500px;">
+      <div class="form-group">
+        <label class="form-label">Full Name</label>
+        <input type="text" class="form-input" placeholder="Jane Doe">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="jane@example.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-input" rows="4" placeholder="Tell us about your wellness goals..." style="min-height: 120px; resize: vertical;"></textarea>
+      </div>
+      <a class="btn" href="#" style="width: 100%; justify-content: center;">Submit</a>
+    </div>
+  </section>
+
+
+  <!-- ═══ OLIVE SECTION ═══ -->
+  <div class="olive-section">
+    <span class="section-kicker">06 — Dark Section</span>
+    <h2 class="section-title" style="margin-bottom: 16px;">Olive Background Treatment</h2>
+    <p>When content sits on the olive background, headings switch to Cream (#faf5ec), body text to 90% opacity cream, and kickers/eyebrows shift to Mist (#c7c8b9). This creates a rich, grounded section that contrasts with the lighter cream sections.</p>
+    <div style="margin-top: 24px;">
+      <a class="btn" href="#" style="background: linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.1) 100%); border-color: rgba(250,245,236,0.3); color: var(--iha-cream);">Light Button on Dark</a>
+    </div>
+  </div>
+
+
+  <!-- ═══ DASHBOARD PREVIEW ═══ -->
+  <section class="section">
+    <span class="section-kicker">07 — Dashboard UI</span>
+    <h2 class="section-title">GoHighLevel Dashboard</h2>
+    <p class="section-desc">The client-facing GHL dashboard uses the brand palette applied via custom CSS overrides.</p>
+
+    <div class="dashboard-preview">
+      <div class="dashboard-layout">
+        <div class="sidebar-preview">
+          <div style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--iha-sage); margin-bottom: 12px; padding: 0 12px;">Navigation</div>
+          <div class="sidebar-nav-item">Launchpad</div>
+          <div class="sidebar-nav-item active">Dashboard</div>
+          <div class="sidebar-nav-item">Conversations</div>
+          <div class="sidebar-nav-item">Calendars</div>
+          <div class="sidebar-nav-item">Contacts</div>
+          <div class="sidebar-nav-item">Opportunities</div>
+          <div class="sidebar-nav-item">Payments</div>
+          <div style="border-top: 1px solid rgba(83,90,67,0.15); margin: 8px 12px;"></div>
+          <div class="sidebar-nav-item">Marketing</div>
+          <div class="sidebar-nav-item">Automation</div>
+          <div class="sidebar-nav-item">Settings</div>
+        </div>
+        <div class="dashboard-main">
+          <div class="dashboard-header-bar">
+            <h3>Dashboard</h3>
+            <a class="btn btn-dashboard" href="#">Edit Dashboard</a>
+          </div>
+          <div class="dashboard-cards">
+            <div class="card dashboard-card">
+              <div class="dashboard-card-header">Opportunity Status</div>
+              <p style="text-align: center; color: var(--iha-sage); padding: 20px 0; font-size: 0.9rem;">No Data Found</p>
+            </div>
+            <div class="card dashboard-card">
+              <div class="dashboard-card-header">Conversion Rate</div>
+              <p style="text-align: center; font-size: 2rem; color: var(--iha-charcoal); padding: 12px 0;">0%</p>
+              <p style="text-align: center; font-size: 0.8rem; color: var(--iha-sage);">Won revenue: $0</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ DESIGN TOKENS ═══ -->
+  <section class="section">
+    <span class="section-kicker">08 — Design Tokens</span>
+    <h2 class="section-title">Spacing, Radii &amp; Shadows</h2>
+    <p class="section-desc">Reusable design tokens that maintain consistency across all touchpoints.</p>
+
+    <div class="token-grid">
+      <div class="token-item">
+        <div class="token-label">Border Radius — Small</div>
+        <div class="token-value">14px (inputs, small cards)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Border Radius — Medium</div>
+        <div class="token-value">24px (cards, surfaces)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Border Radius — Pill</div>
+        <div class="token-value">999px (buttons, badges)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Border Radius — Dashboard</div>
+        <div class="token-value">16px (widget cards), 8px (buttons, nav)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Shadow — Soft</div>
+        <div class="token-value">0 18px 50px rgba(72,71,71, 0.09)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Shadow — Card</div>
+        <div class="token-value">0 20px 60px rgba(72,71,71, 0.12)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Shadow — Dashboard</div>
+        <div class="token-value">0 2px 12px rgba(72,71,71, 0.05)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Transition</div>
+        <div class="token-value">260ms ease (all interactive elements)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Max Width — Container</div>
+        <div class="token-value">1200px (1100px on brand page)</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Max Width — Copy</div>
+        <div class="token-value">760px (readable body text)</div>
+      </div>
+    </div>
+
+    <h3 style="font-size: 1.6rem; margin-top: 40px; margin-bottom: 16px;">Font Stack Summary</h3>
+    <div class="token-grid">
+      <div class="token-item">
+        <div class="token-label">Headlines</div>
+        <div class="token-value" style="font-family: 'Tan Mon Cheri', Georgia, serif; font-size: 1.1rem;">Tan Mon Cheri</div>
+        <div style="font-size: 0.78rem; color: var(--iha-sage); margin-top: 4px;">weight 400, line-height 0.94, tracking 0.01em</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Kickers / Labels</div>
+        <div class="token-value" style="font-family: 'Julius Sans One', Arial, sans-serif; font-size: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">Julius Sans One</div>
+        <div style="font-size: 0.78rem; color: var(--iha-sage); margin-top: 4px;">0.84rem, tracking 0.18em, uppercase, Rust color</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Body / UI</div>
+        <div class="token-value" style="font-family: 'TT Norms', Arial, sans-serif; font-size: 1rem;">TT Norms</div>
+        <div style="font-size: 0.78rem; color: var(--iha-sage); margin-top: 4px;">1rem–1.14rem, line-height 1.65, Charcoal color</div>
+      </div>
+      <div class="token-item">
+        <div class="token-label">Fallback Stack</div>
+        <div class="token-value">Headlines: Georgia, serif<br>Body: Arial, sans-serif</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer style="text-align: center; padding: 48px 0 80px; color: var(--iha-sage); font-size: 0.85rem;">
+    <div class="divider" style="margin: 0 auto 24px;"></div>
+    Integrative Healthcare Alliance &mdash; Brand Style Reference<br>
+    <span style="font-size: 0.75rem; opacity: 0.7;">Generated from iha-ghl-base.css + iha-ghl-dashboard.css</span>
+  </footer>
+
+</div>
+
+</body>
+</html>
