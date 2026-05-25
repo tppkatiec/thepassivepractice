@@ -90,6 +90,26 @@
       font-family: monospace;
       color: #ccc;
     }
+    .export-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .export-btn:hover { background: #6366f1; }
+    .export-btn.copied {
+      background: #065f46;
+      color: #34d399;
+    }
     .instructions {
       margin-top: 12px;
       font-size: 11px;
@@ -138,6 +158,8 @@
       <span class="slider"></span>
     </label>
   </div>
+
+  <button id="exportNotes" class="export-btn">Copy All Notes to Clipboard</button>
 
   <div id="statusBox" class="status">
     Toggle the inspector, then hover over any element on a GHL page.

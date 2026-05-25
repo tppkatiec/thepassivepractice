@@ -1,6 +1,7 @@
 const toggleInspector = document.getElementById("toggleInspector");
 const toggleSticky = document.getElementById("toggleSticky");
 const toggleDebug = document.getElementById("toggleDebug");
+const exportNotes = document.getElementById("exportNotes");
 const statusBox = document.getElementById("statusBox");
 
 // Load saved state
@@ -42,6 +43,29 @@ toggleDebug.addEventListener("change", () => {
   const enabled = toggleDebug.checked;
   chrome.storage?.local?.set({ debugEnabled: enabled });
   sendToTab({ action: "toggleDebug", enabled });
+});
+
+exportNotes.addEventListener("click", () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (!tabs[0]?.id) return;
+    chrome.tabs.sendMessage(tabs[0].id, { action: "exportNotes" }, (response) => {
+      if (response && response.notes) {
+        navigator.clipboard.writeText(response.notes).then(() => {
+          exportNotes.classList.add("copied");
+          exportNotes.textContent = `Copied ${response.count} note(s)!`;
+          setTimeout(() => {
+            exportNotes.classList.remove("copied");
+            exportNotes.textContent = "Copy All Notes to Clipboard";
+          }, 2000);
+        });
+      } else {
+        exportNotes.textContent = "No pinned notes yet";
+        setTimeout(() => {
+          exportNotes.textContent = "Copy All Notes to Clipboard";
+        }, 2000);
+      }
+    });
+  });
 });
 
 function updateStatus() {

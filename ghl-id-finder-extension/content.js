@@ -195,6 +195,9 @@
         <button class="gft-close" style="display:none">&times;</button>
       </div>
       <div class="gft-body"></div>
+      <div class="gft-note-area" style="display:none">
+        <textarea class="gft-note-input" placeholder="What needs to be fixed here..." rows="2"></textarea>
+      </div>
       <div class="gft-selector" title="Click to copy selector">
         <code></code>
         <span class="gft-copy-icon">COPY</span>
@@ -362,8 +365,62 @@
     closeBtn.style.display = "";
     closeBtn.onclick = () => removePinned(pinned);
 
+    // Show the note area on pinned tooltips
+    const noteArea = pinned.querySelector(".gft-note-area");
+    noteArea.style.display = "";
+    const noteInput = pinned.querySelector(".gft-note-input");
+    noteInput.addEventListener("click", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("mousedown", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("keydown", (ev) => ev.stopPropagation());
+    // Auto-resize as they type
+    noteInput.addEventListener("input", () => {
+      noteInput.style.height = "auto";
+      noteInput.style.height = noteInput.scrollHeight + "px";
+    });
+
+    // Make pinned tooltip draggable
+    let isDragging = false;
+    let dragX = 0, dragY = 0;
+    const header = pinned.querySelector(".gft-header");
+    header.style.cursor = "grab";
+    header.addEventListener("mousedown", (ev) => {
+      if (ev.target.closest(".gft-close")) return;
+      isDragging = true;
+      header.style.cursor = "grabbing";
+      dragX = ev.clientX - pinned.offsetLeft;
+      dragY = ev.clientY - pinned.offsetTop;
+      ev.preventDefault();
+    });
+    document.addEventListener("mousemove", (ev) => {
+      if (!isDragging) return;
+      pinned.style.left = (ev.clientX - dragX) + "px";
+      pinned.style.top = (ev.clientY - dragY) + "px";
+    });
+    document.addEventListener("mouseup", () => {
+      if (isDragging) {
+        isDragging = false;
+        header.style.cursor = "grab";
+      }
+    });
+
     positionTooltip(pinned, e);
     pinnedTooltips.push(pinned);
+
+    // Focus the note input after a brief delay
+    setTimeout(() => noteInput.focus(), 50);
+  }
+
+  function exportAllNotes() {
+    const notes = [];
+    pinnedTooltips.forEach((tip, i) => {
+      const selector = tip.querySelector(".gft-selector code")?.textContent || "";
+      const tag = tip.querySelector(".gft-tag")?.textContent || "";
+      const note = tip.querySelector(".gft-note-input")?.value || "";
+      if (selector || note) {
+        notes.push(`${i + 1}. [${tag}] ${selector}${note ? "\n   Note: " + note : ""}`);
+      }
+    });
+    return notes.join("\n\n");
   }
 
   function removePinned(tip) {
@@ -459,7 +516,7 @@
 
   // ── Message from popup ──
 
-  chrome.runtime?.onMessage?.addListener((msg) => {
+  chrome.runtime?.onMessage?.addListener((msg, sender, sendResponse) => {
     if (msg.action === "toggleInspector") {
       msg.enabled ? enable() : disable();
     }
@@ -469,6 +526,11 @@
     if (msg.action === "toggleDebug") {
       debugMode = msg.enabled;
     }
+    if (msg.action === "exportNotes") {
+      const text = exportAllNotes();
+      sendResponse({ notes: text, count: pinnedTooltips.length });
+    }
+    return true;
   });
 
   // ── Restore state on load ──
