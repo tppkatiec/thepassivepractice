@@ -4,6 +4,7 @@
   // ── State ──
   let enabled = false;
   let stickyMode = true;
+  let debugMode = true;
   let hoveredEl = null;
   let tooltip = null;
   let pinnedTooltips = [];
@@ -74,6 +75,112 @@
     if (meaningful.length) return "." + CSS.escape(meaningful[0]);
 
     return el.tagName.toLowerCase();
+  }
+
+  // ── CSS Debug: find what's blocking your styles ──
+
+  const VISUAL_PROPS = [
+    "color", "background-color", "background", "font-family", "font-size",
+    "font-weight", "line-height", "letter-spacing", "text-transform",
+    "text-decoration", "padding", "margin", "border", "border-radius",
+    "display", "position", "width", "height", "max-width", "min-height",
+    "opacity", "overflow", "z-index", "box-shadow", "text-align",
+  ];
+
+  function getInlineStyles(el) {
+    const styles = [];
+    const s = el.style;
+    for (let i = 0; i < s.length; i++) {
+      const prop = s[i];
+      const val = s.getPropertyValue(prop);
+      const priority = s.getPropertyPriority(prop);
+      styles.push({ prop, val, important: priority === "important" });
+    }
+    return styles;
+  }
+
+  function getMatchingRules(el) {
+    const results = [];
+    try {
+      for (const sheet of document.styleSheets) {
+        let rules;
+        try { rules = sheet.cssRules || sheet.rules; } catch { continue; }
+        if (!rules) continue;
+        for (const rule of rules) {
+          if (rule.type !== 1) continue; // CSSStyleRule only
+          try {
+            if (!el.matches(rule.selectorText)) continue;
+          } catch { continue; }
+          const important = [];
+          const style = rule.style;
+          for (let i = 0; i < style.length; i++) {
+            const prop = style[i];
+            if (style.getPropertyPriority(prop) === "important") {
+              important.push({ prop, val: style.getPropertyValue(prop), selector: rule.selectorText });
+            }
+          }
+          if (important.length) {
+            results.push(...important);
+          }
+        }
+      }
+    } catch {}
+    return results;
+  }
+
+  function getInheritedOverrides(el) {
+    const dominated = [];
+    const INHERIT_PROPS = ["color", "font-family", "font-size", "font-weight",
+      "line-height", "letter-spacing", "text-transform", "text-align", "text-decoration"];
+    let parent = el.parentElement;
+    const elComputed = window.getComputedStyle(el);
+    while (parent && parent !== document.body) {
+      const pStyle = parent.style;
+      for (const prop of INHERIT_PROPS) {
+        const parentInline = pStyle.getPropertyValue(prop);
+        if (parentInline) {
+          const computed = elComputed.getPropertyValue(prop);
+          if (computed === parentInline || computed.includes(parentInline)) {
+            const parentSelector = bestSelector(parent);
+            dominated.push({ prop, val: parentInline, from: parentSelector });
+          }
+        }
+      }
+      // Also check parent's !important rules
+      try {
+        for (const sheet of document.styleSheets) {
+          let rules;
+          try { rules = sheet.cssRules; } catch { continue; }
+          if (!rules) continue;
+          for (const rule of rules) {
+            if (rule.type !== 1) continue;
+            try { if (!parent.matches(rule.selectorText)) continue; } catch { continue; }
+            for (const prop of INHERIT_PROPS) {
+              if (rule.style.getPropertyPriority(prop) === "important") {
+                const val = rule.style.getPropertyValue(prop);
+                dominated.push({ prop, val, from: rule.selectorText + " (parent !important)" });
+              }
+            }
+          }
+        }
+      } catch {}
+      parent = parent.parentElement;
+    }
+    // Dedupe
+    const seen = new Set();
+    return dominated.filter((d) => {
+      const key = d.prop + d.from;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+  }
+
+  function getCssDebugInfo(el) {
+    const inline = getInlineStyles(el);
+    const importants = getMatchingRules(el);
+    const inherited = getInheritedOverrides(el);
+    return { inline, importants, inherited };
   }
 
   // ── Tooltip creation ──
@@ -149,6 +256,42 @@
         <div class="gft-label">Data Attributes</div>
         ${dataAttrs.map((a) => `<div class="gft-value" style="font-size:11px">${escapeHtml(a.name)}="${escapeHtml(a.value.slice(0, 60))}"</div>`).join("")}
       </div>`;
+    }
+
+    // ── CSS Debug section ──
+    if (debugMode) {
+      const debug = getCssDebugInfo(el);
+
+      if (debug.inline.length) {
+        const hasImportant = debug.inline.some((s) => s.important);
+        html += `<div class="gft-row">
+          <div class="gft-label" style="color:${hasImportant ? '#f59e0b' : '#888'}">Inline Styles${hasImportant ? ' (has !important)' : ''}</div>
+          ${debug.inline.map((s) => `<div class="gft-debug-line${s.important ? ' gft-debug-warn' : ''}">${escapeHtml(s.prop)}: ${escapeHtml(s.val)}${s.important ? ' <span class="gft-debug-badge">!important</span>' : ''}</div>`).join("")}
+        </div>`;
+      }
+
+      if (debug.importants.length) {
+        html += `<div class="gft-row">
+          <div class="gft-label" style="color:#ef4444">!important Rules Blocking You</div>
+          ${debug.importants.slice(0, 8).map((r) => `<div class="gft-debug-line gft-debug-warn"><span class="gft-debug-badge">!important</span> ${escapeHtml(r.prop)}: ${escapeHtml(r.val)}<div style="font-size:10px;color:#888;margin-top:1px">from: ${escapeHtml(r.selector)}</div></div>`).join("")}
+          ${debug.importants.length > 8 ? `<div class="gft-debug-line" style="opacity:.5">+${debug.importants.length - 8} more</div>` : ""}
+        </div>`;
+      }
+
+      if (debug.inherited.length) {
+        html += `<div class="gft-row">
+          <div class="gft-label" style="color:#f59e0b">Inherited / Parent Overrides</div>
+          ${debug.inherited.slice(0, 6).map((r) => `<div class="gft-debug-line gft-debug-inherit">${escapeHtml(r.prop)}: ${escapeHtml(r.val)}<div style="font-size:10px;color:#888;margin-top:1px">from: ${escapeHtml(r.from)}</div></div>`).join("")}
+          ${debug.inherited.length > 6 ? `<div class="gft-debug-line" style="opacity:.5">+${debug.inherited.length - 6} more</div>` : ""}
+        </div>`;
+      }
+
+      if (!debug.inline.length && !debug.importants.length && !debug.inherited.length) {
+        html += `<div class="gft-row">
+          <div class="gft-label" style="color:#34d399">CSS Debug</div>
+          <div class="gft-debug-line" style="color:#34d399">No blockers found — your custom CSS should apply cleanly.</div>
+        </div>`;
+      }
     }
 
     body.innerHTML = html;
@@ -323,12 +466,16 @@
     if (msg.action === "toggleSticky") {
       stickyMode = msg.enabled;
     }
+    if (msg.action === "toggleDebug") {
+      debugMode = msg.enabled;
+    }
   });
 
   // ── Restore state on load ──
-  chrome.storage?.local?.get(["inspectorEnabled", "stickyEnabled"], (data) => {
+  chrome.storage?.local?.get(["inspectorEnabled", "stickyEnabled", "debugEnabled"], (data) => {
     if (data.inspectorEnabled) enable();
     if (data.stickyEnabled !== undefined) stickyMode = data.stickyEnabled;
+    if (data.debugEnabled !== undefined) debugMode = data.debugEnabled;
   });
 
   // ── Utility ──

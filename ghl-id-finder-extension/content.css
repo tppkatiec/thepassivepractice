@@ -150,6 +150,36 @@
   color: #34d399;
 }
 
+/* ── CSS Debug rows ── */
+.ghl-finder-tooltip .gft-debug-line {
+  font-size: 11px;
+  color: #ccc;
+  padding: 3px 0;
+  border-bottom: 1px solid #1e1e30;
+  line-height: 1.4;
+}
+.ghl-finder-tooltip .gft-debug-line:last-child {
+  border-bottom: none;
+}
+.ghl-finder-tooltip .gft-debug-warn {
+  color: #fbbf24;
+}
+.ghl-finder-tooltip .gft-debug-inherit {
+  color: #fb923c;
+}
+.ghl-finder-tooltip .gft-debug-badge {
+  display: inline-block;
+  background: #ef4444;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 0 5px;
+  border-radius: 3px;
+  margin-right: 4px;
+  vertical-align: middle;
+  text-transform: uppercase;
+}
+
 /* Pinned badge */
 .ghl-finder-tooltip .gft-pinned-badge {
   font-size: 9px;

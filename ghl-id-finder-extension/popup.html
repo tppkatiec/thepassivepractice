@@ -131,6 +131,14 @@
     </label>
   </div>
 
+  <div class="toggle-row">
+    <span class="toggle-label">CSS Debug Mode</span>
+    <label class="toggle">
+      <input type="checkbox" id="toggleDebug" checked>
+      <span class="slider"></span>
+    </label>
+  </div>
+
   <div id="statusBox" class="status">
     Toggle the inspector, then hover over any element on a GHL page.
   </div>
@@ -139,8 +147,11 @@
     <li>Hover to see classes & IDs</li>
     <li>Click an element to pin its info</li>
     <li>Click the CSS selector to copy it</li>
+    <li><span style="color:#ef4444">RED</span> = !important rules blocking you</li>
+    <li><span style="color:#fb923c">ORANGE</span> = inherited from parent</li>
+    <li><span style="color:#fbbf24">YELLOW</span> = inline styles on element</li>
+    <li><span style="color:#34d399">GREEN</span> = no blockers found</li>
     <li>Press <span class="hotkey">Esc</span> to dismiss pinned tooltips</li>
-    <li>Works on GHL funnels, websites & dashboards</li>
   </ul>
 
   <script src="popup.js"></script>
