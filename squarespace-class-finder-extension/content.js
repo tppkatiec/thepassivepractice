@@ -7,197 +7,122 @@
   let tooltip = null;
   let pinnedTooltips = [];
 
-  // ── Squarespace class patterns ──
-  const SQS_PATTERNS = [
-    /^sqs-/,                  // all sqs-* (blocks, layout, gallery, cart, svg-icon, etc.)
-    /^sqsrte-/,               // rich text editor classes
-    /^fe-/,                   // Fluid Engine (fe-block, fe-block-{id}, fe-{sectionId})
-    /^fluid-engine/,
-    /^yui3-/,                 // legacy YUI widgets
-    /^page-section/,          // page-section, page-section-*
-    /^section-background/,    // section-background, section-background-overlay
-    /^section-border/,
-    /^section-divider/,
-    /^section-/,
-    /^content-wrapper$/,
-    /^content-wrap$/,
-    /^content$/,
-    /^sections$/,
-    /^collection-content-wrapper/,
-    /^collection-/,           // collection-{id}, collection-type-*, collection-layout-*
-    /^homepage$/,
-    /^view-list$/,
-    /^view-item$/,
-    /^has-/,                  // has-primary-nav, has-cart, has-logo-image, etc.
-    /^tweak-/,                // tweak-* (Site Styles toggles)
-    /^scale-/,                // scale-heading-1-font-size, etc.
-    /^button-style-/,
-    /^button-corner-style-/,
-    /^(small|medium|large)-button-shape-/,
-    /^image-block-/,          // image-block-card, image-block-outer-wrapper, etc.
-    /^gallery-design-/,
-    /^gallery-aspect-ratio-/,
-    /^gallery-transitions-/,
-    /^gallery-/,
-    /^event-/,                // event-thumbnails, event-list-*, event-date-label
-    /^product-list-/,
-    /^product-item-/,
-    /^product-/,
-    /^show-product-/,
-    /^newsletter-style-/,
-    /^opentable-style-/,
-    /^lightbox-style-/,
-    /^social-icons-/,
-    /^social-icon-/,
-    /^ancillary-/,            // ancillary-header-*-position-*
-    /^index-/,                // index-section, index-gallery-*, index-item
-    /^page-banner-/,
-    /^page-description$/,
-    /^page-text-wrapper$/,
-    /^page-title$/,
-    /^main-content$/,
-    /^main-nav$/,
-    /^mobileNav$/,
-    /^nav-wrapper$/,
-    /^primary-nav-wrapper$/,
-    /^secondary-nav-wrapper$/,
-    /^logo-wrapper$/,
-    /^site-/,                 // site-header, site-footer, site-container, etc.
-    /^summary-/,              // summary-block-*, summary-title, summary-item
-    /^image-list$/,
-    /^image-meta$/,
-    /^image$/,
-    /^image-caption-wrapper$/,
-    /^spacer-block$/,
-    /^html-block$/,
-    /^social-account-links/,
-    /^user-items-list/,
-    /^form-wrapper$/,
-    /^field-list$/,
-    /^form-submission/,
-    /^native-currency-code-/,
-    /^mobile-style-available$/,
-    /^touch-styles$/,
-    // ── 7.0 Brine/Bedford PascalCase BEM ──
-    /^Main$/,
-    /^Site/,
-    /^Header/,
-    /^Footer/,
-    /^Mobile-bar/,
-    /^Mobile-overlay/,
-    /^Parent-item$/,
-    /^Icon/,
-    /^Index-/,
-    /^header-/,
-    /^footer-/,
-    /^js-/,                   // js-index-item-image, js-* hooks
-  ];
+  // ── Build a full CSS selector path for targeting ──
 
-  const SQS_BLOCK_TYPES = {
-    "sqs-block-image": "Image Block",
-    "sqs-block-html": "Text/HTML Block",
-    "sqs-block-video": "Video Block",
-    "sqs-block-gallery": "Gallery Block",
-    "sqs-block-button": "Button Block",
-    "sqs-block-spacer": "Spacer Block",
-    "sqs-block-code": "Code Block",
-    "sqs-block-form": "Form Block",
-    "sqs-block-map": "Map Block",
-    "sqs-block-newsletter": "Newsletter Block",
-    "sqs-block-quote": "Quote Block",
-    "sqs-block-twitter": "Twitter Block",
-    "sqs-block-social-links": "Social Links Block",
-    "sqs-block-socialaccountlinks": "Social Links (v2) Block",
-    "sqs-block-audio": "Audio Block",
-    "sqs-block-markdown": "Markdown Block",
-    "sqs-block-menu": "Menu Block",
-    "sqs-block-pricing-plan": "Pricing Block",
-    "sqs-block-product": "Product Block",
-    "sqs-block-summary-v2": "Summary Block",
-    "sqs-block-carousel": "Carousel Block",
-    "sqs-block-accordion": "Accordion Block",
-    "sqs-block-tourdates": "Tour Dates Block",
-    "sqs-block-calendar": "Calendar Block",
-    "sqs-block-chart": "Chart Block",
-    "sqs-block-donation": "Donation Block",
-    "sqs-block-horizontalrule": "Horizontal Rule Block",
-    "sqs-block-collectionlink": "Collection Link Block",
-    "sqs-block-countdown": "Countdown Block",
-    "sqs-block-opentable": "OpenTable Block",
-    "sqs-block-embed": "Embed Block",
-    "sqs-block-search": "Search Block",
-    "sqs-block-ical": "iCal Block",
-    "sqs-block-archive": "Archive Block",
-    "sqs-block-instagram": "Instagram Block",
-    "sqs-block-tag-cloud": "Tag Cloud Block",
-    "sqs-block-tock": "Tock Block",
-    "sqs-block-zola": "Zola Block",
-    "sqs-block-acuity": "Acuity Block",
-    "sqs-block-foursquare": "Foursquare Block",
-    "sqs-block-yelp-review": "Yelp Review Block",
-    "sqs-block-flickr": "Flickr Block",
-    "sqs-block-500px": "500px Block",
-    "sqs-block-soundcloud": "SoundCloud Block",
-    "sqs-block-website-component": "Website Component Block",
-  };
-
-  // ── Helpers ──
-
-  function isSqsClass(cls) {
-    return SQS_PATTERNS.some((p) => p.test(cls));
+  function getSelector(el) {
+    if (el.id) return `#${CSS.escape(el.id)}`;
+    const tag = el.tagName.toLowerCase();
+    const cls = Array.from(el.classList).filter((c) => !c.startsWith("sqsf-"));
+    if (cls.length) return tag + "." + cls.map(CSS.escape).join(".");
+    return tag;
   }
 
-  function classifyElement(el) {
-    const cls = Array.from(el.classList);
-    const tag = el.tagName.toLowerCase();
-
-    // Check for specific block types
-    for (const [sqsClass, label] of Object.entries(SQS_BLOCK_TYPES)) {
-      if (cls.includes(sqsClass)) return label;
+  function getSelectorPath(el) {
+    const parts = [];
+    let current = el;
+    while (current && current !== document.body && current !== document.documentElement) {
+      const sel = getSelector(current);
+      parts.unshift(sel);
+      // Stop at a meaningful anchor (ID, or known Squarespace container)
+      if (current.id) break;
+      current = current.parentElement;
     }
+    return parts.join(" > ");
+  }
 
-    if (cls.some((c) => c === "sqs-block")) return "Block";
-    if (cls.some((c) => c === "sqs-block-content")) return "Block Content";
+  function getShortSelector(el) {
+    if (el.id) return `#${CSS.escape(el.id)}`;
+    const cls = Array.from(el.classList).filter((c) => !c.startsWith("sqsf-"));
+    if (cls.length) return "." + cls.map(CSS.escape).join(".");
+    return el.tagName.toLowerCase();
+  }
+
+  // ── Classify what kind of element this is ──
+
+  function classifyElement(el) {
+    const tag = el.tagName.toLowerCase();
+    const cls = Array.from(el.classList);
+    const id = el.id || "";
+
+    if (id.startsWith("section-") || id.startsWith("page-section")) return "Section";
+    if (id.startsWith("block-")) return "Block";
+    if (cls.some((c) => c.startsWith("sqs-block-"))) {
+      const blockClass = cls.find((c) => c.startsWith("sqs-block-") && c !== "sqs-block-content");
+      if (blockClass) {
+        const type = blockClass.replace("sqs-block-", "").replace(/-/g, " ");
+        return type.charAt(0).toUpperCase() + type.slice(1) + " Block";
+      }
+      return "Block";
+    }
+    if (cls.includes("sqs-block")) return "Block";
+    if (cls.includes("page-section")) return "Page Section";
+    if (cls.includes("content-wrapper")) return "Content Wrapper";
+    if (cls.some((c) => c.startsWith("fe-block"))) return "Fluid Engine Block";
+    if (cls.includes("fluid-engine")) return "Fluid Engine Grid";
     if (cls.some((c) => c.startsWith("sqs-row"))) return "Row";
-    if (cls.some((c) => c.startsWith("sqs-col-"))) return "Column";
-    if (cls.some((c) => c.startsWith("sqs-layout"))) return "Layout";
-    if (cls.some((c) => c.startsWith("page-section"))) return "Page Section";
-    if (cls.some((c) => c.startsWith("fe-"))) return "Fluid Engine";
+    if (cls.some((c) => c.startsWith("sqs-col"))) return "Column";
+    if (cls.includes("sqs-layout")) return "Layout";
+    if (cls.includes("header") || cls.includes("Header")) return "Header";
+    if (cls.includes("footer") || cls.includes("Footer")) return "Footer";
     if (cls.some((c) => c.startsWith("sqs-gallery"))) return "Gallery";
     if (cls.some((c) => c.startsWith("summary-"))) return "Summary";
-    if (cls.includes("Header") || cls.some((c) => c.startsWith("header-"))) return "Header";
-    if (cls.includes("Footer") || cls.some((c) => c.startsWith("footer-"))) return "Footer";
-    if (cls.includes("Main")) return "Main";
-    if (cls.some((c) => c.startsWith("Site"))) return "Site";
+    if (cls.includes("btn") || cls.some((c) => c.startsWith("sqs-button"))) return "Button";
+    if (cls.some((c) => c.startsWith("image-block"))) return "Image Block";
+    if (cls.some((c) => c.startsWith("sqs-html-content"))) return "Rich Text";
 
     if (tag === "section") return "Section";
     if (tag === "nav") return "Nav";
     if (tag === "a") return "Link";
     if (tag === "img") return "Image";
     if (tag === "button") return "Button";
-    if (/^h[1-6]$/.test(tag)) return "Heading";
-    if (tag === "p") return "Text";
+    if (/^h[1-6]$/.test(tag)) return `Heading (${tag})`;
+    if (tag === "p") return "Paragraph";
+    if (tag === "ul" || tag === "ol") return "List";
+    if (tag === "li") return "List Item";
+    if (tag === "span") return "Span";
+    if (tag === "div") return "Div";
+    if (tag === "form") return "Form";
+    if (tag === "input") return "Input";
 
     return tag.toUpperCase();
   }
 
-  function bestSelector(el) {
-    // Prefer the most specific sqs-block-* class
-    const cls = Array.from(el.classList);
-    const sqsBlockType = cls.find((c) => SQS_BLOCK_TYPES[c]);
-    if (sqsBlockType) return "." + CSS.escape(sqsBlockType);
+  // ── Key computed styles for overriding ──
 
-    // Then any sqs-specific class
-    const sqsClasses = cls.filter(isSqsClass);
-    if (sqsClasses.length) return "." + sqsClasses.slice(0, 2).map(CSS.escape).join(".");
+  function getKeyStyles(el) {
+    const cs = window.getComputedStyle(el);
+    const styles = [];
+    const tag = el.tagName.toLowerCase();
 
-    // Fall back to first meaningful class
-    const meaningful = cls.filter(
-      (c) => !c.startsWith("sqsf-") && c.length > 1
-    );
-    if (meaningful.length) return "." + CSS.escape(meaningful[0]);
+    // Always show these
+    const pairs = [
+      ["font-family", cs.fontFamily],
+      ["font-size", cs.fontSize],
+      ["font-weight", cs.fontWeight],
+      ["color", rgbToHex(cs.color)],
+      ["background", rgbToHex(cs.backgroundColor)],
+      ["padding", cs.padding],
+      ["margin", cs.margin],
+    ];
 
-    return el.tagName.toLowerCase();
+    // Conditionally show these if non-default
+    if (cs.lineHeight !== "normal") pairs.push(["line-height", cs.lineHeight]);
+    if (cs.letterSpacing !== "normal") pairs.push(["letter-spacing", cs.letterSpacing]);
+    if (cs.textTransform !== "none") pairs.push(["text-transform", cs.textTransform]);
+    if (cs.textAlign !== "start" && cs.textAlign !== "left") pairs.push(["text-align", cs.textAlign]);
+    if (cs.borderRadius !== "0px") pairs.push(["border-radius", cs.borderRadius]);
+    if (cs.display !== "block" && cs.display !== "inline") pairs.push(["display", cs.display]);
+    if (cs.position !== "static") pairs.push(["position", cs.position]);
+    if (cs.opacity !== "1") pairs.push(["opacity", cs.opacity]);
+
+    return pairs;
+  }
+
+  function rgbToHex(rgb) {
+    if (rgb === "transparent" || rgb === "rgba(0, 0, 0, 0)") return "transparent";
+    const match = rgb.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/);
+    if (!match) return rgb;
+    return "#" + [match[1], match[2], match[3]].map((c) => parseInt(c).toString(16).padStart(2, "0")).join("");
   }
 
   // ── Tooltip ──
@@ -212,7 +137,10 @@
         <button class="sqsf-close" style="display:none">&times;</button>
       </div>
       <div class="sqsf-body"></div>
-      <div class="sqsf-selector" title="Click to copy selector">
+      <div class="sqsf-note-area" style="display:none">
+        <textarea class="sqsf-note-input" placeholder="What needs to be fixed here..." rows="2"></textarea>
+      </div>
+      <div class="sqsf-selector" title="Click to copy full selector path">
         <code></code>
         <span class="sqsf-copy-icon">COPY</span>
       </div>
@@ -222,41 +150,48 @@
   }
 
   function populateTooltip(tip, el) {
-    const tag = classifyElement(el);
-    const allClasses = Array.from(el.classList).filter(
-      (c) => !c.startsWith("sqsf-")
-    );
-    const sqsClasses = allClasses.filter(isSqsClass);
-    const otherClasses = allClasses.filter((c) => !isSqsClass(c));
-    const selector = bestSelector(el);
+    const type = classifyElement(el);
+    const id = el.id || null;
+    const tag = el.tagName.toLowerCase();
+    const allClasses = Array.from(el.classList).filter((c) => !c.startsWith("sqsf-"));
+    const selectorPath = getSelectorPath(el);
+    const shortSel = getShortSelector(el);
 
-    tip.querySelector(".sqsf-tag").textContent = tag;
+    tip.querySelector(".sqsf-tag").textContent = type;
 
     const body = tip.querySelector(".sqsf-body");
     let html = "";
 
-    if (sqsClasses.length) {
+    // Element tag
+    html += `<div class="sqsf-row">
+      <div class="sqsf-label">Element</div>
+      <div class="sqsf-value">&lt;${tag}&gt;</div>
+    </div>`;
+
+    // ID
+    if (id) {
       html += `<div class="sqsf-row">
-        <div class="sqsf-label">Squarespace Classes (${sqsClasses.length})</div>
+        <div class="sqsf-label">ID</div>
+        <div class="sqsf-value sqsf-copyable" data-copy="#${id}">#${escapeHtml(id)}</div>
+      </div>`;
+    }
+
+    // Classes
+    if (allClasses.length) {
+      html += `<div class="sqsf-row">
+        <div class="sqsf-label">Classes (${allClasses.length})</div>
         <div class="sqsf-class-list">
-          ${sqsClasses.map((c) => `<span class="sqsf-class-pill sqs" data-class="${escapeHtml(c)}">.${escapeHtml(c)}</span>`).join("")}
+          ${allClasses.slice(0, 20).map((c) => `<span class="sqsf-class-pill" data-class="${escapeHtml(c)}">.${escapeHtml(c)}</span>`).join("")}
+          ${allClasses.length > 20 ? `<span class="sqsf-class-pill" style="opacity:.5">+${allClasses.length - 20} more</span>` : ""}
         </div>
       </div>`;
     }
 
-    if (otherClasses.length) {
-      html += `<div class="sqsf-row">
-        <div class="sqsf-label">Other Classes (${otherClasses.length})</div>
-        <div class="sqsf-class-list">
-          ${otherClasses.slice(0, 15).map((c) => `<span class="sqsf-class-pill" data-class="${escapeHtml(c)}">.${escapeHtml(c)}</span>`).join("")}
-          ${otherClasses.length > 15 ? `<span class="sqsf-class-pill" style="opacity:.5">+${otherClasses.length - 15} more</span>` : ""}
-        </div>
-      </div>`;
-    }
-
-    if (!sqsClasses.length && !otherClasses.length) {
-      html += `<div class="sqsf-row"><div class="sqsf-value" style="color:#666;font-style:italic">No classes on this element</div></div>`;
-    }
+    // Full selector path (the main thing they need for CSS targeting)
+    html += `<div class="sqsf-row">
+      <div class="sqsf-label">CSS Selector Path</div>
+      <div class="sqsf-value sqsf-copyable sqsf-path" data-copy="${escapeAttr(selectorPath)}">${escapeHtml(selectorPath)}</div>
+    </div>`;
 
     // Data attributes
     const dataAttrs = Array.from(el.attributes)
@@ -265,41 +200,67 @@
     if (dataAttrs.length) {
       html += `<div class="sqsf-row">
         <div class="sqsf-label">Data Attributes</div>
-        ${dataAttrs.map((a) => `<div class="sqsf-value" style="font-size:11px">${escapeHtml(a.name)}="${escapeHtml(a.value.slice(0, 60))}"</div>`).join("")}
+        ${dataAttrs.map((a) => `<div class="sqsf-value" style="font-size:11px">${escapeHtml(a.name)}="${escapeHtml(a.value.slice(0, 50))}"</div>`).join("")}
+      </div>`;
+    }
+
+    // Key computed styles
+    const styles = getKeyStyles(el);
+    html += `<div class="sqsf-row">
+      <div class="sqsf-label">Current Styles</div>
+      <div class="sqsf-styles-grid">
+        ${styles.map(([prop, val]) => `<div class="sqsf-style-item sqsf-copyable" data-copy="${escapeAttr(prop)}: ${escapeAttr(val)};"><span class="sqsf-style-prop">${prop}:</span> <span class="sqsf-style-val">${escapeHtml(val.length > 35 ? val.slice(0, 35) + "..." : val)}</span></div>`).join("")}
+      </div>
+    </div>`;
+
+    // Inline styles warning
+    const inlineStyle = el.getAttribute("style");
+    if (inlineStyle) {
+      html += `<div class="sqsf-row">
+        <div class="sqsf-label" style="color:#f59e0b">Inline Styles (may override CSS)</div>
+        <div class="sqsf-value sqsf-copyable sqsf-inline-warn" data-copy="${escapeAttr(inlineStyle)}">${escapeHtml(inlineStyle.length > 120 ? inlineStyle.slice(0, 120) + "..." : inlineStyle)}</div>
       </div>`;
     }
 
     body.innerHTML = html;
-    tip.querySelector(".sqsf-selector code").textContent = selector;
 
-    // Bind click-to-copy on pills
-    tip.querySelectorAll(".sqsf-class-pill[data-class]").forEach((pill) => {
-      pill.addEventListener("click", (e) => {
+    // Bottom selector bar shows the short selector
+    tip.querySelector(".sqsf-selector code").textContent = shortSel;
+
+    // Click-to-copy on all copyable elements
+    tip.querySelectorAll(".sqsf-copyable[data-copy]").forEach((el) => {
+      el.addEventListener("click", (e) => {
         e.stopPropagation();
-        const cls = "." + pill.dataset.class;
-        navigator.clipboard.writeText(cls).then(() => {
-          pill.classList.add("copied");
-          const orig = pill.textContent;
-          pill.textContent = "Copied!";
-          setTimeout(() => {
-            pill.classList.remove("copied");
-            pill.textContent = orig;
-          }, 1200);
+        navigator.clipboard.writeText(el.dataset.copy).then(() => {
+          el.classList.add("copied");
+          const orig = el.innerHTML;
+          el.textContent = "Copied!";
+          setTimeout(() => { el.classList.remove("copied"); el.innerHTML = orig; }, 1000);
         });
       });
     });
 
-    // Selector bar
+    // Click-to-copy on pills
+    tip.querySelectorAll(".sqsf-class-pill[data-class]").forEach((pill) => {
+      pill.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navigator.clipboard.writeText("." + pill.dataset.class).then(() => {
+          pill.classList.add("copied");
+          const orig = pill.textContent;
+          pill.textContent = "Copied!";
+          setTimeout(() => { pill.classList.remove("copied"); pill.textContent = orig; }, 1200);
+        });
+      });
+    });
+
+    // Selector bar copy
     const selectorBar = tip.querySelector(".sqsf-selector");
     selectorBar.onclick = (e) => {
       e.stopPropagation();
-      navigator.clipboard.writeText(selector).then(() => {
+      navigator.clipboard.writeText(shortSel).then(() => {
         selectorBar.classList.add("copied");
         tip.querySelector(".sqsf-copy-icon").textContent = "COPIED!";
-        setTimeout(() => {
-          selectorBar.classList.remove("copied");
-          tip.querySelector(".sqsf-copy-icon").textContent = "COPY";
-        }, 1200);
+        setTimeout(() => { selectorBar.classList.remove("copied"); tip.querySelector(".sqsf-copy-icon").textContent = "COPY"; }, 1200);
       });
     };
   }
@@ -324,8 +285,43 @@
     const closeBtn = pinned.querySelector(".sqsf-close");
     closeBtn.style.display = "";
     closeBtn.onclick = () => removePinned(pinned);
+
+    // Show notes
+    const noteArea = pinned.querySelector(".sqsf-note-area");
+    noteArea.style.display = "";
+    const noteInput = pinned.querySelector(".sqsf-note-input");
+    noteInput.addEventListener("click", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("mousedown", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("keydown", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("input", () => {
+      noteInput.style.height = "auto";
+      noteInput.style.height = noteInput.scrollHeight + "px";
+    });
+
+    // Draggable
+    let isDragging = false, dragX = 0, dragY = 0;
+    const header = pinned.querySelector(".sqsf-header");
+    header.style.cursor = "grab";
+    header.addEventListener("mousedown", (ev) => {
+      if (ev.target.closest(".sqsf-close")) return;
+      isDragging = true;
+      header.style.cursor = "grabbing";
+      dragX = ev.clientX - pinned.offsetLeft;
+      dragY = ev.clientY - pinned.offsetTop;
+      ev.preventDefault();
+    });
+    document.addEventListener("mousemove", (ev) => {
+      if (!isDragging) return;
+      pinned.style.left = (ev.clientX - dragX) + "px";
+      pinned.style.top = (ev.clientY - dragY) + "px";
+    });
+    document.addEventListener("mouseup", () => {
+      if (isDragging) { isDragging = false; header.style.cursor = "grab"; }
+    });
+
     positionTooltip(pinned, e);
     pinnedTooltips.push(pinned);
+    setTimeout(() => noteInput.focus(), 50);
   }
 
   function removePinned(tip) {
@@ -402,9 +398,20 @@
     document.removeEventListener("keydown", onKeyDown, true);
   }
 
-  chrome.runtime?.onMessage?.addListener((msg) => {
+  chrome.runtime?.onMessage?.addListener((msg, sender, sendResponse) => {
     if (msg.action === "toggleInspector") msg.enabled ? enable() : disable();
     if (msg.action === "toggleSticky") stickyMode = msg.enabled;
+    if (msg.action === "exportNotes") {
+      const notes = [];
+      pinnedTooltips.forEach((tip, i) => {
+        const sel = tip.querySelector(".sqsf-selector code")?.textContent || "";
+        const tag = tip.querySelector(".sqsf-tag")?.textContent || "";
+        const note = tip.querySelector(".sqsf-note-input")?.value || "";
+        if (sel || note) notes.push(`${i + 1}. [${tag}] ${sel}${note ? "\n   Note: " + note : ""}`);
+      });
+      sendResponse({ notes: notes.join("\n\n"), count: pinnedTooltips.length });
+    }
+    return true;
   });
 
   chrome.storage?.local?.get(["sqsClassEnabled", "sqsClassSticky"], (data) => {
@@ -416,5 +423,8 @@
     const d = document.createElement("div");
     d.textContent = str;
     return d.innerHTML;
+  }
+  function escapeAttr(str) {
+    return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
   }
 })();

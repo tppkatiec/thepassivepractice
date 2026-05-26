@@ -10,8 +10,8 @@
 .sqsf-tooltip {
   position: fixed;
   z-index: 2147483647;
-  max-width: 420px;
-  min-width: 220px;
+  max-width: 440px;
+  min-width: 240px;
   font-family: "SF Mono", "Fira Code", Consolas, monospace;
   font-size: 12px;
   line-height: 1.5;
@@ -75,7 +75,76 @@
 .sqsf-tooltip .sqsf-value {
   color: #e0e0e0;
   word-break: break-all;
+  font-size: 12px;
 }
+
+/* ── Copyable elements ── */
+.sqsf-tooltip .sqsf-copyable {
+  cursor: pointer;
+  border-radius: 3px;
+  padding: 1px 4px;
+  margin: -1px -4px;
+  transition: background 0.15s;
+}
+.sqsf-tooltip .sqsf-copyable:hover {
+  background: #1a1a1a;
+}
+.sqsf-tooltip .sqsf-copyable.copied {
+  color: #34d399 !important;
+}
+
+/* ── CSS Selector Path (highlighted) ── */
+.sqsf-tooltip .sqsf-path {
+  color: #60a5fa;
+  font-size: 11px;
+  padding: 4px 6px;
+  background: #111;
+  border-radius: 4px;
+  margin: 2px 0 0 0;
+  display: block;
+}
+
+/* ── Inline styles warning ── */
+.sqsf-tooltip .sqsf-inline-warn {
+  color: #fbbf24;
+  font-size: 11px;
+  padding: 4px 6px;
+  background: #1a1700;
+  border: 1px solid #332e00;
+  border-radius: 4px;
+  margin: 2px 0 0 0;
+  display: block;
+}
+
+/* ── Computed styles grid ── */
+.sqsf-tooltip .sqsf-styles-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1px;
+  margin-top: 2px;
+}
+.sqsf-tooltip .sqsf-style-item {
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.sqsf-tooltip .sqsf-style-item:hover {
+  background: #1a1a1a;
+}
+.sqsf-tooltip .sqsf-style-prop {
+  color: #888;
+}
+.sqsf-tooltip .sqsf-style-val {
+  color: #ccc;
+}
+.sqsf-tooltip .sqsf-style-item.copied .sqsf-style-val,
+.sqsf-tooltip .sqsf-style-item.copied .sqsf-style-prop {
+  color: #34d399;
+}
+
+/* ── Selector bar ── */
 .sqsf-tooltip .sqsf-selector {
   display: flex;
   align-items: center;
@@ -100,6 +169,7 @@
 }
 .sqsf-tooltip .sqsf-selector.copied .sqsf-copy-icon { color: #34d399; }
 
+/* ── Class pills ── */
 .sqsf-tooltip .sqsf-class-list {
   display: flex;
   flex-wrap: wrap;
@@ -123,14 +193,31 @@
   background: #065f46;
   color: #34d399;
 }
-.sqsf-tooltip .sqsf-class-pill.sqs {
-  background: #1e3a8a;
-  color: #dbeafe;
+
+/* ── Notes ── */
+.sqsf-tooltip .sqsf-note-area {
+  padding: 8px 12px;
+  border-top: 1px solid #222;
+  background: #0a0a0a;
 }
-.sqsf-tooltip .sqsf-class-pill.sqs:hover {
-  background: #3b82f6;
+.sqsf-tooltip .sqsf-note-input {
+  width: 100%;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 6px;
   color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  resize: none;
+  outline: none;
+  min-height: 36px;
+  transition: border-color 0.15s;
 }
+.sqsf-tooltip .sqsf-note-input:focus { border-color: #888; }
+.sqsf-tooltip .sqsf-note-input::placeholder { color: #555; }
+
 .sqsf-tooltip .sqsf-pinned-badge {
   font-size: 9px;
   color: #facc15;
