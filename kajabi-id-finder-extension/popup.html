@@ -90,6 +90,23 @@
       font-family: monospace;
       color: #ccc;
     }
+    .export-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px;
+      background: #dc2626;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .export-btn:hover { background: #ef4444; }
+    .export-btn.copied { background: #065f46; color: #34d399; }
     .instructions {
       margin-top: 12px;
       font-size: 11px;
@@ -131,13 +148,16 @@
     </label>
   </div>
 
+  <button id="exportNotes" class="export-btn">Copy All Notes to Clipboard</button>
+
   <div id="statusBox" class="status">
     Toggle the inspector, then hover over any element on a Kajabi page.
   </div>
 
   <ul class="instructions">
     <li>Hover to see classes, IDs & data attrs</li>
-    <li>Click an element to pin its info</li>
+    <li>Click to pin + add notes</li>
+    <li>Drag pinned tooltips to reposition</li>
     <li>Click any class or selector to copy it</li>
     <li>Press <span class="hotkey">Esc</span> to dismiss pinned tooltips</li>
     <li>Works on Kajabi sites & custom domains</li>

@@ -156,6 +156,9 @@
         <button class="kft-close" style="display:none">&times;</button>
       </div>
       <div class="kft-body"></div>
+      <div class="kft-note-area" style="display:none">
+        <textarea class="kft-note-input" placeholder="What needs to be fixed here..." rows="2"></textarea>
+      </div>
       <div class="kft-selector" title="Click to copy selector">
         <code></code>
         <span class="kft-copy-icon">COPY</span>
@@ -314,8 +317,55 @@
     closeBtn.style.display = "";
     closeBtn.onclick = () => removePinned(pinned);
 
+    // Show the note area
+    const noteArea = pinned.querySelector(".kft-note-area");
+    noteArea.style.display = "";
+    const noteInput = pinned.querySelector(".kft-note-input");
+    noteInput.addEventListener("click", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("mousedown", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("keydown", (ev) => ev.stopPropagation());
+    noteInput.addEventListener("input", () => {
+      noteInput.style.height = "auto";
+      noteInput.style.height = noteInput.scrollHeight + "px";
+    });
+
+    // Draggable header
+    let isDragging = false, dragX = 0, dragY = 0;
+    const header = pinned.querySelector(".kft-header");
+    header.style.cursor = "grab";
+    header.addEventListener("mousedown", (ev) => {
+      if (ev.target.closest(".kft-close")) return;
+      isDragging = true;
+      header.style.cursor = "grabbing";
+      dragX = ev.clientX - pinned.offsetLeft;
+      dragY = ev.clientY - pinned.offsetTop;
+      ev.preventDefault();
+    });
+    document.addEventListener("mousemove", (ev) => {
+      if (!isDragging) return;
+      pinned.style.left = (ev.clientX - dragX) + "px";
+      pinned.style.top = (ev.clientY - dragY) + "px";
+    });
+    document.addEventListener("mouseup", () => {
+      if (isDragging) { isDragging = false; header.style.cursor = "grab"; }
+    });
+
     positionTooltip(pinned, e);
     pinnedTooltips.push(pinned);
+    setTimeout(() => noteInput.focus(), 50);
+  }
+
+  function exportAllNotes() {
+    const notes = [];
+    pinnedTooltips.forEach((tip, i) => {
+      const selector = tip.querySelector(".kft-selector code")?.textContent || "";
+      const tag = tip.querySelector(".kft-tag")?.textContent || "";
+      const note = tip.querySelector(".kft-note-input")?.value || "";
+      if (selector || note) {
+        notes.push(`${i + 1}. [${tag}] ${selector}${note ? "\n   Note: " + note : ""}`);
+      }
+    });
+    return notes.join("\n\n");
   }
 
   function removePinned(tip) {
@@ -411,13 +461,18 @@
 
   // ── Message from popup ──
 
-  chrome.runtime?.onMessage?.addListener((msg) => {
+  chrome.runtime?.onMessage?.addListener((msg, sender, sendResponse) => {
     if (msg.action === "toggleInspector") {
       msg.enabled ? enable() : disable();
     }
     if (msg.action === "toggleSticky") {
       stickyMode = msg.enabled;
     }
+    if (msg.action === "exportNotes") {
+      const text = exportAllNotes();
+      sendResponse({ notes: text, count: pinnedTooltips.length });
+    }
+    return true;
   });
 
   // ── Restore state on load ──

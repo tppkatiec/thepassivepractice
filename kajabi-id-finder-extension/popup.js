@@ -1,5 +1,6 @@
 const toggleInspector = document.getElementById("toggleInspector");
 const toggleSticky = document.getElementById("toggleSticky");
+const exportNotesBtn = document.getElementById("exportNotes");
 const statusBox = document.getElementById("statusBox");
 
 chrome.storage?.local?.get(["kajabiInspectorEnabled", "kajabiStickyEnabled"], (data) => {
@@ -33,6 +34,29 @@ toggleSticky.addEventListener("change", () => {
   const enabled = toggleSticky.checked;
   chrome.storage?.local?.set({ kajabiStickyEnabled: enabled });
   sendToTab({ action: "toggleSticky", enabled });
+});
+
+exportNotesBtn.addEventListener("click", () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    if (!tabs[0]?.id) return;
+    chrome.tabs.sendMessage(tabs[0].id, { action: "exportNotes" }, (response) => {
+      if (response && response.notes) {
+        navigator.clipboard.writeText(response.notes).then(() => {
+          exportNotesBtn.classList.add("copied");
+          exportNotesBtn.textContent = `Copied ${response.count} note(s)!`;
+          setTimeout(() => {
+            exportNotesBtn.classList.remove("copied");
+            exportNotesBtn.textContent = "Copy All Notes to Clipboard";
+          }, 2000);
+        });
+      } else {
+        exportNotesBtn.textContent = "No pinned notes yet";
+        setTimeout(() => {
+          exportNotesBtn.textContent = "Copy All Notes to Clipboard";
+        }, 2000);
+      }
+    });
+  });
 });
 
 function updateStatus() {

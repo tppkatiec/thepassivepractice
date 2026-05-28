@@ -150,6 +150,35 @@
   color: #34d399;
 }
 
+/* ── Notes area ── */
+.kajabi-finder-tooltip .kft-note-area {
+  padding: 8px 12px;
+  border-top: 1px solid #2a2028;
+  background: #150e14;
+}
+.kajabi-finder-tooltip .kft-note-input {
+  width: 100%;
+  background: #2a1525;
+  border: 1px solid #dc2626;
+  border-radius: 6px;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 10px;
+  resize: none;
+  outline: none;
+  min-height: 36px;
+  transition: border-color 0.15s;
+}
+.kajabi-finder-tooltip .kft-note-input:focus {
+  border-color: #f87171;
+}
+.kajabi-finder-tooltip .kft-note-input::placeholder {
+  color: #dc2626;
+  opacity: 0.5;
+}
+
 /* Pinned badge */
 .kajabi-finder-tooltip .kft-pinned-badge {
   font-size: 9px;
